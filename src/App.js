@@ -29,7 +29,7 @@ function App() {
   return (
     <Router>
       <div>
-        <h1>tức quá rồi </h1>
+        <h1>tức quá rồi lần 2 2 2 2 2</h1>
         <Header onOpenSidebar={handleSidebarOpen} />
         <Sidebar open={sidebarOpen} onClose={handleSidebarClose} />
         <Container>
