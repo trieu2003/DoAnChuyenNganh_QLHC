@@ -1,0 +1,147 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\MSI PC\\Desktop\\DA_HK7\\DACHUYENNGANH\\BE_DOAN_QLHC\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{BD769941-251C-491B-86E8-E0ED08C5A05E}|BE_DOAN_QLHC\\BE_DOAN_QLHC.csproj|c:\\users\\msi pc\\desktop\\da_hk7\\dachuyennganh\\be_doan_qlhc\\be_doan_qlhc\\weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD769941-251C-491B-86E8-E0ED08C5A05E}|BE_DOAN_QLHC\\BE_DOAN_QLHC.csproj|solutionrelative:be_doan_qlhc\\weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD769941-251C-491B-86E8-E0ED08C5A05E}|BE_DOAN_QLHC\\BE_DOAN_QLHC.csproj|c:\\users\\msi pc\\desktop\\da_hk7\\dachuyennganh\\be_doan_qlhc\\be_doan_qlhc\\data\\qlhccontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD769941-251C-491B-86E8-E0ED08C5A05E}|BE_DOAN_QLHC\\BE_DOAN_QLHC.csproj|solutionrelative:be_doan_qlhc\\data\\qlhccontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD769941-251C-491B-86E8-E0ED08C5A05E}|BE_DOAN_QLHC\\BE_DOAN_QLHC.csproj|c:\\users\\msi pc\\desktop\\da_hk7\\dachuyennganh\\be_doan_qlhc\\be_doan_qlhc\\be_doan_qlhc.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{BD769941-251C-491B-86E8-E0ED08C5A05E}|BE_DOAN_QLHC\\BE_DOAN_QLHC.csproj|solutionrelative:be_doan_qlhc\\be_doan_qlhc.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD769941-251C-491B-86E8-E0ED08C5A05E}|BE_DOAN_QLHC\\BE_DOAN_QLHC.csproj|c:\\users\\msi pc\\desktop\\da_hk7\\dachuyennganh\\be_doan_qlhc\\be_doan_qlhc\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD769941-251C-491B-86E8-E0ED08C5A05E}|BE_DOAN_QLHC\\BE_DOAN_QLHC.csproj|solutionrelative:be_doan_qlhc\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD769941-251C-491B-86E8-E0ED08C5A05E}|BE_DOAN_QLHC\\BE_DOAN_QLHC.csproj|c:\\users\\msi pc\\desktop\\da_hk7\\dachuyennganh\\be_doan_qlhc\\be_doan_qlhc\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{BD769941-251C-491B-86E8-E0ED08C5A05E}|BE_DOAN_QLHC\\BE_DOAN_QLHC.csproj|solutionrelative:be_doan_qlhc\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD769941-251C-491B-86E8-E0ED08C5A05E}|BE_DOAN_QLHC\\BE_DOAN_QLHC.csproj|c:\\users\\msi pc\\desktop\\da_hk7\\dachuyennganh\\be_doan_qlhc\\be_doan_qlhc\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{BD769941-251C-491B-86E8-E0ED08C5A05E}|BE_DOAN_QLHC\\BE_DOAN_QLHC.csproj|solutionrelative:be_doan_qlhc\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD769941-251C-491B-86E8-E0ED08C5A05E}|BE_DOAN_QLHC\\BE_DOAN_QLHC.csproj|c:\\users\\msi pc\\desktop\\da_hk7\\dachuyennganh\\be_doan_qlhc\\be_doan_qlhc\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD769941-251C-491B-86E8-E0ED08C5A05E}|BE_DOAN_QLHC\\BE_DOAN_QLHC.csproj|solutionrelative:be_doan_qlhc\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "QLHCContext.cs",
+              "DocumentMoniker": "C:\\Users\\MSI PC\\Desktop\\DA_HK7\\DACHUYENNGANH\\BE_DOAN_QLHC\\BE_DOAN_QLHC\\Data\\QLHCContext.cs",
+              "RelativeDocumentMoniker": "BE_DOAN_QLHC\\Data\\QLHCContext.cs",
+              "ToolTip": "C:\\Users\\MSI PC\\Desktop\\DA_HK7\\DACHUYENNGANH\\BE_DOAN_QLHC\\BE_DOAN_QLHC\\Data\\QLHCContext.cs",
+              "RelativeToolTip": "BE_DOAN_QLHC\\Data\\QLHCContext.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAA8wAAAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T21:11:05.902Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BE_DOAN_QLHC.http",
+              "DocumentMoniker": "C:\\Users\\MSI PC\\Desktop\\DA_HK7\\DACHUYENNGANH\\BE_DOAN_QLHC\\BE_DOAN_QLHC\\BE_DOAN_QLHC.http",
+              "RelativeDocumentMoniker": "BE_DOAN_QLHC\\BE_DOAN_QLHC.http",
+              "ToolTip": "C:\\Users\\MSI PC\\Desktop\\DA_HK7\\DACHUYENNGANH\\BE_DOAN_QLHC\\BE_DOAN_QLHC\\BE_DOAN_QLHC.http",
+              "RelativeToolTip": "BE_DOAN_QLHC\\BE_DOAN_QLHC.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2024-10-19T21:07:45.94Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "WeatherForecastController.cs",
+              "DocumentMoniker": "C:\\Users\\MSI PC\\Desktop\\DA_HK7\\DACHUYENNGANH\\BE_DOAN_QLHC\\BE_DOAN_QLHC\\Controllers\\WeatherForecastController.cs",
+              "RelativeDocumentMoniker": "BE_DOAN_QLHC\\Controllers\\WeatherForecastController.cs",
+              "ToolTip": "C:\\Users\\MSI PC\\Desktop\\DA_HK7\\DACHUYENNGANH\\BE_DOAN_QLHC\\BE_DOAN_QLHC\\Controllers\\WeatherForecastController.cs",
+              "RelativeToolTip": "BE_DOAN_QLHC\\Controllers\\WeatherForecastController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T21:07:56.7Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "WeatherForecast.cs",
+              "DocumentMoniker": "C:\\Users\\MSI PC\\Desktop\\DA_HK7\\DACHUYENNGANH\\BE_DOAN_QLHC\\BE_DOAN_QLHC\\WeatherForecast.cs",
+              "RelativeDocumentMoniker": "BE_DOAN_QLHC\\WeatherForecast.cs",
+              "ToolTip": "C:\\Users\\MSI PC\\Desktop\\DA_HK7\\DACHUYENNGANH\\BE_DOAN_QLHC\\BE_DOAN_QLHC\\WeatherForecast.cs",
+              "RelativeToolTip": "BE_DOAN_QLHC\\WeatherForecast.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T21:07:43.165Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\MSI PC\\Desktop\\DA_HK7\\DACHUYENNGANH\\BE_DOAN_QLHC\\BE_DOAN_QLHC\\appsettings.json",
+              "RelativeDocumentMoniker": "BE_DOAN_QLHC\\appsettings.json",
+              "ToolTip": "C:\\Users\\MSI PC\\Desktop\\DA_HK7\\DACHUYENNGANH\\BE_DOAN_QLHC\\BE_DOAN_QLHC\\appsettings.json",
+              "RelativeToolTip": "BE_DOAN_QLHC\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-10-19T21:05:11.362Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\MSI PC\\Desktop\\DA_HK7\\DACHUYENNGANH\\BE_DOAN_QLHC\\BE_DOAN_QLHC\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "BE_DOAN_QLHC\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\MSI PC\\Desktop\\DA_HK7\\DACHUYENNGANH\\BE_DOAN_QLHC\\BE_DOAN_QLHC\\Properties\\launchSettings.json",
+              "RelativeToolTip": "BE_DOAN_QLHC\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-10-19T21:07:53.863Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\MSI PC\\Desktop\\DA_HK7\\DACHUYENNGANH\\BE_DOAN_QLHC\\BE_DOAN_QLHC\\Program.cs",
+              "RelativeDocumentMoniker": "BE_DOAN_QLHC\\Program.cs",
+              "ToolTip": "C:\\Users\\MSI PC\\Desktop\\DA_HK7\\DACHUYENNGANH\\BE_DOAN_QLHC\\BE_DOAN_QLHC\\Program.cs",
+              "RelativeToolTip": "BE_DOAN_QLHC\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T21:07:42.005Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
