@@ -1,6 +1,0 @@
-@BE_DOAN_QLHC_HostAddress = http://localhost:5259
-
-GET {{BE_DOAN_QLHC_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

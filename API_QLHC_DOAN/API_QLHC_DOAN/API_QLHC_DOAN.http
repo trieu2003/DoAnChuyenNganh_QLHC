@@ -1,0 +1,6 @@
+@API_QLHC_DOAN_HostAddress = http://localhost:5118
+
+GET {{API_QLHC_DOAN_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
