@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("API_QLHC_DOAN")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+28b0196fba71189444cb4e6c5b4252540d90a8ac")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+755eb5f0f4ea1ad847c83ca874b03b2aaafc5183")]
 [assembly: System.Reflection.AssemblyProductAttribute("API_QLHC_DOAN")]
 [assembly: System.Reflection.AssemblyTitleAttribute("API_QLHC_DOAN")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
