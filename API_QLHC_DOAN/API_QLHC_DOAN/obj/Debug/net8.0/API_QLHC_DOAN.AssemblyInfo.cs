@@ -11,10 +11,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("f8163a32-514f-4725-a163-7264b9bcb9e0")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("API_QLHC_DOAN")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6b1586a30f7f85f38c8fd60e856ad2ebb3588268")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+28b0196fba71189444cb4e6c5b4252540d90a8ac")]
 [assembly: System.Reflection.AssemblyProductAttribute("API_QLHC_DOAN")]
 [assembly: System.Reflection.AssemblyTitleAttribute("API_QLHC_DOAN")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

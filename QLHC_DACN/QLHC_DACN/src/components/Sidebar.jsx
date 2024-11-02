@@ -18,7 +18,7 @@ const Sidebar = ({ open, onClose }) => {
             Trang Chủ
           </Link>
           <Link 
-            to="/chemical-management" 
+            to="/ChemicalManagement" 
             className="text-gray-700 hover:bg-blue-100 p-2 rounded transition-colors duration-200"
           >
             Quản Lý Hóa Chất

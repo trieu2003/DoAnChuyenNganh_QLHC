@@ -7,7 +7,8 @@ import Home from './pages/Home'; // Giả sử bạn có trang Home
 import Login from './pages/Login'; // Giả sử bạn có trang Login
 import SignUp from './pages/SignUp'; // Thêm dòng này
 import ChangePassword from "./pages/ChangePassword"; // Thêm route này
-
+import ChemicalManagement from "./pages/ChemicalManagement";
+import PurchaseRequest from "./pages/PurchaseRequest";
 const App = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -28,6 +29,8 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           {/* Thêm các route khác tại đây */}
+          <Route path="/ChemicalManagement" element={<ChemicalManagement />} />
+          <Route path="/purchase-request" element={<PurchaseRequest />} />
           <Route path="/register" element={<SignUp />} /> {/* Thêm route này */}
           <Route path="/change-password" element={<ChangePassword />} /> {/* Route mới */}
         </Routes>

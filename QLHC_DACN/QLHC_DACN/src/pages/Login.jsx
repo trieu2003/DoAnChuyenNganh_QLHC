@@ -6,7 +6,6 @@ import { MdEmail } from "react-icons/md";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const handleSubmit = (e) => {
     e.preventDefault();
     // Xử lý đăng nhập
