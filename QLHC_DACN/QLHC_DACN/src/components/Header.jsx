@@ -17,6 +17,12 @@ const Header = ({ onOpenSidebar }) => {
         <Link to="/change-password" className="text-white hover:text-gray-200 text-lg">
           Đổi Mật Khẩu
         </Link>
+        <Link
+            to="/user-management"
+            className="text-white hover:text-gray-200 text-lg"
+          >
+            Quản Trị Người Dùng
+          </Link>
       </div>
     </header>
   );

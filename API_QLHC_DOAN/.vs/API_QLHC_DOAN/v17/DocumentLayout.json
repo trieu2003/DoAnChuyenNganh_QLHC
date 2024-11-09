@@ -3,40 +3,44 @@
   "WorkspaceRootPath": "E:\\Huit24-25\\HK1\\DoANCNganh\\DOAN\\Code\\DoAnChuyenNganh_QLHC\\API_QLHC_DOAN\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A71BCEF0-5670-4224-84D0-67F06725C80F}|API_QLHC_DOAN\\API_QLHC_DOAN.csproj|e:\\huit24-25\\hk1\\doancnganh\\doan\\code\\doanchuyennganh_qlhc\\api_qlhc_doan\\api_qlhc_doan\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A71BCEF0-5670-4224-84D0-67F06725C80F}|API_QLHC_DOAN\\API_QLHC_DOAN.csproj|solutionrelative:api_qlhc_doan\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{A71BCEF0-5670-4224-84D0-67F06725C80F}|API_QLHC_DOAN\\API_QLHC_DOAN.csproj|e:\\huit24-25\\hk1\\doancnganh\\doan\\code\\doanchuyennganh_qlhc\\api_qlhc_doan\\api_qlhc_doan\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A71BCEF0-5670-4224-84D0-67F06725C80F}|API_QLHC_DOAN\\API_QLHC_DOAN.csproj|solutionrelative:api_qlhc_doan\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A71BCEF0-5670-4224-84D0-67F06725C80F}|API_QLHC_DOAN\\API_QLHC_DOAN.csproj|e:\\huit24-25\\hk1\\doancnganh\\doan\\code\\doanchuyennganh_qlhc\\api_qlhc_doan\\api_qlhc_doan\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A71BCEF0-5670-4224-84D0-67F06725C80F}|API_QLHC_DOAN\\API_QLHC_DOAN.csproj|solutionrelative:api_qlhc_doan\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A71BCEF0-5670-4224-84D0-67F06725C80F}|API_QLHC_DOAN\\API_QLHC_DOAN.csproj|e:\\huit24-25\\hk1\\doancnganh\\doan\\code\\doanchuyennganh_qlhc\\api_qlhc_doan\\api_qlhc_doan\\data\\yourdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A71BCEF0-5670-4224-84D0-67F06725C80F}|API_QLHC_DOAN\\API_QLHC_DOAN.csproj|solutionrelative:api_qlhc_doan\\data\\yourdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A71BCEF0-5670-4224-84D0-67F06725C80F}|API_QLHC_DOAN\\API_QLHC_DOAN.csproj|e:\\huit24-25\\hk1\\doancnganh\\doan\\code\\doanchuyennganh_qlhc\\api_qlhc_doan\\api_qlhc_doan\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A71BCEF0-5670-4224-84D0-67F06725C80F}|API_QLHC_DOAN\\API_QLHC_DOAN.csproj|solutionrelative:api_qlhc_doan\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A71BCEF0-5670-4224-84D0-67F06725C80F}|API_QLHC_DOAN\\API_QLHC_DOAN.csproj|e:\\huit24-25\\hk1\\doancnganh\\doan\\code\\doanchuyennganh_qlhc\\api_qlhc_doan\\api_qlhc_doan\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A71BCEF0-5670-4224-84D0-67F06725C80F}|API_QLHC_DOAN\\API_QLHC_DOAN.csproj|solutionrelative:api_qlhc_doan\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A71BCEF0-5670-4224-84D0-67F06725C80F}|API_QLHC_DOAN\\API_QLHC_DOAN.csproj|e:\\huit24-25\\hk1\\doancnganh\\doan\\code\\doanchuyennganh_qlhc\\api_qlhc_doan\\api_qlhc_doan\\api_qlhc_doan.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{A71BCEF0-5670-4224-84D0-67F06725C80F}|API_QLHC_DOAN\\API_QLHC_DOAN.csproj|solutionrelative:api_qlhc_doan\\api_qlhc_doan.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{A71BCEF0-5670-4224-84D0-67F06725C80F}|API_QLHC_DOAN\\API_QLHC_DOAN.csproj|e:\\huit24-25\\hk1\\doancnganh\\doan\\code\\doanchuyennganh_qlhc\\api_qlhc_doan\\api_qlhc_doan\\models\\updatenguoidungdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A71BCEF0-5670-4224-84D0-67F06725C80F}|API_QLHC_DOAN\\API_QLHC_DOAN.csproj|solutionrelative:api_qlhc_doan\\models\\updatenguoidungdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A71BCEF0-5670-4224-84D0-67F06725C80F}|API_QLHC_DOAN\\API_QLHC_DOAN.csproj|e:\\huit24-25\\hk1\\doancnganh\\doan\\code\\doanchuyennganh_qlhc\\api_qlhc_doan\\api_qlhc_doan\\models\\nguoidung.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A71BCEF0-5670-4224-84D0-67F06725C80F}|API_QLHC_DOAN\\API_QLHC_DOAN.csproj|solutionrelative:api_qlhc_doan\\models\\nguoidung.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A71BCEF0-5670-4224-84D0-67F06725C80F}|API_QLHC_DOAN\\API_QLHC_DOAN.csproj|e:\\huit24-25\\hk1\\doancnganh\\doan\\code\\doanchuyennganh_qlhc\\api_qlhc_doan\\api_qlhc_doan\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A71BCEF0-5670-4224-84D0-67F06725C80F}|API_QLHC_DOAN\\API_QLHC_DOAN.csproj|solutionrelative:api_qlhc_doan\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A71BCEF0-5670-4224-84D0-67F06725C80F}|API_QLHC_DOAN\\API_QLHC_DOAN.csproj|e:\\huit24-25\\hk1\\doancnganh\\doan\\code\\doanchuyennganh_qlhc\\api_qlhc_doan\\api_qlhc_doan\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A71BCEF0-5670-4224-84D0-67F06725C80F}|API_QLHC_DOAN\\API_QLHC_DOAN.csproj|solutionrelative:api_qlhc_doan\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A71BCEF0-5670-4224-84D0-67F06725C80F}|API_QLHC_DOAN\\API_QLHC_DOAN.csproj|e:\\huit24-25\\hk1\\doancnganh\\doan\\code\\doanchuyennganh_qlhc\\api_qlhc_doan\\api_qlhc_doan\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A71BCEF0-5670-4224-84D0-67F06725C80F}|API_QLHC_DOAN\\API_QLHC_DOAN.csproj|solutionrelative:api_qlhc_doan\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A71BCEF0-5670-4224-84D0-67F06725C80F}|API_QLHC_DOAN\\API_QLHC_DOAN.csproj|e:\\huit24-25\\hk1\\doancnganh\\doan\\code\\doanchuyennganh_qlhc\\api_qlhc_doan\\api_qlhc_doan\\data\\yourdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A71BCEF0-5670-4224-84D0-67F06725C80F}|API_QLHC_DOAN\\API_QLHC_DOAN.csproj|solutionrelative:api_qlhc_doan\\data\\yourdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A71BCEF0-5670-4224-84D0-67F06725C80F}|API_QLHC_DOAN\\API_QLHC_DOAN.csproj|e:\\huit24-25\\hk1\\doancnganh\\doan\\code\\doanchuyennganh_qlhc\\api_qlhc_doan\\api_qlhc_doan\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A71BCEF0-5670-4224-84D0-67F06725C80F}|API_QLHC_DOAN\\API_QLHC_DOAN.csproj|solutionrelative:api_qlhc_doan\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A71BCEF0-5670-4224-84D0-67F06725C80F}|API_QLHC_DOAN\\API_QLHC_DOAN.csproj|e:\\huit24-25\\hk1\\doancnganh\\doan\\code\\doanchuyennganh_qlhc\\api_qlhc_doan\\api_qlhc_doan\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A71BCEF0-5670-4224-84D0-67F06725C80F}|API_QLHC_DOAN\\API_QLHC_DOAN.csproj|solutionrelative:api_qlhc_doan\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A71BCEF0-5670-4224-84D0-67F06725C80F}|API_QLHC_DOAN\\API_QLHC_DOAN.csproj|e:\\huit24-25\\hk1\\doancnganh\\doan\\code\\doanchuyennganh_qlhc\\api_qlhc_doan\\api_qlhc_doan\\api_qlhc_doan.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
       "RelativeMoniker": "D:0:0:{A71BCEF0-5670-4224-84D0-67F06725C80F}|API_QLHC_DOAN\\API_QLHC_DOAN.csproj|solutionrelative:api_qlhc_doan\\api_qlhc_doan.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A71BCEF0-5670-4224-84D0-67F06725C80F}|API_QLHC_DOAN\\API_QLHC_DOAN.csproj|e:\\huit24-25\\hk1\\doancnganh\\doan\\code\\doanchuyennganh_qlhc\\api_qlhc_doan\\api_qlhc_doan\\api_qlhc_doan.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{A71BCEF0-5670-4224-84D0-67F06725C80F}|API_QLHC_DOAN\\API_QLHC_DOAN.csproj|solutionrelative:api_qlhc_doan\\api_qlhc_doan.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A71BCEF0-5670-4224-84D0-67F06725C80F}|API_QLHC_DOAN\\API_QLHC_DOAN.csproj|e:\\huit24-25\\hk1\\doancnganh\\doan\\code\\doanchuyennganh_qlhc\\api_qlhc_doan\\api_qlhc_doan\\weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -54,23 +58,76 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "E:\\Huit24-25\\HK1\\DoANCNganh\\DOAN\\Code\\DoAnChuyenNganh_QLHC\\API_QLHC_DOAN\\API_QLHC_DOAN\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "API_QLHC_DOAN\\Controllers\\UsersController.cs",
+              "ToolTip": "E:\\Huit24-25\\HK1\\DoANCNganh\\DOAN\\Code\\DoAnChuyenNganh_QLHC\\API_QLHC_DOAN\\API_QLHC_DOAN\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "API_QLHC_DOAN\\Controllers\\UsersController.cs",
+              "ViewState": "AQIAAFcAAAAAAAAAAADwv2cAAAAtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-02T05:25:02.301Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UpdateNguoiDungDTO.cs",
+              "DocumentMoniker": "E:\\Huit24-25\\HK1\\DoANCNganh\\DOAN\\Code\\DoAnChuyenNganh_QLHC\\API_QLHC_DOAN\\API_QLHC_DOAN\\Models\\UpdateNguoiDungDTO.cs",
+              "RelativeDocumentMoniker": "API_QLHC_DOAN\\Models\\UpdateNguoiDungDTO.cs",
+              "ToolTip": "E:\\Huit24-25\\HK1\\DoANCNganh\\DOAN\\Code\\DoAnChuyenNganh_QLHC\\API_QLHC_DOAN\\API_QLHC_DOAN\\Models\\UpdateNguoiDungDTO.cs",
+              "RelativeToolTip": "API_QLHC_DOAN\\Models\\UpdateNguoiDungDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAKAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-09T16:24:10.386Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "YourDbContext.cs",
               "DocumentMoniker": "E:\\Huit24-25\\HK1\\DoANCNganh\\DOAN\\Code\\DoAnChuyenNganh_QLHC\\API_QLHC_DOAN\\API_QLHC_DOAN\\Data\\YourDbContext.cs",
               "RelativeDocumentMoniker": "API_QLHC_DOAN\\Data\\YourDbContext.cs",
               "ToolTip": "E:\\Huit24-25\\HK1\\DoANCNganh\\DOAN\\Code\\DoAnChuyenNganh_QLHC\\API_QLHC_DOAN\\API_QLHC_DOAN\\Data\\YourDbContext.cs",
               "RelativeToolTip": "API_QLHC_DOAN\\Data\\YourDbContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAkAAABUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-26T10:17:53.198Z"
+              "WhenOpened": "2024-11-02T05:22:43.663Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
+              "Title": "NguoiDung.cs",
+              "DocumentMoniker": "E:\\Huit24-25\\HK1\\DoANCNganh\\DOAN\\Code\\DoAnChuyenNganh_QLHC\\API_QLHC_DOAN\\API_QLHC_DOAN\\Models\\NguoiDung.cs",
+              "RelativeDocumentMoniker": "API_QLHC_DOAN\\Models\\NguoiDung.cs",
+              "ToolTip": "E:\\Huit24-25\\HK1\\DoANCNganh\\DOAN\\Code\\DoAnChuyenNganh_QLHC\\API_QLHC_DOAN\\API_QLHC_DOAN\\Models\\NguoiDung.cs",
+              "RelativeToolTip": "API_QLHC_DOAN\\Models\\NguoiDung.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAsAAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-02T05:42:34.724Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "API_QLHC_DOAN.http",
+              "DocumentMoniker": "E:\\Huit24-25\\HK1\\DoANCNganh\\DOAN\\Code\\DoAnChuyenNganh_QLHC\\API_QLHC_DOAN\\API_QLHC_DOAN\\API_QLHC_DOAN.http",
+              "RelativeDocumentMoniker": "API_QLHC_DOAN\\API_QLHC_DOAN.http",
+              "ToolTip": "E:\\Huit24-25\\HK1\\DoANCNganh\\DOAN\\Code\\DoAnChuyenNganh_QLHC\\API_QLHC_DOAN\\API_QLHC_DOAN\\API_QLHC_DOAN.http",
+              "RelativeToolTip": "API_QLHC_DOAN\\API_QLHC_DOAN.http",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2024-10-20T01:50:42.469Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "appsettings.json",
               "DocumentMoniker": "E:\\Huit24-25\\HK1\\DoANCNganh\\DOAN\\Code\\DoAnChuyenNganh_QLHC\\API_QLHC_DOAN\\API_QLHC_DOAN\\appsettings.json",
               "RelativeDocumentMoniker": "API_QLHC_DOAN\\appsettings.json",
@@ -83,79 +140,44 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "LoginController.cs",
-              "DocumentMoniker": "E:\\Huit24-25\\HK1\\DoANCNganh\\DOAN\\Code\\DoAnChuyenNganh_QLHC\\API_QLHC_DOAN\\API_QLHC_DOAN\\Controllers\\LoginController.cs",
-              "RelativeDocumentMoniker": "API_QLHC_DOAN\\Controllers\\LoginController.cs",
-              "ToolTip": "E:\\Huit24-25\\HK1\\DoANCNganh\\DOAN\\Code\\DoAnChuyenNganh_QLHC\\API_QLHC_DOAN\\API_QLHC_DOAN\\Controllers\\LoginController.cs",
-              "RelativeToolTip": "API_QLHC_DOAN\\Controllers\\LoginController.cs",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAAABQAAAAMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-26T10:09:49.822Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "NguoiDung.cs",
-              "DocumentMoniker": "E:\\Huit24-25\\HK1\\DoANCNganh\\DOAN\\Code\\DoAnChuyenNganh_QLHC\\API_QLHC_DOAN\\API_QLHC_DOAN\\Models\\NguoiDung.cs",
-              "RelativeDocumentMoniker": "API_QLHC_DOAN\\Models\\NguoiDung.cs",
-              "ToolTip": "E:\\Huit24-25\\HK1\\DoANCNganh\\DOAN\\Code\\DoAnChuyenNganh_QLHC\\API_QLHC_DOAN\\API_QLHC_DOAN\\Models\\NguoiDung.cs",
-              "RelativeToolTip": "API_QLHC_DOAN\\Models\\NguoiDung.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAsAAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-26T09:54:07.562Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "E:\\Huit24-25\\HK1\\DoANCNganh\\DOAN\\Code\\DoAnChuyenNganh_QLHC\\API_QLHC_DOAN\\API_QLHC_DOAN\\Program.cs",
               "RelativeDocumentMoniker": "API_QLHC_DOAN\\Program.cs",
               "ToolTip": "E:\\Huit24-25\\HK1\\DoANCNganh\\DOAN\\Code\\DoAnChuyenNganh_QLHC\\API_QLHC_DOAN\\API_QLHC_DOAN\\Program.cs",
               "RelativeToolTip": "API_QLHC_DOAN\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "ViewState": "AQIAABIAAAAAAAAAAAAAABcAAAAaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-26T10:01:46.042Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "API_QLHC_DOAN.http",
-              "DocumentMoniker": "E:\\Huit24-25\\HK1\\DoANCNganh\\DOAN\\Code\\DoAnChuyenNganh_QLHC\\API_QLHC_DOAN\\API_QLHC_DOAN\\API_QLHC_DOAN.http",
-              "RelativeDocumentMoniker": "API_QLHC_DOAN\\API_QLHC_DOAN.http",
-              "ToolTip": "E:\\Huit24-25\\HK1\\DoANCNganh\\DOAN\\Code\\DoAnChuyenNganh_QLHC\\API_QLHC_DOAN\\API_QLHC_DOAN\\API_QLHC_DOAN.http",
-              "RelativeToolTip": "API_QLHC_DOAN\\API_QLHC_DOAN.http",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
-              "WhenOpened": "2024-10-20T01:50:42.469Z"
+              "WhenOpened": "2024-11-02T09:06:10.44Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "WeatherForecastController.cs",
-              "DocumentMoniker": "E:\\Huit24-25\\HK1\\DoANCNganh\\DOAN\\Code\\DoAnChuyenNganh_QLHC\\API_QLHC_DOAN\\API_QLHC_DOAN\\Controllers\\WeatherForecastController.cs",
-              "RelativeDocumentMoniker": "API_QLHC_DOAN\\Controllers\\WeatherForecastController.cs",
-              "ToolTip": "E:\\Huit24-25\\HK1\\DoANCNganh\\DOAN\\Code\\DoAnChuyenNganh_QLHC\\API_QLHC_DOAN\\API_QLHC_DOAN\\Controllers\\WeatherForecastController.cs",
-              "RelativeToolTip": "API_QLHC_DOAN\\Controllers\\WeatherForecastController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "E:\\Huit24-25\\HK1\\DoANCNganh\\DOAN\\Code\\DoAnChuyenNganh_QLHC\\API_QLHC_DOAN\\API_QLHC_DOAN\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "API_QLHC_DOAN\\Data\\AppDbContext.cs",
+              "ToolTip": "E:\\Huit24-25\\HK1\\DoANCNganh\\DOAN\\Code\\DoAnChuyenNganh_QLHC\\API_QLHC_DOAN\\API_QLHC_DOAN\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "API_QLHC_DOAN\\Data\\AppDbContext.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-26T09:54:45.709Z"
+              "WhenOpened": "2024-11-02T05:11:41.688Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "appsettings.Development.json",
-              "DocumentMoniker": "E:\\Huit24-25\\HK1\\DoANCNganh\\DOAN\\Code\\DoAnChuyenNganh_QLHC\\API_QLHC_DOAN\\API_QLHC_DOAN\\appsettings.Development.json",
-              "RelativeDocumentMoniker": "API_QLHC_DOAN\\appsettings.Development.json",
-              "ToolTip": "E:\\Huit24-25\\HK1\\DoANCNganh\\DOAN\\Code\\DoAnChuyenNganh_QLHC\\API_QLHC_DOAN\\API_QLHC_DOAN\\appsettings.Development.json",
-              "RelativeToolTip": "API_QLHC_DOAN\\appsettings.Development.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-10-26T09:43:57.84Z"
+              "DocumentIndex": 6,
+              "Title": "LoginController.cs",
+              "DocumentMoniker": "E:\\Huit24-25\\HK1\\DoANCNganh\\DOAN\\Code\\DoAnChuyenNganh_QLHC\\API_QLHC_DOAN\\API_QLHC_DOAN\\Controllers\\LoginController.cs",
+              "RelativeDocumentMoniker": "API_QLHC_DOAN\\Controllers\\LoginController.cs",
+              "ToolTip": "E:\\Huit24-25\\HK1\\DoANCNganh\\DOAN\\Code\\DoAnChuyenNganh_QLHC\\API_QLHC_DOAN\\API_QLHC_DOAN\\Controllers\\LoginController.cs",
+              "RelativeToolTip": "API_QLHC_DOAN\\Controllers\\LoginController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-26T10:09:49.822Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 9,
               "Title": "API_QLHC_DOAN.csproj",
               "DocumentMoniker": "E:\\Huit24-25\\HK1\\DoANCNganh\\DOAN\\Code\\DoAnChuyenNganh_QLHC\\API_QLHC_DOAN\\API_QLHC_DOAN\\API_QLHC_DOAN.csproj",
               "RelativeDocumentMoniker": "API_QLHC_DOAN\\API_QLHC_DOAN.csproj",
@@ -167,7 +189,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "WeatherForecast.cs",
               "DocumentMoniker": "E:\\Huit24-25\\HK1\\DoANCNganh\\DOAN\\Code\\DoAnChuyenNganh_QLHC\\API_QLHC_DOAN\\API_QLHC_DOAN\\WeatherForecast.cs",
               "RelativeDocumentMoniker": "API_QLHC_DOAN\\WeatherForecast.cs",
@@ -179,7 +201,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "API_QLHC_DOAN",
               "DocumentMoniker": "E:\\Huit24-25\\HK1\\DoANCNganh\\DOAN\\Code\\DoAnChuyenNganh_QLHC\\API_QLHC_DOAN\\API_QLHC_DOAN\\API_QLHC_DOAN.csproj",
               "RelativeDocumentMoniker": "API_QLHC_DOAN\\API_QLHC_DOAN.csproj",

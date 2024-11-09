@@ -7,11 +7,11 @@ namespace API_QLHC_DOAN.Models
         [Key]
         public int MaNguoiDung { get; set; }
 
-        [Required]
-        [MaxLength(50)]
+        
+        [MaxLength(20)]
         public string TenDangNhap { get; set; }
 
-        [Required]
+        
         public string MatKhauHash { get; set; }
 
         [Required]
@@ -20,7 +20,7 @@ namespace API_QLHC_DOAN.Models
 
         public string VaiTro { get; set; }
 
-        [Required]
+       
         public DateTime NgayTao { get; set; }
     }
 }

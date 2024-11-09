@@ -11,7 +11,7 @@ builder.Services.AddDbContext<YourDbContext>(options => options.UseSqlServer(bui
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin",
-        builder => builder.WithOrigins("http://localhost:3000") // Thay đổi theo địa chỉ nguồn của bạn
+        builder => builder.WithOrigins("http://localhost:5173") // Thay đổi theo địa chỉ nguồn của bạn
                           .AllowAnyHeader()
                           .AllowAnyMethod());
 });
