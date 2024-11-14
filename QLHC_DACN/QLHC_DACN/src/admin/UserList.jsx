@@ -1,6 +1,6 @@
 // UserList.jsx
 import { useEffect, useState } from 'react';
-import { getUsers,deleteUser,updateUser } from '../pages/CRUDUser'; // Đảm bảo đường dẫn đúng
+import { getUsers,deleteUser,updateUser } from './CRUDUser'; // Đảm bảo đường dẫn đúng
 
 const UserList = () => {
   const [users, setUsers] = useState([]);

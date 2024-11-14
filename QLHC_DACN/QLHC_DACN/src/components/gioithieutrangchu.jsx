@@ -82,9 +82,9 @@ const GioiThieu = () => {
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <img src="https://source.unsplash.com/300x200/?classroom" alt="Classroom" className="w-full h-48 object-cover rounded-lg shadow-lg" />
-          <img src="https://source.unsplash.com/300x200/?laboratory" alt="Laboratory" className="w-full h-48 object-cover rounded-lg shadow-lg" />
-          <img src="https://source.unsplash.com/300x200/?library" alt="Library" className="w-full h-48 object-cover rounded-lg shadow-lg" />
+          <img src="/assets/images/campus.png"  alt="Classroom" className="w-full h-48 object-cover rounded-lg shadow-lg" />
+          <img src="/assets/images/campus.png"  alt="Laboratory" className="w-full h-48 object-cover rounded-lg shadow-lg" />
+          <img src="/assets/images/campus.png"  alt="Library" className="w-full h-48 object-cover rounded-lg shadow-lg" />
         </div>
       </section>
 
@@ -98,17 +98,17 @@ const GioiThieu = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="text-center p-4 bg-white rounded-lg shadow-lg">
-            <img src="https://source.unsplash.com/150x150/?teacher" alt="Teacher" className="rounded-full mx-auto mb-4" />
+            <img src="/assets/images/campus.png"  alt="Teacher" className="rounded-full mx-auto mb-4" />
             <h3 className="text-lg font-semibold">Nguyễn Văn A</h3>
             <p>Giáo sư, Khoa Kinh tế</p>
           </div>
           <div className="text-center p-4 bg-white rounded-lg shadow-lg">
-            <img src="https://source.unsplash.com/150x150/?professor" alt="Professor" className="rounded-full mx-auto mb-4" />
+            <img src="/assets/images/campus.png" alt="Professor" className="rounded-full mx-auto mb-4" />
             <h3 className="text-lg font-semibold">Trần Thị B</h3>
             <p>Tiến sĩ, Khoa Công nghệ thông tin</p>
           </div>
           <div className="text-center p-4 bg-white rounded-lg shadow-lg">
-            <img src="https://source.unsplash.com/150x150/?research" alt="Researcher" className="rounded-full mx-auto mb-4" />
+            <img src="/assets/images/campus.png" alt="Researcher" className="rounded-full mx-auto mb-4" />
             <h3 className="text-lg font-semibold">Lê Văn C</h3>
             <p>Thạc sĩ, Khoa Kỹ thuật</p>
           </div>
@@ -124,9 +124,9 @@ const GioiThieu = () => {
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <img src="https://source.unsplash.com/300x200/?event" alt="Event" className="w-full h-48 object-cover rounded-lg shadow-lg" />
-          <img src="https://source.unsplash.com/300x200/?competition" alt="Competition" className="w-full h-48 object-cover rounded-lg shadow-lg" />
-          <img src="https://source.unsplash.com/300x200/?workshop" alt="Workshop" className="w-full h-48 object-cover rounded-lg shadow-lg" />
+          <img src="/assets/images/campus.png"  alt="Event" className="w-full h-48 object-cover rounded-lg shadow-lg" />
+          <img src="/assets/images/campus.png"  alt="Competition" className="w-full h-48 object-cover rounded-lg shadow-lg" />
+          <img src="/assets/images/campus.png"  alt="Workshop" className="w-full h-48 object-cover rounded-lg shadow-lg" />
         </div>
       </section>
 

@@ -531,6 +531,7 @@ import GioiThieuContact from './components/gioi-thieucontact';
 import DaoTao from './components/dao-tao';
 import NganhDaoTao from './components/nganh-dao-tao';
 import CRUDUser from './pages/CRUDUser';
+// import CRUDRole from 'admin/CRUDUser';
 import ChemicalManagement from './pages/ChemicalManagement';
 import InventoryManagement from './pages/InventoryManagement';
 import DeXuatForm from './pages/DeXuatSuDungHC';
@@ -594,6 +595,7 @@ const App = () => {
           <Route path="/dao-tao" element={<DaoTao />} />
           <Route path="/change-password" element={isLoggedIn ? <ChangePassword /> : <Navigate to="/login" />} />
           <Route path="/user-management" element={<CRUDUser />} />
+          {/* <Route path="/role-management" element={<CRUDRole />} /> */}
           <Route path="/chemical-management" element={<ChemicalManagement />} />
           <Route path="/inventory-management" element={<InventoryManagement />} />
           <Route path="/create-dexuat-page" element={<DeXuatForm />} />

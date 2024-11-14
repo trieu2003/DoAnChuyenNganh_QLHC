@@ -109,6 +109,38 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "API_QLHC_DOAN.Controllers.DeXuatController",
+    "Method": "CreateDeXuat",
+    "RelativePath": "api/DeXuat/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "phieuDeXuat",
+        "Type": "API_QLHC_DOAN.Models.PhieuDeXuat",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.DeXuatController",
+    "Method": "CreateChiTietDeXuat",
+    "RelativePath": "api/DeXuat/create-details",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "chiTietDeXuat",
+        "Type": "System.Collections.Generic.List\u00601[[API_QLHC_DOAN.Models.ChiTietDeXuat, API_QLHC_DOAN, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "API_QLHC_DOAN.Controllers.LoginController",
     "Method": "ChangePassword",
     "RelativePath": "api/Login/change-password",
