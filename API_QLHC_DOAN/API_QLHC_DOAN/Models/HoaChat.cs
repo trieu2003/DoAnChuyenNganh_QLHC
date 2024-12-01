@@ -7,7 +7,6 @@ namespace API_QLHC_DOAN.Models
     {
         [Key]  // This attribute marks the property as the primary key
         public int MaHoaChat { get; set; }
-
         public string SoCAS { get; set; }
         public string TenHoaChat { get; set; }
         public string DonVi { get; set; }
@@ -18,5 +17,10 @@ namespace API_QLHC_DOAN.Models
         public DateTime? ThoiHanSuDung { get; set; }
         public string? HinhAnh { get; set; }
         public DateTime NgayTao { get; set; }
+
+        // Navigation Property
+        public ICollection<LoHoaChat> LoHoaChats { get; set; } // Một HoaChat có nhiều LoHoaChat
+      
     }
 }
+

@@ -466,7 +466,9 @@
 import { Link } from "react-router-dom";
 
 const Header = ({ onOpenSidebar, isLoggedIn, userName, onLogout }) => {
+
   return (
+  
     <header className="bg-blue-600 text-white p-4 flex items-center justify-between max-w-full">
       <button onClick={onOpenSidebar} className="text-white text-2xl">
         <span className="material-icons">Menu</span>
@@ -501,12 +503,12 @@ const Header = ({ onOpenSidebar, isLoggedIn, userName, onLogout }) => {
         <Link to="/dao-tao" className="text-white hover:text-gray-200 text-lg">
           Đào Tạo
         </Link>
-        <Link
+        {/* <Link
             to="/user-management"
             className="text-white hover:text-gray-200 text-lg"
           >
             Quản Trị Người Dùng
-          </Link>
+          </Link> */}
       </div>
     </header>
   );

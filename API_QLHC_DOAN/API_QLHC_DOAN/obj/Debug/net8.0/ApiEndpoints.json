@@ -193,32 +193,186 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "API_QLHC_DOAN.Controllers.LoginController",
-    "Method": "SendOtp",
-    "RelativePath": "api/Login/send-otp",
-    "HttpMethod": "POST",
+    "ContainingType": "API_QLHC_DOAN.Controllers.PhieuThanhLyController",
+    "Method": "GetPhieuThanhLyDetails",
+    "RelativePath": "api/PhieuThanhLy",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[PhieuThanhLyDetails, API_QLHC_DOAN, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.PhieuThanhLyController",
+    "Method": "AcceptPhieuThanhLy",
+    "RelativePath": "api/PhieuThanhLy/accept/{id}",
+    "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "email",
-        "Type": "System.String",
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "API_QLHC_DOAN.Controllers.LoginController",
-    "Method": "VerifyOtp",
-    "RelativePath": "api/Login/verify-otp",
+    "ContainingType": "API_QLHC_DOAN.Controllers.PhieuThanhLyController",
+    "Method": "CreatePhieuThanhLy",
+    "RelativePath": "api/PhieuThanhLy/create-phieu-thanh-ly",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "request",
-        "Type": "API_QLHC_DOAN.Controllers.OtpRequest",
+        "Type": "API_QLHC_DOAN.Models.CreatePhieuThanhLyRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.PhieuThanhLyController",
+    "Method": "GetHoaChats",
+    "RelativePath": "api/PhieuThanhLy/hoa-chat",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[API_QLHC_DOAN.Models.HoaChat, API_QLHC_DOAN, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.PhieuThanhLyController",
+    "Method": "GetHoaChatsChuaThanhLy",
+    "RelativePath": "api/PhieuThanhLy/hoa-chat-chua-thanh-ly",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[API_QLHC_DOAN.Models.HoaChatDto, API_QLHC_DOAN, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.PhieuThanhLyController",
+    "Method": "GetHoaChatInLoHoaChatByMaHoaChatTenHoaChat",
+    "RelativePath": "api/PhieuThanhLy/hoa-chat-lo-hoa-chat-ten/{TenHoaChat}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "TenHoaChat",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "API_QLHC_DOAN.Models.HoaChatDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.PhieuThanhLyController",
+    "Method": "GetHoaChatInLoHoaChatByMaHoaChat",
+    "RelativePath": "api/PhieuThanhLy/hoa-chat-lo-hoa-chat/{maHoaChat}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "maHoaChat",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "API_QLHC_DOAN.Models.HoaChatDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.PhieuThanhLyController",
+    "Method": "GetHoaChatByCAS",
+    "RelativePath": "api/PhieuThanhLy/hoa-chat/{soCAS}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "soCAS",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "API_QLHC_DOAN.Models.HoaChatDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.PhieuThanhLyController",
+    "Method": "RejectPhieuThanhLy",
+    "RelativePath": "api/PhieuThanhLy/reject/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
@@ -263,6 +417,96 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.StatisticsController",
+    "Method": "GetHoaChatStatistics",
+    "RelativePath": "api/Statistics/hoa-chat-statistics",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[HoaChatStatistic, API_QLHC_DOAN, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.StatisticsController",
+    "Method": "GetLoHoaChatStatistics",
+    "RelativePath": "api/Statistics/lo-hoa-chat-statistics",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[LoHoaChatStatistic, API_QLHC_DOAN, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.StatisticsController",
+    "Method": "GetPhieuThanhLyStatistics",
+    "RelativePath": "api/Statistics/phieu-thanh-ly-statistics",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[PhieuThanhLyStatusStatistic, API_QLHC_DOAN, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.StatisticsController",
+    "Method": "GetTotalPhieuThanhLy",
+    "RelativePath": "api/Statistics/total-phieu-thanh-ly",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Int32",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.ThongKeController",
+    "Method": "ThongKeHoaChat",
+    "RelativePath": "api/ThongKe/hoa-chat",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "API_QLHC_DOAN.Controllers.UsersController",
@@ -393,26 +637,5 @@
       }
     ],
     "ReturnTypes": []
-  },
-  {
-    "ContainingType": "API_QLHC_DOAN.Controllers.WeatherForecastController",
-    "Method": "Get",
-    "RelativePath": "WeatherForecast",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[API_QLHC_DOAN.WeatherForecast, API_QLHC_DOAN, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ],
-    "EndpointName": "GetWeatherForecast"
   }
 ]

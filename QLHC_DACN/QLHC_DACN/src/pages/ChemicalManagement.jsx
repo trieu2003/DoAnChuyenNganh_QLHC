@@ -113,7 +113,7 @@ const ChemicalManagement = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-extrabold text-center text-gray-800 mb-6">
+      <h1 className="text-3xl font-extrabold text-center text-blue-600 mb-6">
         Danh Mục Hóa Chất
       </h1>
 
@@ -140,64 +140,96 @@ const ChemicalManagement = () => {
         </button>
       </form>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {chemicals.length > 0 ? (
-          chemicals.map((chemical) => (
-            <div
-              key={chemical.maHoaChat}
-              className="border border-gray-300 rounded-lg p-2 bg-white shadow-lg transition-transform transform hover:scale-105 hover:shadow-2xl hover:border-blue-400 hover:bg-blue-100"
-            >
-              <div className="relative overflow-hidden rounded-md mb-2">
-                <div className="group relative">
-                  <img
-                    src={`src/assets/Images/${chemical.hinhAnh}`}
-                    alt={chemical.tenHoaChat}
-                    className="w-full h-48 object-cover rounded-md transition-transform duration-300 group-hover:scale-150 group-hover:object-contain"
-                  />
-                </div>
-              </div>
-              <h3 className="text-sl font-semibold text-gray-800">
-                {chemical.tenHoaChat}
-              </h3>
-              <p className="text-gray-500 text-xm mt-1">
-                Số CAS: {chemical.soCAS}
-              </p>
-              <p className="text-gray-500 text-xm">Đơn Vị: {chemical.donVi}</p>
-              <p className="text-gray-500 text-xm line-clamp-2">
-                Mô Tả: {chemical.moTa || "N/A"}
-              </p>
-              <button
-                onClick={() => handleViewLots(chemical.maHoaChat)}
-                className="mt-2 bg-gradient-to-r from-blue-400 to-blue-600 text-white py-1 px-2 rounded shadow hover:from-blue-500 hover:to-blue-700 transition duration-200 transform hover:scale-105"
-              >
-                Xem Lô Hóa Chất
-              </button>
-            </div>
-          ))
-        ) : (
-          <div className="col-span-full text-center py-4 text-gray-500">
-            Không có hóa chất nào để hiển thị.
-          </div>
-        )}
+      <div className="overflow-x-auto bg-gray-50 p-4 rounded-lg shadow-md">
+        <table className="min-w-full border-collapse border border-gray-300 bg-white rounded-lg shadow-xl">
+          <thead>
+            <tr className="bg-gradient-to-r from-blue-500 to-blue-700 text-white">
+              <th className="border px-6 py-3 text-left font-semibold text-sm">
+                Tên Hóa Chất
+              </th>
+              <th className="border px-6 py-3 text-left font-semibold text-sm">
+                Số CAS
+              </th>
+              <th className="border px-6 py-3 text-left font-semibold text-sm">
+                Đơn Vị
+              </th>
+              <th className="border px-6 py-3 text-left font-semibold text-sm">
+                Mô Tả
+              </th>
+              <th className="border px-6 py-3 text-center font-semibold text-sm">
+                Hình Ảnh
+              </th>
+              <th className="border px-6 py-3 text-center font-semibold text-sm">
+                Hành Động
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {chemicals.length > 0 ? (
+              chemicals.map((chemical) => (
+                <tr
+                  key={chemical.maHoaChat}
+                  className="hover:bg-blue-100 transition duration-300"
+                >
+                  <td className="border px-6 py-3 text-gray-800 text-sm">
+                    {chemical.tenHoaChat}
+                  </td>
+                  <td className="border px-6 py-3 text-gray-600 text-sm">
+                    {chemical.soCAS}
+                  </td>
+                  <td className="border px-6 py-3 text-gray-600 text-sm">
+                    {chemical.donVi}
+                  </td>
+                  <td className="border px-6 py-3 text-gray-600 text-sm line-clamp-2">
+                    {chemical.moTa || "N/A"}
+                  </td>
+                  <td className="border px-6 py-3 text-center">
+                    <img
+                      src={`src/assets/Images/${chemical.hinhAnh}`}
+                      alt={chemical.tenHoaChat}
+                      className="h-14 w-14 object-cover rounded-lg shadow-md mx-auto"
+                    />
+                  </td>
+                  <td className="border px-6 py-3 text-center">
+                    <button
+                      onClick={() => handleViewLots(chemical.maHoaChat)}
+                      className="bg-gradient-to-r from-blue-400 to-blue-600 text-white py-2 px-4 rounded-lg shadow hover:from-blue-500 hover:to-blue-700 transform transition-transform duration-200 hover:scale-105"
+                    >
+                      Xem Lô Hóa Chất
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td
+                  colSpan="6"
+                  className="text-center py-4 text-gray-500 text-sm"
+                >
+                  Không có hóa chất nào để hiển thị.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
       </div>
 
-      {/* pagination */}
-      <div className="flex items-center justify-center mt-4 space-x-4">
-        {" "}
+      {/* Pagination */}
+      <div className="flex items-center justify-center mt-6 space-x-4">
         {/* Center alignment and spacing */}
         <button
           onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
           disabled={currentPage === 1}
-          className={`flex items-center justify-center py-2 px-4 rounded transition duration-200 
+          className={`flex items-center justify-center py-2 px-4 rounded-lg shadow transition duration-300 transform 
       ${
         currentPage === 1
-          ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-          : "bg-gray-500 text-white hover:bg-gray-600"
-      }`} // Conditional styling
+          ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+          : "bg-blue-500 text-white hover:bg-blue-600 hover:scale-105"
+      }`}
         >
           Trang Trước
         </button>
-        <span className="text-gray-700 font-semibold">
+        <span className="text-gray-800 font-semibold text-lg">
           Trang {currentPage} / {totalPages}
         </span>
         <button
@@ -205,12 +237,12 @@ const ChemicalManagement = () => {
             setCurrentPage((prev) => Math.min(prev + 1, totalPages))
           }
           disabled={currentPage === totalPages}
-          className={`flex items-center justify-center py-2 px-4 rounded transition duration-200 
+          className={`flex items-center justify-center py-2 px-4 rounded-lg shadow transition duration-300 transform 
       ${
         currentPage === totalPages
-          ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-          : "bg-gray-500 text-white hover:bg-gray-600"
-      }`} // Conditional styling
+          ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+          : "bg-blue-500 text-white hover:bg-blue-600 hover:scale-105"
+      }`}
         >
           Trang Sau
         </button>
@@ -222,24 +254,43 @@ const ChemicalManagement = () => {
           className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50"
           onClick={handleOverlayClick}
         >
-          <div className="bg-white rounded-lg shadow-lg p-8 z-60 max-w-lg w-full">
+          <div className="bg-white rounded-lg shadow-lg p-8 z-60 max-w-3xl w-full">
             <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
               Danh Sách Lô Hóa Chất
             </h2>
-            <div className="grid grid-cols-5 gap-4 mb-6">
-              {lots.map((lot) => (
-                <button
-                  key={lot.maLo}
-                  onClick={() => handleLotClick(lot.maLo)}
-                  className={`py-2 px-4 rounded-lg text-white text-center transition duration-300 ${
-                    lot.soLuongTon > 0
-                      ? "bg-blue-500 hover:bg-blue-600"
-                      : "bg-gray-500 cursor-not-allowed"
-                  }`}
-                >
-                  {lot.maLo}
-                </button>
-              ))}
+            <div className="overflow-x-auto">
+              <table className="min-w-full bg-white border border-gray-300 rounded-lg">
+                <thead>
+                  <tr className="bg-gray-200 text-gray-700">
+                    <th className="px-4 py-2 text-left">Mã Lô</th>
+                    <th className="px-4 py-2 text-left">Nhà Cung Cấp</th>
+                    <th className="px-4 py-2 text-left">Số Lượng</th>
+                    <th className="px-4 py-2 text-left">Số Lượng Tồn</th>
+                    <th className="px-4 py-2 text-left">Hạn Sử Dụng</th>
+                    <th className="px-4 py-2 text-left">Ghi Chú</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {lots.map((lot) => (
+                    <tr
+                      key={lot.maLo}
+                      className={`border-t hover:bg-gray-100 ${
+                        lot.soLuongTon > 0 ? "bg-white" : "bg-gray-100"
+                      }`}
+                      onClick={() => handleLotClick(lot.maLo)}
+                    >
+                      <td className="px-4 py-2">{lot.maLo}</td>
+                      <td className="px-4 py-2">{lot.nhaCungCap}</td>
+                      <td className="px-4 py-2">{lot.soLuong}</td>
+                      <td className="px-4 py-2">{lot.soLuongTon}</td>
+                      <td className="px-4 py-2">{lot.hanSuDung}</td>
+                      <td className="px-4 py-2">
+                        {lot.ghiChu ? lot.ghiChu : "Không có ghi chú"}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
 
             {/* Display lot details */}
@@ -249,7 +300,7 @@ const ChemicalManagement = () => {
                   Thông Tin Lô: {selectedLot.maLo}
                 </h3>
                 <div className="grid grid-cols-1 gap-y-2 text-gray-700">
-                <p className="text-lg">
+                  <p className="text-lg">
                     <span className="font-semibold">Nhà cung cấp:</span>{" "}
                     {selectedLot.nhaCungCap}
                   </p>

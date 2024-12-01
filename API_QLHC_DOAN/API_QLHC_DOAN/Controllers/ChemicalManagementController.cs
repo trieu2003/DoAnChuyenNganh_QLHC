@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using API_QLHC_DOAN.Data;
 using API_QLHC_DOAN.Models;
 using Microsoft.EntityFrameworkCore;
+using SendGrid.Helpers.Mail;
 
 namespace API_QLHC_DOAN.Controllers
 {
@@ -110,6 +111,7 @@ namespace API_QLHC_DOAN.Controllers
 
             return Ok(lotDetails); // Trả về thông tin chi tiết của lô hóa chất
         }
-
     }
+        
+
 }

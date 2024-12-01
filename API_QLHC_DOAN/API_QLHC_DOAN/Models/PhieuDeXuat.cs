@@ -7,9 +7,6 @@ namespace API_QLHC_DOAN.Models
         [Key]
         public int MaPhieuDX { get; set; }
 
-        [Required]
-        public int SoLuongDeXuat { get; set; }
-
         [StringLength(255)]
         public string LyDo { get; set; }
 
@@ -19,6 +16,7 @@ namespace API_QLHC_DOAN.Models
 
         [Required]
         public DateTime NgayTao { get; set; }
+        public int MaNguoiDung { get; set; }
 
     }
 }

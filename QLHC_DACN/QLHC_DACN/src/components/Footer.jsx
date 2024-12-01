@@ -1,6 +1,7 @@
 import React from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
+
 const Footer = () => {
   return (
     <footer className="bg-blue-600 text-white text-center p-6 mt-auto">
@@ -41,6 +42,16 @@ const Footer = () => {
               <i className="fab fa-linkedin-in text-2xl"></i>
             </a>
           </div>
+          <div className="relative w-full h-64 mt-4">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.0573416097695!2d106.62625411062105!3d10.80692028929927!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752be27ea41e05%3A0xfa77697a39f13ab0!2zMTQwIMSQLiBMw6ogVHLhu41uZyBU4bqlbiwgVMOieSBUaOG6oW5oLCBUw6JuIFBow7osIEjhu5MgQ2jDrSBNaW5oIDcwMDAwMCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1732432253314!5m2!1svi!2s)"
+          width="100%"
+          height="100%"
+          style={{ border: 0 }}
+          allowFullScreen=""
+          loading="lazy"
+        ></iframe>
+      </div>
         </div>
       </div>
 

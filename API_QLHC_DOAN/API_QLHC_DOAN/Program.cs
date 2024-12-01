@@ -1,49 +1,51 @@
 using API_QLHC_DOAN.Data;
-using API_QLHC_DOAN.Services;
+//using API_QLHC_DOAN.Services;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
-// Program.cs
-builder.Services.AddDbContext<YourDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Đăng ký DbContext với kết nối tới cơ sở dữ liệu
+builder.Services.AddDbContext<YourDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+);
+
+// Đăng ký các dịch vụ của bạn vào DI container
+//builder.Services.AddScoped<PhieuThanhLyService>();  // Đăng ký PhieuThanhLyService (nếu bạn có service này)
 
 
-// Thêm dịch vụ CORS
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowSpecificOrigin",
-        //builder => builder.WithOrigins("http://localhost:5176")
-        builder => builder.WithOrigins("http://localhost:5173")// Thay đổi theo địa chỉ nguồn của bạn
-                          .AllowAnyHeader()
-                          .AllowAnyMethod()
-                          .AllowCredentials()); // Bổ sung AllowCredentials để gửi cookie hoặc thông tin xác thực khác);
-});
 
-
-// Đăng ký các dịch vụ của bạn
-builder.Services.AddScoped<OtpService>();  // Thêm dịch vụ OtpService
-builder.Services.AddScoped<EmailService>(); // Thêm dịch vụ EmailService
-// Add services to the container.
+// Đăng ký các controller
 builder.Services.AddControllers();
+
+// Đăng ký Swagger cho môi trường phát triển
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin", builder =>
+        builder.WithOrigins("http://localhost:5173") // Thay đổi theo địa chỉ nguồn của bạn
+               .AllowAnyHeader()
+               .AllowAnyMethod()
+               .AllowCredentials());
+});
+
 var app = builder.Build();
 
-
 // Cấu hình middleware CORS
-app.UseCors("AllowSpecificOrigin"); // Áp dụng chính sách CORS ở đây
+app.UseCors("AllowSpecificOrigin");
 
-// Configure the HTTP request pipeline.
+// Cấu hình Swagger (chỉ trong môi trường phát triển)
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
+// Cấu hình các middleware khác
 app.UseHttpsRedirection();
 app.UseAuthorization();
 
-app.MapControllers();
+app.MapControllers(); // Ánh xạ các controller
 
 app.Run();

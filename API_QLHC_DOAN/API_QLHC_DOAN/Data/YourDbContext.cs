@@ -14,15 +14,80 @@ namespace API_QLHC_DOAN.Data
         public DbSet<LoHoaChat> LoHoaChat { get; set; }
         // Thêm bảng hóa chất
         public DbSet<HoaChat> HoaChat { get; set; }
+        //Thêm bảng phiếu nhập
+        public DbSet<PhieuNhap> PhieuNhap { get; set; }
+        // Thêm bảng phiếu phân bổ
+        public DbSet<PhieuPhanBo> PhieuPhanBo { get; set; }
+
+        // Thêm bảng chi tiết phân bổ
+        public DbSet<ChiTietPhanBo> ChiTietPhanBo { get; set; }
+
+        // Thêm bảng lớp học phần
+        public DbSet<LopHocPhan> LopHocPhan { get; set; }
+
         // Thêm bảng phiếu đề xuất
         public DbSet<PhieuDeXuat> PhieuDeXuat { get; set; }
         // Thêm bảng chi tiết phiếu đề xuất
         public DbSet<ChiTietDeXuat> ChiTietDeXuat { get; set; }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        public DbSet<DuyetPhieuDX> DuyetPhieuDX { get; set; }
+        public DbSet<PhieuThanhLy> PhieuThanhLy { get; set; }
+
+        public DbSet<DuyetPhieuTL> DuyetPhieuTL { get; set; }
+        // Thêm DbSet cho dữ liệu trả về
+        public DbSet<PhieuThanhLyDetails> PhieuThanhLyDetails { get; set; }
+        public async Task<List<PhieuThanhLyDetails>> GetPhieuThanhLyDetailsAsync()
         {
-            modelBuilder.Entity<ChiTietDeXuat>()
-                .HasKey(ct => new { ct.MaPhieuDX, ct.MaHoaChat }); // Định nghĩa khóa chính phức hợp
+            return await this.PhieuThanhLyDetails.FromSqlRaw("EXEC GetPhieuThanhLyDetails").ToListAsync();
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Cấu hình các mối quan hệ giữa các bảng
+            modelBuilder.Entity<PhieuThanhLy>()
+                .HasOne(p => p.NguoiDung)
+                .WithMany()
+                .HasForeignKey(p => p.MaNguoiDung);
+
+            modelBuilder.Entity<LoHoaChat>()
+                .HasOne(lh => lh.HoaChat)
+                .WithMany(h => h.LoHoaChats)
+                .HasForeignKey(lh => lh.MaHoaChat);
+
+            modelBuilder.Entity<LoHoaChat>()
+                .HasOne(lh => lh.PhieuThanhLy)
+                .WithMany(p => p.LoHoaChats)
+                .HasForeignKey(lh => lh.MaPhieuTL);
+
+            modelBuilder.Entity<DuyetPhieuTL>()
+                .HasOne(d => d.PhieuThanhLy)
+                .WithMany(p => p.DuyetPhieuTLs)
+                .HasForeignKey(d => d.MaPhieuTL);
+            // Cấu hình PhieuThanhLyDetails không có khóa chính
+            modelBuilder.Entity<PhieuThanhLyDetails>().HasNoKey();
+
+
+            modelBuilder.Entity<LoHoaChat>()
+           .HasOne(l => l.HoaChat)
+           .WithMany(h => h.LoHoaChats)
+           .HasForeignKey(l => l.MaHoaChat);
+
+            modelBuilder.Entity<LoHoaChat>()
+                .HasOne(l => l.PhieuThanhLy)
+                .WithMany(p => p.LoHoaChats)
+                .HasForeignKey(l => l.MaPhieuTL);
+            // Định nghĩa khóa chính phức hợp cho ChiTietDeXuat
+            modelBuilder.Entity<ChiTietDeXuat>()
+                .HasKey(ct => new { ct.MaPhieuDX, ct.MaHoaChat });
+           
+            modelBuilder.Entity<DuyetPhieuDX>()
+                .HasKey(dp => new { dp.MaPhieuDX, dp.MaNguoiDung });
+
+            // Định nghĩa khóa chính phức hợp cho bảng ChiTietPhanBo
+            modelBuilder.Entity<ChiTietPhanBo>()
+                .HasKey(ctpb => new { ctpb.MaPhieuPB, ctpb.MaLo });
+
+            base.OnModelCreating(modelBuilder);
+
+        }
     }
 }

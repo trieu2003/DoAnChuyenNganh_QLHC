@@ -18,7 +18,7 @@ const Sidebar = ({ open, onClose }) => {
             Trang Chủ
           </Link>
           <Link 
-            to="/chemical-management" 
+            to="/ChemicalManagement" 
             className="text-gray-700 hover:bg-blue-100 p-2 rounded transition-colors duration-200"
           >
             Quản Lý Hóa Chất
@@ -41,12 +41,7 @@ const Sidebar = ({ open, onClose }) => {
           >
             Dự Trù Hóa Chất
           </Link>
-          <Link 
-            to="/create-dexuat-page" 
-            className="text-gray-700 hover:bg-blue-100 p-2 rounded transition-colors duration-200"
-          >
-            Đề Xuất sử dụng Hóa Chất
-          </Link>
+          
           <Link 
             to="/chemical-usage" 
             className="text-gray-700 hover:bg-blue-100 p-2 rounded transition-colors duration-200"
@@ -54,13 +49,13 @@ const Sidebar = ({ open, onClose }) => {
             Quản Lý Sử Dụng Hóa Chất
           </Link>
           <Link 
-            to="/expired-chemicals" 
+            to="/phieu-thanh-ly" 
             className="text-gray-700 hover:bg-blue-100 p-2 rounded transition-colors duration-200"
           >
             Thanh Lý Hóa Chất Hết Hạn
           </Link>
           <Link 
-            to="/reporting" 
+            to="/thong-ke" 
             className="text-gray-700 hover:bg-blue-100 p-2 rounded transition-colors duration-200"
           >
             Thống Kê & Báo Cáo
