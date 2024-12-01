@@ -247,7 +247,7 @@ VALUES
 (N'Dự trữ', N'Đã duyệt', '2024-05-03', 3),
 (N'Dùng cho lớp học', N'Chờ duyệt', '2024-05-04', 4),
 (N'Dự trữ hóa chất', N'Đã duyệt', '2024-05-05', 5),
-(N'Cần gấp', 'Chờ duyệt', N'2024-05-06', 6),
+(N'Cần gấp', N'Chờ duyệt', N'2024-05-06', 6),
 (N'Dùng cho thí nghiệm', N'Đã duyệt', '2024-05-07', 7),
 (N'Bổ sung hóa chất', N'Chờ duyệt', '2024-05-08', 8),
 (N'Cần thêm cho thí nghiệm', N'Đã duyệt', '2024-05-09', 9),
