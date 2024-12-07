@@ -1,4 +1,5 @@
 ﻿using API_QLHC_DOAN.Models;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
 namespace API_QLHC_DOAN.Data
@@ -35,9 +36,22 @@ namespace API_QLHC_DOAN.Data
         public DbSet<DuyetPhieuTL> DuyetPhieuTL { get; set; }
         // Thêm DbSet cho dữ liệu trả về
         public DbSet<PhieuThanhLyDetails> PhieuThanhLyDetails { get; set; }
+        public DbSet<BaiThiNghiem> BaiThiNghiem { get; set; }
+        public DbSet<DuTru> DuTru { get; set; }
+        public DbSet<MonHoc> MonHocs { get; set; }
         public async Task<List<PhieuThanhLyDetails>> GetPhieuThanhLyDetailsAsync()
         {
             return await this.PhieuThanhLyDetails.FromSqlRaw("EXEC GetPhieuThanhLyDetails").ToListAsync();
+        } 
+
+        // Tạo một phương thức để gọi stored procedure và trả về danh sách kết quả
+        public async Task<List<PhieuThanhLyDetails>> GetPhieuThanhLyDetailsAsyncChiTiet(int maPhieuTL)
+        {
+            var maPhieuTLParam = new SqlParameter("@MaPhieuTL", maPhieuTL);
+
+            return await this.PhieuThanhLyDetails
+                .FromSqlRaw("EXEC GetPhieuThanhLyDetailsChiTiet @MaPhieuTL", maPhieuTLParam)
+                .ToListAsync();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -85,6 +99,23 @@ namespace API_QLHC_DOAN.Data
             // Định nghĩa khóa chính phức hợp cho bảng ChiTietPhanBo
             modelBuilder.Entity<ChiTietPhanBo>()
                 .HasKey(ctpb => new { ctpb.MaPhieuPB, ctpb.MaLo });
+            // Cấu hình quan hệ nhiều-nhiều giữa HoaChat và BaiThiNghiem qua bảng DuTru
+            // Cấu hình quan hệ nhiều-nhiều giữa HoaChat và BaiThiNghiem qua bảng DuTru
+            modelBuilder.Entity<DuTru>()
+      .HasKey(d => new { d.MaHoaChat, d.MaBaiTN });
+
+           
+            modelBuilder.Entity<BaiThiNghiem>()
+      .HasKey(b => b.MaBaiTN); // Định nghĩa khóa chính cho BaiThiNghiem nếu không sử dụng convention mặc định
+
+            modelBuilder.Entity<BaiThiNghiem>()
+           .HasOne(b => b.MonHoc)         // Mối quan hệ một nhiều với MonHoc
+           .WithMany(m => m.BaiThiNghiems) // MonHoc có nhiều BaiThiNghiem
+           .HasForeignKey(b => b.MaMon);  // Khóa ngoại MaMon
+
+            // Đảm bảo rằng bạn đã chỉ định khóa chính trong Fluent API
+            modelBuilder.Entity<MonHoc>()
+                .HasKey(m => m.MaMon);  // Chỉ định khóa chính là MaMon
 
             base.OnModelCreating(modelBuilder);
 

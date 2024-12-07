@@ -109,6 +109,78 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "API_QLHC_DOAN.Controllers.ChemicalUsageManagement",
+    "Method": "CreateChiTietPhanBo",
+    "RelativePath": "api/ChemicalUsageManagement/create-allocation-details",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "chiTietPhanBo",
+        "Type": "System.Collections.Generic.List\u00601[[API_QLHC_DOAN.Models.ChiTietPhanBo, API_QLHC_DOAN, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.ChemicalUsageManagement",
+    "Method": "CreatePhieuPhanBo",
+    "RelativePath": "api/ChemicalUsageManagement/CreatePhieuPhanBo",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "phieuPhanBo",
+        "Type": "API_QLHC_DOAN.Models.PhieuPhanBo",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.ChemicalUsageManagement",
+    "Method": "GetClasses",
+    "RelativePath": "api/ChemicalUsageManagement/GetClasses",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.ChemicalUsageManagement",
+    "Method": "GetPhieuPhanBo",
+    "RelativePath": "api/ChemicalUsageManagement/GetPhieuPhanBo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.DeXuatController",
+    "Method": "GetAllDeXuatDetails",
+    "RelativePath": "api/DeXuat/all-details",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.DeXuatController",
+    "Method": "GetAllDeXuatDetailsUser",
+    "RelativePath": "api/DeXuat/all-detailsUser",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "API_QLHC_DOAN.Controllers.DeXuatController",
     "Method": "CreateDeXuat",
     "RelativePath": "api/DeXuat/create",
@@ -139,6 +211,230 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.DeXuatController",
+    "Method": "GetDeXuatDetails",
+    "RelativePath": "api/DeXuat/details/{maPhieuDX}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "maPhieuDX",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.DeXuatController",
+    "Method": "GetPhieuDeXuatDaDuyet",
+    "RelativePath": "api/DeXuat/getPhieuDeXuatDaDuyet",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.DeXuatController",
+    "Method": "GetPhieuDeXuatDangChoDuyet",
+    "RelativePath": "api/DeXuat/getPhieuDeXuatDangChoDuyet",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.DeXuatController",
+    "Method": "UpdateAndApproveAsync",
+    "RelativePath": "api/DeXuat/update-and-approve/{maPhieuDX}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "maPhieuDX",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "DuyetPhieuDX",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.DeXuatController",
+    "Method": "UpdateChiTietDeXuat",
+    "RelativePath": "api/DeXuat/updateChiTietDeXuat/{maPhieuDX}/{maHoaChat}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "maPhieuDX",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "maHoaChat",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updatedChiTiet",
+        "Type": "API_QLHC_DOAN.Models.ChiTietDeXuat",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.DeXuatController",
+    "Method": "UpdatePhieuDeXuat",
+    "RelativePath": "api/DeXuat/updatePhieuDeXuat/{maPhieuDX}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "maPhieuDX",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updatedPhieuDeXuat",
+        "Type": "API_QLHC_DOAN.Models.PhieuDeXuat",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.DeXuatController",
+    "Method": "GetDeXuatByUser",
+    "RelativePath": "api/DeXuat/user-details",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "createdBy",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.InventoryManagementController",
+    "Method": "AddLots",
+    "RelativePath": "api/InventoryManagement/AddLots",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "lots",
+        "Type": "System.Collections.Generic.List\u00601[[API_QLHC_DOAN.Models.LoHoaChat, API_QLHC_DOAN, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.InventoryManagementController",
+    "Method": "AddPhieuNhap",
+    "RelativePath": "api/InventoryManagement/AddPhieuNhap",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newPhieuNhap",
+        "Type": "API_QLHC_DOAN.Models.PhieuNhap",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "API_QLHC_DOAN.Models.PhieuNhap",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.InventoryManagementController",
+    "Method": "GetChemicalLotsByPhieuNhap",
+    "RelativePath": "api/InventoryManagement/api/lohoaChat/{maPhieuNhap}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "maPhieuNhap",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.InventoryManagementController",
+    "Method": "GetAllPhieuNhap",
+    "RelativePath": "api/InventoryManagement/GetAllPhieuNhap",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[API_QLHC_DOAN.Models.PhieuNhap, API_QLHC_DOAN, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.InventoryManagementController",
+    "Method": "GetPhieuNhapById",
+    "RelativePath": "api/InventoryManagement/GetPhieuNhapById/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "API_QLHC_DOAN.Models.PhieuNhap",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "API_QLHC_DOAN.Controllers.LoginController",
@@ -193,6 +489,27 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "API_QLHC_DOAN.Controllers.LoginController",
+    "Method": "UpdateUserEmail",
+    "RelativePath": "api/Login/update-email/{userId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "API_QLHC_DOAN.Controllers.UpdateUserEmailRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "API_QLHC_DOAN.Controllers.PhieuThanhLyController",
     "Method": "GetPhieuThanhLyDetails",
     "RelativePath": "api/PhieuThanhLy",
@@ -202,7 +519,33 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[PhieuThanhLyDetails, API_QLHC_DOAN, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[API_QLHC_DOAN.Models.PhieuThanhLyDetails, API_QLHC_DOAN, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.PhieuThanhLyController",
+    "Method": "GetPhieuThanhLyDetailsAsyncChiTiet",
+    "RelativePath": "api/PhieuThanhLy/{maPhieuTL}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "maPhieuTL",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[API_QLHC_DOAN.Models.PhieuThanhLyDetails, API_QLHC_DOAN, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -377,46 +720,6 @@
       }
     ],
     "ReturnTypes": []
-  },
-  {
-    "ContainingType": "API_QLHC_DOAN.Controllers.PurchaseRequestController",
-    "Method": "GetPurchaseRequestDetail",
-    "RelativePath": "api/PurchaseRequest/GetChiTietPhieuDeXuat",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[API_QLHC_DOAN.Models.ChiTietDeXuat, API_QLHC_DOAN, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "API_QLHC_DOAN.Controllers.PurchaseRequestController",
-    "Method": "GetPurchaseRequest",
-    "RelativePath": "api/PurchaseRequest/GetPhieuDeXuat",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[API_QLHC_DOAN.Models.PhieuDeXuat, API_QLHC_DOAN, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
   },
   {
     "ContainingType": "API_QLHC_DOAN.Controllers.StatisticsController",

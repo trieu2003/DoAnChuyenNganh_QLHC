@@ -28,6 +28,7 @@ import PurchaseRequestDetails from './components/DeXuatDetails';
 import PurchaseRequestAdd from './pages/PurchaseRequest_Add';
 import PurchaseRequestEdit from './pages/PurchaseRequest_Edit';
 import DuyetPurchaseRequest from './admin/DuyetPhieuDX';
+import CreatePhieuThanhLyForm from './components/CreatePhieuThanhLyForm';
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn') === 'true');
@@ -84,6 +85,7 @@ const App = () => {
         onLogout={handleLogout}
         isLoggedIn={isLoggedIn}
         userName={userName}
+        userId={maNguoiDung}  
         onOpenSidebar={handleOpenSidebar} // Gọi hàm mở sidebar
       />
       
@@ -113,6 +115,7 @@ const App = () => {
           <Route path='/duyet-purchase-request' element={<DuyetPurchaseRequest></DuyetPurchaseRequest>}/>
 
           <Route path="/phieu-thanh-ly" element={<DashboardPhieuThanhLy />} />
+          <Route path="/tao-phieu-thanh-ly" element={<CreatePhieuThanhLyForm />} /> 
           <Route path="/thong-ke" element={<DashboardThongKe />} />
           
           {/* Dự Trù Hóa Chất */}

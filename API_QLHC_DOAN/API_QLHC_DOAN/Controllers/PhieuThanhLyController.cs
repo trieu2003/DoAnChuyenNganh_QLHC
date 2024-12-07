@@ -24,22 +24,242 @@ namespace API_QLHC_DOAN.Controllers
            
         }
 
-        // Lấy tất cả phiếu thanh lý chi tiết với các thông tin liên quan
+        // //Lấy tất cả phiếu thanh lý chi tiết với các thông tin liên quan
         [HttpGet]
+
+        //public async Task<ActionResult<IEnumerable<PhieuThanhLyDetails>>> GetPhieuThanhLyDetails()
+        //{
+        //    try
+        //    {
+        //        // Gọi phương thức từ DbContext để lấy dữ liệu từ thủ tục
+        //        var result = await _context.GetPhieuThanhLyDetailsAsync();
+        //        return Ok(result);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(500, "Internal server error: " + ex.Message);
+        //    }
+        //}
 
         public async Task<ActionResult<IEnumerable<PhieuThanhLyDetails>>> GetPhieuThanhLyDetails()
         {
             try
             {
-                // Gọi phương thức từ DbContext để lấy dữ liệu từ thủ tục
+                // Gọi phương thức từ DbContext để lấy tất cả dữ liệu chi tiết phiếu thanh lý
                 var result = await _context.GetPhieuThanhLyDetailsAsync();
-                return Ok(result);
+
+                // Kiểm tra nếu result là null hoặc không có dữ liệu
+                if (result == null || !result.Any())
+                {
+                    return NotFound("Không có dữ liệu phiếu thanh lý.");
+                }
+
+                // Nhóm kết quả theo maPhieuTL và gộp lại các chi tiết
+                var groupedResult = result
+                    .GroupBy(phieu => phieu.MaPhieuTL)
+                    .Select(group => new PhieuThanhLyDetails
+                    {
+                        MaPhieuTL = group.Key, // Mã phiếu thanh lý
+                        LyDo = group.First().LyDo, // Giả sử lý do giống nhau cho tất cả các chi tiết cùng maPhieuTL
+                        TrangThai = group.First().TrangThai, // Trạng thái cũng có thể giống nhau cho toàn bộ phiếu
+                        PhuongThucThanhLy = group.First().PhuongThucThanhLy, // Tương tự cho phương thức thanh lý
+                        NgayTao = group.First().NgayTao, // Ngày tạo có thể giống nhau
+                                                         //    DanhSachHoaChat = group.Select(phieu => new HoaChat
+                                                         //    {
+                                                         //        MaLo = phieu.MaLo,
+                                                         //        NhaCungCap = phieu.NhaCungCap,
+                                                         //        LoTrangThai = phieu.LoTrangThai,
+                                                         //        TenHoaChat = phieu.TenHoaChat,
+                                                         //        HoaChatSoLo = phieu.HoaChatSoLo,
+                                                         //        HoaChatSoCAS = phieu.HoaChatSoCAS,
+                                                         //        HanSuDung = phieu.HanSuDung
+                                                         //    }).ToList() // Gộp các chi tiết hoa chất trong phiếu thanh lý
+                                                         //})
+                    })
+                    .ToList();
+
+                return Ok(groupedResult); // Trả về kết quả đã gộp
             }
             catch (Exception ex)
             {
                 return StatusCode(500, "Internal server error: " + ex.Message);
             }
         }
+
+        // API để lấy chi tiết phiếu thanh lý
+        [HttpGet("{maPhieuTL}")]
+        public async Task<ActionResult<IEnumerable<PhieuThanhLyDetails>>> GetPhieuThanhLyDetailsAsyncChiTiet(int maPhieuTL)
+        {
+            try
+            {
+                // Gọi phương thức trong DbContext để lấy dữ liệu từ stored procedure
+                var result = await _context.GetPhieuThanhLyDetailsAsyncChiTiet(maPhieuTL);
+
+                // Kiểm tra nếu không có dữ liệu trả về
+                if (result == null || !result.Any()) // Sử dụng .Any() để kiểm tra danh sách có rỗng không
+                {
+                    return NotFound(new { message = $"Không tìm thấy dữ liệu cho phiếu thanh lý với mã {maPhieuTL}" });
+                }
+
+                // Trả về kết quả nếu có dữ liệu
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                // Log lỗi nếu có và trả về thông báo lỗi chung cho người dùng
+                return StatusCode(500, new { message = "Đã xảy ra lỗi khi xử lý yêu cầu.", error = ex.Message });
+            }
+        }
+
+
+        //public async Task<List<PhieuThanhLyDetails>> GetPhieuThanhLyDetailsAsync()
+        //{
+        //    try
+        //    {
+        //        // Truy vấn dữ liệu từ cơ sở dữ liệu
+        //        var result = await _context.PhieuThanhLy
+        //            .Include(p => p.NguoiDung)
+        //            .Include(p => p.LoHoaChats)
+        //                .ThenInclude(lh => lh.HoaChat)  // Bao gồm thông tin hóa chất
+        //            .Where(p => p.TrangThai != "Chờ duyệt") // Lọc phiếu thanh lý đã duyệt hoặc bị từ chối
+        //            .Select(p => new PhieuThanhLyDetails
+        //            {
+        //                MaPhieuTL = p.MaPhieuTL,
+        //                LyDo = p.LyDo,
+        //                TrangThai = p.TrangThai,
+        //                PhuongThucThanhLy = p.PhuongThucThanhLy,
+        //                NgayTao = p.NgayTao,
+        //                MaNguoiDung = p.MaNguoiDung,
+        //                NguoiDung_TenDangNhap = p.NguoiDung.TenDangNhap,
+        //                NguoiDung_Email = p.NguoiDung.Email,
+        //                HoaChatDetails = p.LoHoaChats.Select(lh => new HoaChatDetails
+        //                {
+        //                    TenHoaChat = lh.HoaChat.TenHoaChat,
+        //                    SoLo = lh.SoLo,
+        //                    SoCAS = lh.HoaChat.SoCAS,
+        //                    SoLuong = lh.SoLuong,
+        //                    TrangThai = lh.TrangThai,
+        //                    ThoiHanSuDung = lh.HoaChat.ThoiHanSuDung,
+        //                    MoTa = lh.HoaChat.MoTa,
+        //                    CongThucHoaHoc = lh.HoaChat.CongThucHoaHoc,
+        //                    NguyHiem = lh.HoaChat.NguyHiem,
+        //                    SoLieuAnToan = lh.HoaChat.SoLieuAnToan
+        //                }).ToList()
+        //            })
+        //            .ToListAsync();
+
+        //        // Nếu không có kết quả
+        //        if (result == null || !result.Any())
+        //        {
+        //            return new List<PhieuThanhLyDetails>(); // Trả về danh sách rỗng nếu không có dữ liệu
+        //        }
+
+        //        return result;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Xử lý lỗi nếu có
+        //        throw new Exception("Lỗi trong quá trình truy vấn dữ liệu: " + ex.Message);
+        //    }
+        //}
+        //public async Task<ActionResult<IEnumerable<PhieuThanhLyDetails>>> GetPhieuThanhLyDetails()
+        //{
+        //    try
+        //    {
+        //        // Truy vấn các phiếu thanh lý cùng với thông tin liên quan
+        //        var result = await _context.PhieuThanhLy
+        //            .Include(p => p.NguoiDung)  // Include người dùng
+        //            .Include(p => p.LoHoaChats) // Bao gồm thông tin lô hóa chất
+        //                .ThenInclude(lh => lh.HoaChat)  // Bao gồm thông tin hóa chất trong lô hóa chất
+        //            .Where(p => p.TrangThai != "Chờ duyệt")  // Lọc phiếu thanh lý đã duyệt hoặc bị từ chối
+        //            .Select(p => new PhieuThanhLyDetails
+        //            {
+        //                MaPhieuTL = p.MaPhieuTL,
+        //                LyDo = p.LyDo,
+        //                TrangThai = p.TrangThai,
+        //                PhuongThucThanhLy = p.PhuongThucThanhLy,
+        //                NgayTao = p.NgayTao,
+        //                MaNguoiDung = p.MaNguoiDung,
+        //                //NguoiDung_TenDangNhap = p.NguoiDung.TenDangNhap,
+        //                //NguoiDung_Email = p.NguoiDung.Email,
+        //                HoaChatDetails = p.LoHoaChats.Select(lh => new HoaChatDetails
+        //                {
+        //                    TenHoaChat = lh.HoaChat.TenHoaChat,
+        //                    SoLo = lh.SoLo,
+        //                    SoCAS = lh.HoaChat.SoCAS,
+        //                    SoLuong = lh.SoLuong,
+        //                    TrangThai = lh.TrangThai,
+        //                    //ThoiHanSuDung = lh.HoaChat.ThoiHanSuDung,
+        //                    MoTa = lh.HoaChat.MoTa
+        //                }).ToList()
+        //            })
+        //            .ToListAsync();
+
+        //        // Nếu không tìm thấy dữ liệu
+        //        if (result == null || !result.Any())
+        //        {
+        //            return NotFound("Không có phiếu thanh lý nào trong hệ thống.");
+        //        }
+
+        //        // Trả về kết quả
+        //        return Ok(result);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(500, "Lỗi trong quá trình lấy dữ liệu: " + ex.Message);
+        //    }
+        //}
+
+
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<PhieuThanhLyDetails>>> GetPhieuThanhLyDetails()
+        //{
+        //    try
+        //    {
+        //        // Truy vấn các phiếu thanh lý cùng với thông tin liên quan
+        //        var result = await _context.PhieuThanhLy
+        //            .Include(p => p.NguoiDung)  // Include người dùng
+        //            .Include(p => p.LoHoaChats) // Bao gồm thông tin lô hóa chất
+        //                .ThenInclude(lh => lh.HoaChat)  // Bao gồm thông tin hóa chất trong lô hóa chất
+        //            .Where(p => p.TrangThai != "Chờ duyệt")  // Lọc phiếu thanh lý đã duyệt hoặc bị từ chối
+        //            .Select(p => new PhieuThanhLyDetails
+        //            {
+        //                MaPhieuTL = p.MaPhieuTL,
+        //                LyDo = p.LyDo,
+        //                TrangThai = p.TrangThai,
+        //                PhuongThucThanhLy = p.PhuongThucThanhLy,
+        //                NgayTao = p.NgayTao,  // Không cần `GetValueOrDefault` nữa vì đã là non-nullable DateTime
+        //                NguoiDung_TenDangNhap = p.NguoiDung.TenDangNhap,
+        //                NguoiDung_Email = p.NguoiDung.Email,
+        //                HoaChatDetails = p.LoHoaChats.Select(lh => new HoaChatDetails
+        //                {
+        //                    TenHoaChat = lh.HoaChat.TenHoaChat,
+        //                    SoLo = lh.SoLo,
+        //                    SoCAS = lh.HoaChat.SoCAS,
+        //                    SoLuong = lh.SoLuong,
+        //                    TrangThai = lh.TrangThai,
+        //                    ThoiHanSuDung = lh.HoaChat.ThoiHanSuDung ?? DateTime.MinValue, // Nếu null, bạn có thể gán giá trị mặc định
+        //                    MoTa = lh.HoaChat.MoTa
+        //                }).ToList()
+        //            })
+        //            .ToListAsync();
+
+        //        // Nếu không tìm thấy dữ liệu
+        //        if (result == null || !result.Any())
+        //        {
+        //            return NotFound("Không có phiếu thanh lý nào trong hệ thống.");
+        //        }
+
+        //        // Trả về kết quả
+        //        return Ok(result);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(500, "Lỗi trong quá trình lấy dữ liệu: " + ex.Message);
+        //    }
+        //}
+
+
 
         [HttpPut("accept/{id}")]
         public async Task<IActionResult> AcceptPhieuThanhLy(int id)
@@ -375,7 +595,9 @@ namespace API_QLHC_DOAN.Controllers
             }
         }
 
+        
+        }
 
     }
-}
+
 

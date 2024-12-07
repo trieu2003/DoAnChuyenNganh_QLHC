@@ -55,6 +55,12 @@ const Sidebar = ({ open, onClose }) => {
             Thanh Lý Hóa Chất Hết Hạn
           </Link>
           <Link 
+            to="/tao-phieu-thanh-ly" 
+            className="text-gray-700 hover:bg-blue-100 p-2 rounded transition-colors duration-200"
+          >
+            Tạo phiếu thanh lý
+          </Link>
+          <Link 
             to="/thong-ke" 
             className="text-gray-700 hover:bg-blue-100 p-2 rounded transition-colors duration-200"
           >

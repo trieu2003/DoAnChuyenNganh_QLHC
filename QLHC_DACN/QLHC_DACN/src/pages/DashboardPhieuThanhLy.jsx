@@ -298,9 +298,9 @@ const DashboardPhieuThanhLy = () => {
     window.location.reload(); // Làm mới danh sách phiếu thanh lý sau khi tạo
   };
 
-  const handleCreate = () => {
-    setIsFormOpen(true); // Mở form tạo phiếu thanh lý
-  };
+  // const handleCreate = () => {
+  //   setIsFormOpen(true); // Mở form tạo phiếu thanh lý
+  // };
 
   const handleCloseForm = () => {
     setIsFormOpen(false); // Đóng form
@@ -311,14 +311,14 @@ const DashboardPhieuThanhLy = () => {
       <h1 className="text-3xl font-bold mb-4">Quản Lý Phiếu Thanh Lý</h1>
 
       {/* Nút Tạo Phiếu Thanh Lý */}
-      {!isFormOpen && (
+      {/* {!isFormOpen && (
         <button
           onClick={handleCreate}
           className="bg-blue-600 text-white px-6 py-2 rounded-md mb-4 hover:bg-blue-700 transition"
         >
           Tạo Phiếu Thanh Lý
         </button>
-      )}
+      )} */}
 
       {/* Hiển thị danh sách phiếu thanh lý hoặc form tạo/ chỉnh sửa */}
       {isFormOpen ? (
