@@ -68,7 +68,7 @@ namespace API_QLHC_DOAN.Controllers
         }
 
         [HttpPost("AddLots")]
-        public IActionResult AddLots([FromBody] List<LoHoaChat> lots)
+        public IActionResult AddLots([FromBody] List<LoHoaChatDTO> lots)
         {
             if (lots == null || !lots.Any())
             {
@@ -87,9 +87,12 @@ namespace API_QLHC_DOAN.Controllers
                         return BadRequest($"Chemical ID {lot.MaHoaChat} does not exist.");
                     }
 
-                
+
                     // Thêm lô hóa chất vào context
-                    _context.LoHoaChat.Add(lot);
+                    var loHoaChatEntity = MapDtoToEntity(lot);
+                    _context.LoHoaChat.Add(loHoaChatEntity);
+
+                    //_context.LoHoaChat.Add(lot);
                 }
 
                 // Lưu thay đổi vào cơ sở dữ liệu
@@ -106,6 +109,23 @@ namespace API_QLHC_DOAN.Controllers
                 // Xử lý lỗi khác
                 return StatusCode(500, "Error saving lots: " + ex.Message);
             }
+        }
+        private LoHoaChat MapDtoToEntity(LoHoaChatDTO dto)
+        {
+            return new LoHoaChat
+            {
+                MaLo = dto.MaLo,
+                SoLo = dto.SoLo,
+                NhaCungCap = dto.NhaCungCap,
+                SoLuong = dto.SoLuong,
+                HanSuDung = dto.HanSuDung,
+                TrangThai = dto.TrangThai,
+                SoLuongTon = dto.SoLuongTon,
+                GhiChu = dto.GhiChu,
+                MaHoaChat = dto.MaHoaChat,
+                MaPhieuTL = dto.MaPhieuTL,
+                MaPhieuNhap = dto.MaPhieuNhap
+            };
         }
 
         [HttpGet("api/lohoaChat/{maPhieuNhap}")]
