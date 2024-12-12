@@ -23,19 +23,19 @@
  <p></p>
 
  ### Yêu cầu 
- <p>Xây dựng ứng dụng web quản lý sử dụng hóa chất với các chức năng chính sau:
- - Đăng nhập, Đăng xuất, đổi mật khẩu
- - Quản lý danh mục hóa chất theo lô
- - Đề xuất, duyệt hóa chất mua mới
- - Quản lý nhập hóa chất vào kho
- - Dự trù hóa chất cho các môn học, cho từng bài thí nghiệm
- - Quản lý phân bổ hóa chất thực tế sử dụng
- - Quản lý thanh lý hóa chất hết hạn
- - Thống kê, báo cáo
- Công nghệ sử dụng:
- - Backend: ASP.NET/ ASP. NET Core
- - Frontend: ReactJS hoặc tương đương
- - Cơ sở dữ liệu: SQL Server"
+ <p>Xây dựng ứng dụng web quản lý sử dụng hóa chất với các chức năng chính sau: <br>
+ - Đăng nhập, Đăng xuất, đổi mật khẩu <br>
+ - Quản lý danh mục hóa chất theo lô <br>
+ - Đề xuất, duyệt hóa chất mua mới <br>
+ - Quản lý nhập hóa chất vào kho <br>
+ - Dự trù hóa chất cho các môn học, cho từng bài thí nghiệm <br>
+ - Quản lý phân bổ hóa chất thực tế sử dụng <br>
+ - Quản lý thanh lý hóa chất hết hạn <br>
+ - Thống kê, báo cáo <br>
+ Công nghệ sử dụng: <br>
+ - Backend: ASP.NET/ ASP. NET Core <br>
+ - Frontend: ReactJS hoặc tương đương <br>
+ - Cơ sở dữ liệu: SQL Server" <br>
  </p>
  
  ## Chức năng
