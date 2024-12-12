@@ -32,7 +32,7 @@ const DeXuatList = () => {
   // Xử lý sự kiện sửa
   const handleEdit = (maPhieuDX) => {
     // Chuyển hướng tới trang sửa với tham số maPhieuDX
-    window.location.href = `/purchase-request/edit/${maPhieuDX}`;
+    navigate(`/purchase-request/edit/${maPhieuDX}`);
   };
 
   if (isLoading) {

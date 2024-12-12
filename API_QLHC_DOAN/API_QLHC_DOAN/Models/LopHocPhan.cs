@@ -17,6 +17,6 @@ namespace API_QLHC_DOAN.Models
         [Required]
         public int MaMon { get; set; } // Khóa ngoại liên kết với bảng MonHoc
 
-      
+        //public MonHoc? MonHoc { get; set; }
     }
 }

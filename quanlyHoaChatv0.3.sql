@@ -7,6 +7,7 @@ GO
 CREATE TABLE NguoiDung (
     MaNguoiDung INT PRIMARY KEY IDENTITY,
     TenDangNhap NVARCHAR(50) NOT NULL UNIQUE,
+	TenNguoiDung NVARCHAR(255),
     MatKhauHash NVARCHAR(255) NOT NULL,
     Email NVARCHAR(100) NOT NULL UNIQUE,
     VaiTro NVARCHAR(50),
@@ -211,19 +212,19 @@ VALUES
 (N'Ứng dụng hóa chất trong công nghiệp', 2),
 (N'Thực hành thí nghiệm hóa học', 1);
 
---LopHocPhan (MaLHP, SiSo, GVDay, MaMon)
-INSERT INTO LopHocPhan (SiSo, GVDay, MaMon) 
+--LopHocPhan (MaLHP, SiSo, GVDay, MaMon,TenLHP)
+INSERT INTO LopHocPhan (SiSo, GVDay, MaMon,TenLHP) 
 VALUES 
-(30, N'Thầy Anh', 1),
-(25, N'Thầy Bình', 2),
-(40, N'Cô Cúc', 3),
-(35, N'Thầy Dương', 4),
-(20, N'Cô ÁNh', 5),
-(45, N'Thầy Phát', 6),
-(50, N'Cô Giang', 7),
-(28, N'Thầy Hùng', 8),
-(32, N'Cô Kính', 9),
-(38, N'Thầy Khoa', 10);
+(30, N'Thầy Anh', 1,'LOPH001'),
+(25, N'Thầy Bình', 2,'LOPH002'),
+(40, N'Cô Cúc', 3,'LOPH003'),
+(35, N'Thầy Dương', 4,'LOPH004'),
+(20, N'Cô ÁNh', 5,'LOPSH01'),
+(45, N'Thầy Phát', 6,'LOPSH02'),
+(50, N'Cô Giang', 7,'LOPSH03'),
+(28, N'Thầy Hùng', 8,'LOPSH04'),
+(32, N'Cô Kính', 9,'LOPSH05'),
+(38, N'Thầy Khoa', 10,'LOPSH06');
 
 --PhieuPhanBo (MaPhieuPB, NgayLap, NoiDung, MaLHP)
 INSERT INTO PhieuPhanBo (NgayLap, NoiDung, MaLHP) 
@@ -402,7 +403,7 @@ VALUES
 
 --====================================================PROCEDURE
 
-CREATE PROCEDURE GetPhieuThanhLyDetails
+CREATE PROCEDURE [dbo].[GetPhieuThanhLyDetails]
 AS
 BEGIN
     SELECT 
@@ -430,5 +431,79 @@ BEGIN
     LEFT JOIN LoHoaChat lh ON lh.MaPhieuTL = p.MaPhieuTL
     LEFT JOIN HoaChat hc ON lh.MaHoaChat = hc.MaHoaChat
     LEFT JOIN DuyetPhieuTL dh ON p.MaPhieuTL = dh.MaPhieuTL
-	ORDER BY NgayTao DESC
+    ORDER BY p.NgayTao DESC
 END
+GO
+
+GO
+CREATE PROCEDURE [dbo].[GetChemicalDetailsInPhieuThanhLy]
+    @MaPhieuTL INT
+AS
+BEGIN
+    -- Lấy thông tin về Phiếu Thanh Lý
+    SELECT 
+        pt.MaPhieuTL,
+        pt.LyDo,
+        pt.TrangThai,
+        pt.PhuongThucThanhLy,
+        pt.NgayTao AS NgayTaoPhieuTL,
+        pt.MaNguoiDung,
+        nd.TenDangNhap AS TenNguoiDung
+    FROM dbo.PhieuThanhLy pt
+    JOIN dbo.NguoiDung nd ON pt.MaNguoiDung = nd.MaNguoiDung
+    WHERE pt.MaPhieuTL = @MaPhieuTL;
+
+    -- Lấy thông tin về các hóa chất trong phiếu thanh lý
+    SELECT 
+        hc.MaHoaChat,
+        hc.TenHoaChat,
+        hc.SoCAS,
+        hc.DonVi,
+        hc.MoTa,
+        hc.CongThucHoaHoc,
+        hc.NguyHiem,
+        hc.SoLieuAnToan,
+        hc.ThoiHanSuDung,
+        hc.HinhAnh,
+        hc.NgayTao AS NgayTaoHoaChat
+    FROM dbo.HoaChat hc
+    INNER JOIN dbo.LoHoaChat lh ON hc.MaHoaChat = lh.MaHoaChat
+    WHERE lh.MaPhieuTL = @MaPhieuTL;
+END;
+GO
+
+
+Create  PROCEDURE [dbo].[GetPhieuThanhLyDetailsChiTiet]
+    @MaPhieuTL INT
+AS
+BEGIN
+    -- Lấy thông tin về Phiếu Thanh Lý
+    SELECT 
+        p.MaPhieuTL,
+        p.LyDo,
+        p.TrangThai,
+        p.PhuongThucThanhLy,
+        p.NgayTao,
+        p.MaNguoiDung,
+        u.TenDangNhap AS NguoiDung_TenDangNhap,
+        u.Email AS NguoiDung_Email,
+        lh.MaLo,
+        lh.NhaCungCap,
+        lh.SoLuong,
+        lh.HanSuDung,
+        lh.TrangThai AS LoTrangThai,
+        hc.TenHoaChat,
+        lh.SoLo AS HoaChatSoLo,
+        hc.SoCAS AS HoaChatSoCAS,
+        dh.MaNguoiDung AS DuyetPhieuTL_MaNguoiDung,
+        dh.NgayDuyet AS DuyetPhieuTL_NgayDuyet,
+        dh.TrangThai AS DuyetPhieuTL_TrangThai
+    FROM PhieuThanhLy p
+    INNER JOIN NguoiDung u ON p.MaNguoiDung = u.MaNguoiDung
+    LEFT JOIN LoHoaChat lh ON lh.MaPhieuTL = p.MaPhieuTL
+    LEFT JOIN HoaChat hc ON lh.MaHoaChat = hc.MaHoaChat
+    LEFT JOIN DuyetPhieuTL dh ON p.MaPhieuTL = dh.MaPhieuTL
+    WHERE p.MaPhieuTL = @MaPhieuTL
+    ORDER BY p.NgayTao DESC;
+END
+GO

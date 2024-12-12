@@ -38,7 +38,7 @@ namespace API_QLHC_DOAN.Data
         public DbSet<PhieuThanhLyDetails> PhieuThanhLyDetails { get; set; }
         public DbSet<BaiThiNghiem> BaiThiNghiem { get; set; }
         public DbSet<DuTru> DuTru { get; set; }
-        public DbSet<MonHoc> MonHocs { get; set; }
+        public DbSet<MonHoc> MonHoc { get; set; }
         public async Task<List<PhieuThanhLyDetails>> GetPhieuThanhLyDetailsAsync()
         {
             return await this.PhieuThanhLyDetails.FromSqlRaw("EXEC GetPhieuThanhLyDetails").ToListAsync();
@@ -101,21 +101,12 @@ namespace API_QLHC_DOAN.Data
                 .HasKey(ctpb => new { ctpb.MaPhieuPB, ctpb.MaLo });
             // Cấu hình quan hệ nhiều-nhiều giữa HoaChat và BaiThiNghiem qua bảng DuTru
             // Cấu hình quan hệ nhiều-nhiều giữa HoaChat và BaiThiNghiem qua bảng DuTru
-            modelBuilder.Entity<DuTru>()
-      .HasKey(d => new { d.MaHoaChat, d.MaBaiTN });
-
-           
-            modelBuilder.Entity<BaiThiNghiem>()
-      .HasKey(b => b.MaBaiTN); // Định nghĩa khóa chính cho BaiThiNghiem nếu không sử dụng convention mặc định
-
-            modelBuilder.Entity<BaiThiNghiem>()
-           .HasOne(b => b.MonHoc)         // Mối quan hệ một nhiều với MonHoc
-           .WithMany(m => m.BaiThiNghiems) // MonHoc có nhiều BaiThiNghiem
-           .HasForeignKey(b => b.MaMon);  // Khóa ngoại MaMon
-
-            // Đảm bảo rằng bạn đã chỉ định khóa chính trong Fluent API
+            
             modelBuilder.Entity<MonHoc>()
-                .HasKey(m => m.MaMon);  // Chỉ định khóa chính là MaMon
+           .HasKey(m => m.MaMon);
+
+            modelBuilder.Entity<DuTru>()
+            .HasKey(dt => new { dt.MaHoaChat, dt.MaBaiTN });
 
             base.OnModelCreating(modelBuilder);
 

@@ -23,6 +23,8 @@ import DashboardPhieuThanhLy from './pages/DashboardPhieuThanhLy';
 import DashboardThongKe from './pages/DashboardThongKe';
 import Admin from './admin/Admin';
 import ChemicalForecasting from './pages/ChemicalForecasting'
+import ChemicalForecastingAdd from './pages/ChemicalForecasting_Add';
+import ChemicalForecastingDetail from './pages/ChemicalForecasting_Detail';
 import PurchaseRequest from './pages/PurchaseRequest';
 import PurchaseRequestDetails from './components/DeXuatDetails';
 import PurchaseRequestAdd from './pages/PurchaseRequest_Add';
@@ -120,7 +122,9 @@ const App = () => {
           
           {/* Dự Trù Hóa Chất */}
           <Route path="/chemical-forecasting" element={<ChemicalForecasting />} /> 
-          
+          <Route path="/chemical-forecasting/add/:selectedMaMon" element={<ChemicalForecastingAdd />} /> 
+          <Route path="/chemical-forecasting/details/:selectedMaMon" element={<ChemicalForecastingDetail />} /> 
+                    
           <Route path='/admin'element={<Admin/>}/>
         </Routes>
       </main>
