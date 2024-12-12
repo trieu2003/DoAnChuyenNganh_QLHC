@@ -4,7 +4,7 @@
 >**Thầy  Nguyễn Văn Lễ**
 
 | STT | Họ tên | Chức vụ  |
-|----------------|--------------------|--------------------|
+|-----|------------|--------------------|
 |  1  |  Huỳnh Thanh Triệu  |   Nhóm trưởng  |
 |  2  |  Huỳnh Tuấn Khang  |   Thành viên  |
 |  3  |  Hà Tri Thuỷ  |   Thành viên  |
@@ -19,7 +19,7 @@
 
  ## Xây dựng ứng dụng web quản lý sử dụng hóa chất tại phòng thí nghiệm Trường Đại học Công Thương TPHCM
 
- <h5>Mô tả dự án: </h5>
+ <h4>Mô tả dự án: </h4>
  <p></p>
 
  ### Yêu cầu 
