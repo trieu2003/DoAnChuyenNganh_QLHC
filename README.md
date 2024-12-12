@@ -1,9 +1,10 @@
 # Thành viên
 <h4>Tên nhóm: 9. Nhóm Hoá chất  </h4>
 
->>**Thầy  Nguyễn Văn Lễ**
+>**Thầy  Nguyễn Văn Lễ**
+
 | STT | Họ tên | Chức vụ  |
-|----------------|--------------------|--------------------|
+|-----|---------------------|----------------|
 |  1  |  Huỳnh Thanh Triệu  |   Nhóm trưởng  |
 |  2  |  Huỳnh Tuấn Khang  |   Thành viên  |
 |  3  |  Hà Tri Thuỷ  |   Thành viên  |
