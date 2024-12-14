@@ -31,6 +31,8 @@ import PurchaseRequestAdd from './pages/PurchaseRequest_Add';
 import PurchaseRequestEdit from './pages/PurchaseRequest_Edit';
 import DuyetPurchaseRequest from './admin/DuyetPhieuDX';
 import CreatePhieuThanhLyForm from './components/CreatePhieuThanhLyForm';
+import PrivateRoute from './components/PrivateRoute';
+import ExportExcel from './pages/ExportExcel';
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn') === 'true');
@@ -119,6 +121,8 @@ const App = () => {
           <Route path="/phieu-thanh-ly" element={<DashboardPhieuThanhLy />} />
           <Route path="/tao-phieu-thanh-ly" element={<CreatePhieuThanhLyForm />} /> 
           <Route path="/thong-ke" element={<DashboardThongKe />} />
+
+          <Route path="/export-excel" element={<ExportExcel />} />
           
           {/* Dự Trù Hóa Chất */}
           <Route path="/chemical-forecasting" element={<ChemicalForecasting />} /> 
@@ -126,6 +130,38 @@ const App = () => {
           <Route path="/chemical-forecasting/details/:selectedMaMon" element={<ChemicalForecastingDetail />} /> 
                     
           <Route path='/admin'element={<Admin/>}/>
+
+            {/* Các route yêu cầu đăng nhập */}
+            {/* Trang Admin chỉ dành cho Admin
+ {/* <Route
+    path="/user-management"
+    element={
+      <PrivateRoute requiredRole="admin">
+        <CRUDUser />
+      </PrivateRoute>
+    }
+  />
+
+  {/* Trang cho Giảng Viên */}
+    {/* <Route
+      path="/chemical-forecasting"
+      element={
+        <PrivateRoute requiredRole="giangvien">
+          <ChemicalForecasting />
+        </PrivateRoute>
+      }
+    /> */}
+
+  {/* Trang cho User */}
+  {/* <Route
+    path="/home"
+    element={
+      <PrivateRoute requiredRole="user">
+        <Home />
+      </PrivateRoute>
+    } */}
+  {/* /> */}
+  {/* Thêm các route khác cần bảo vệ */}
         </Routes>
       </main>
 

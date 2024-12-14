@@ -59,6 +59,9 @@ const Login = ({ onLogin }) => {
       } else if (vaiTro === "user") {
         console.log("Điều hướng tới trang Home");
         navigate("../home"); // Chuyển đến trang Home
+      } else if (vaiTro === "giangvien") {
+        console.log("Điều hướng tới trang Home");
+        navigate("../giangvien"); // Chuyển đến trang Home
       } else {
         setError("Vai trò không xác định.");
       }

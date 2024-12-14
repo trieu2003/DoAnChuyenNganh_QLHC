@@ -333,6 +333,122 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "API_QLHC_DOAN.Controllers.DuTruController",
+    "Method": "GetBaiThiNghiemByMonHocId",
+    "RelativePath": "api/DuTru/detail/{maMonHoc}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "maMonHoc",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.DuTruController",
+    "Method": "GetBaiThiNghiemById",
+    "RelativePath": "api/DuTru/getBaiTN/{MaBaiTN}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "MaBaiTN",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.DuTruController",
+    "Method": "GetLopHocPhanList",
+    "RelativePath": "api/DuTru/lophocphan",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.DuTruController",
+    "Method": "GetLopHocPhanByMaMon",
+    "RelativePath": "api/DuTru/lophocphan/{maMon}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "maMon",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.DuTruController",
+    "Method": "GetMonHocList",
+    "RelativePath": "api/DuTru/monhoc",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.DuTruController",
+    "Method": "CreateBaiThiNghiem",
+    "RelativePath": "api/DuTru/taoBaiTN",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "API_QLHC_DOAN.Models.BaiThiNghiem",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.DuTruController",
+    "Method": "CreateDuTru",
+    "RelativePath": "api/DuTru/taoDuTru",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "API_QLHC_DOAN.Models.DuTru",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.DuTruController",
+    "Method": "ThongKeHoaChatTheoMonHoc",
+    "RelativePath": "api/DuTru/thongkeTongSL/{maMonHoc}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "maMonHoc",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "API_QLHC_DOAN.Controllers.InventoryManagementController",
     "Method": "AddLots",
     "RelativePath": "api/InventoryManagement/AddLots",
@@ -342,7 +458,7 @@
     "Parameters": [
       {
         "Name": "lots",
-        "Type": "System.Collections.Generic.List\u00601[[API_QLHC_DOAN.Models.LoHoaChat, API_QLHC_DOAN, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.List\u00601[[API_QLHC_DOAN.Models.LoHoaChatDTO, API_QLHC_DOAN, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "IsRequired": true
       }
     ],

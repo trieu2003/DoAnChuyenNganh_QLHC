@@ -290,36 +290,68 @@ namespace API_QLHC_DOAN.Controllers
             }
         }
 
+        //[HttpPut("reject/{id}")]
+        //public async Task<IActionResult> RejectPhieuThanhLy(int id)
+        //{
+        //    var phieuThanhLy = await _context.PhieuThanhLy.FindAsync(id);
+        //    if (phieuThanhLy == null)
+        //    {
+        //        return NotFound("Phiếu thanh lý không tồn tại");
+        //    }
+
+        //    phieuThanhLy.TrangThai = "Đã từ chối thanh lý";
+
+        //    // Cập nhật trạng thái các lô hóa chất thành 'Đang sử dụng'
+        //    var loHoaChats = await _context.LoHoaChat.Where(lh => lh.MaPhieuTL == id).ToListAsync();
+        //    foreach (var loHoaChat in loHoaChats)
+        //    {
+        //        loHoaChat.TrangThai = "Đang sử dụng";
+        //        loHoaChat.MaPhieuTL = null; // Xóa liên kết với mã phiếu thanh lý
+        //    }
+
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //        return Ok("Phiếu thanh lý đã bị từ chối và trạng thái lô hóa chất đã được cập nhật thành 'Đang sử dụng'.");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(500, "Lỗi trong quá trình cập nhật: " + ex.Message);
+        //    }
+        //}
         [HttpPut("reject/{id}")]
         public async Task<IActionResult> RejectPhieuThanhLy(int id)
         {
+            // Tìm phiếu thanh lý
             var phieuThanhLy = await _context.PhieuThanhLy.FindAsync(id);
             if (phieuThanhLy == null)
             {
                 return NotFound("Phiếu thanh lý không tồn tại");
             }
 
-            phieuThanhLy.TrangThai = "Đã từ chối thanh lý";
-
-            // Cập nhật trạng thái các lô hóa chất thành 'Đang sử dụng'
+            // Cập nhật trạng thái các lô hóa chất thành 'Đang sử dụng' và xóa liên kết mã phiếu thanh lý
             var loHoaChats = await _context.LoHoaChat.Where(lh => lh.MaPhieuTL == id).ToListAsync();
             foreach (var loHoaChat in loHoaChats)
             {
                 loHoaChat.TrangThai = "Đang sử dụng";
+                loHoaChat.MaPhieuTL = null; // Xóa liên kết với phiếu thanh lý
             }
+
+            // Xóa phiếu thanh lý sau khi cập nhật lô hóa chất
+            _context.PhieuThanhLy.Remove(phieuThanhLy);
 
             try
             {
                 await _context.SaveChangesAsync();
-                return Ok("Phiếu thanh lý đã bị từ chối và trạng thái lô hóa chất đã được cập nhật thành 'Đang sử dụng'.");
+                return Ok("Phiếu thanh lý đã bị từ chối và đã được xóa khỏi hệ thống.");
             }
             catch (Exception ex)
             {
-                return StatusCode(500, "Lỗi trong quá trình cập nhật: " + ex.Message);
+                return StatusCode(500, "Lỗi trong quá trình cập nhật và xóa dữ liệu: " + ex.Message);
             }
         }
 
-        
+
         [HttpGet("hoa-chat")]
         public async Task<ActionResult<IEnumerable<HoaChat>>> GetHoaChats()
         {

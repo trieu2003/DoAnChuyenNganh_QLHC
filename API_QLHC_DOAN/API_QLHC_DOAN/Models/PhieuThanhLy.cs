@@ -160,18 +160,32 @@ namespace API_QLHC_DOAN.Models
         public string LyDo { get; set; }
         public string TrangThai { get; set; }
         public string PhuongThucThanhLy { get; set; }
-        public DateTime NgayTao { get; set; }
+        public DateTime? NgayTao { get; set; }
         public int MaNguoiDung { get; set; }
         public string? NguoiDung_TenDangNhap { get; set; }
         public string? NguoiDung_Email { get; set; }
         public int? MaLo { get; set; }
         public string NhaCungCap { get; set; }
         public int SoLuong { get; set; }
+       
+        public string ?GhiChu { get; set; }
         public DateTime HanSuDung { get; set; }
         public string LoTrangThai { get; set; }
         public string TenHoaChat { get; set; }
-        public string HoaChatSoLo { get; set; }
-        public string HoaChatSoCAS { get; set; }
+
+        public int ?SoLuongTon { get; set; }
+        public string? DonVi { get; set; }
+        public string? CongThucHoaHoc { get; set; }
+        public string? HinhAnh { get; set; }
+        public string ?MoTa { get; set; }
+        public string ?NguyHiem { get; set; }
+        public string ?SoLieuAnToan { get; set; }
+     
+        public DateTime ?NgayDuyet { get; set; }
+   
+
+        public string? HoaChatSoLo { get; set; }
+        public string? HoaChatSoCAS { get; set; }
         public int? DuyetPhieuTL_MaNguoiDung { get; set; }
         public DateTime? DuyetPhieuTL_NgayDuyet { get; set; }
         public string? DuyetPhieuTL_TrangThai { get; set; }
@@ -212,6 +226,7 @@ namespace API_QLHC_DOAN.Models
         public string SoLo { get; set; }       // Batch number
         public string SoCAS { get; set; }      // CAS number
         public int SoLuong { get; set; }       // Quantity
+
         public string TrangThai { get; set; }  // Chemical status (e.g., available, expired)
         public DateTime? ThoiHanSuDung { get; set; } // Expiry date (nullable)
         public string MoTa { get; set; }       // Description of the chemical

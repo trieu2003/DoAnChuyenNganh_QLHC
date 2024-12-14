@@ -66,6 +66,7 @@ const Sidebar = ({ open, onClose }) => {
           >
             Thống Kê & Báo Cáo
           </Link>
+      
           <Link 
             to="/settings" 
             className="text-gray-700 hover:bg-blue-100 p-2 rounded transition-colors duration-200"

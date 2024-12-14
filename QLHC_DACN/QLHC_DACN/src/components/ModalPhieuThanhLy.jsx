@@ -166,7 +166,7 @@ const ModalPhieuThanhLy = ({ maPhieuTL, onClose, onDuyet, onTuChoi }) => {
 
   return (
     <div className="p-6">
-      <h2 className="text-3xl font-bold mb-6 text-center">Danh Sách Phiếu Thanh Lý</h2>
+      <h2 className="text-3xl font-bold mb-6 text-center">Xem chi tiết phiếu thanh lý {maPhieuTL}</h2>
 
       <table className="min-w-full table-auto mb-6">
         <thead className="bg-gray-100">
@@ -178,14 +178,20 @@ const ModalPhieuThanhLy = ({ maPhieuTL, onClose, onDuyet, onTuChoi }) => {
             <th className="px-4 py-2 border">Ngày Tạo</th> */}
             {/* <th className="px-4 py-2 border">Mã người dùng</th> */}
             <th className="px-4 py-2 border">Tên đăng nhập người tạo</th>
-            <th className="px-4 py-2 border">Email người tạo</th>
-
+            {/* <th className="px-4 py-2 border">Email người tạo</th> */}
             <th className="px-4 py-2 border">Mã lô</th>
             <th className="px-4 py-2 border">Nhà Cung Cấp</th>
-            <th className="px-4 py-2 border">Số lượng thanh lý </th>
+            <th className="px-4 py-2 border">Số lượng  </th>
+            <th className="px-4 py-2 border">Số lượng Tồn </th>
             <th className="px-4 py-2 border">Hạn Sử Dụng</th>
             <th className="px-4 py-2 border">Trạng thái Lô</th>
             <th className="px-4 py-2 border">Tên Hóa Chất</th>
+            <th className="px-4 py-2 border">Ghi chú</th>
+            <th className="px-4 py-2 border">Đơn vị</th>
+            <th className="px-4 py-2 border">Hình ảnh </th>
+            <th className="px-4 py-2 border">Mô tả</th>
+            <th className="px-4 py-2 border">Nguy hiểm</th>
+            <th className="px-4 py-2 border">Số liệu an toàn</th>
             <th className="px-4 py-2 border">Hóa chất Số Lô</th>
             <th className="px-4 py-2 border">Hóa chất Số CAS</th>
             {/* <th className="px-4 py-2 border">Mã người duyệt phiếu</th> */}
@@ -204,15 +210,25 @@ const ModalPhieuThanhLy = ({ maPhieuTL, onClose, onDuyet, onTuChoi }) => {
               <td className="px-4 py-2 border">{new Date(phieu.ngayTao).toLocaleDateString()}</td> */}
               {/* <td className="px-4 py-2 border">{phieu.maNguoiDung}</td> */}
               <td className="px-4 py-2 border">{phieu.nguoiDung_TenDangNhap}</td>
-              <td className="px-4 py-2 border">{phieu.nguoiDung_Email}</td>
+              {/* <td className="px-4 py-2 border">{phieu.nguoiDung_Email}</td> */}
               <td className="px-4 py-2 border">{phieu.maLo}</td>
               <td className="px-4 py-2 border">{phieu.nhaCungCap}</td>
               <td className="px-4 py-2 border">{phieu.soLuong}</td>
+              <td className="px-4 py-2 border">{phieu.soLuongTon}</td>
               <td className="px-4 py-2 border">{phieu.hanSuDung}</td>
               <td className="px-4 py-2 border">{phieu.loTrangThai}</td>
               <td className="px-4 py-2 border">{phieu.tenHoaChat}</td>
+              <td className="px-4 py-2 border">{phieu.ghiChu}</td>
+              <td className="px-4 py-2 border">{phieu.donVi}</td>   
+              <td className="px-4 py-2 border">{phieu.hinhAnh}</td>
+              <td className="px-4 py-2 border">{phieu.moTa}</td>
+              <td className="px-4 py-2 border">{phieu.nguyHiem}</td>
+              <td className="px-4 py-2 border">{phieu.soLieuAnToan}</td>
               <td className="px-4 py-2 border">{phieu.hoaChatSoLo}</td>
               <td className="px-4 py-2 border">{phieu.hoaChatSoCAS}</td>
+
+             
+              
               {/* <td className="px-4 py-2 border">{phieu.duyetPhieuTL_MaNguoiDung}</td> */}
               <td className="px-4 py-2 border">{new Date(phieu.duyetPhieuTL_NgayDuyet).toLocaleDateString()}</td>
               {/* <td className="px-4 py-2 border">{phieu.duyetPhieuTL_TrangThai}</td>  */}

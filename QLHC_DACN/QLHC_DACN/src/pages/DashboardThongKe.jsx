@@ -635,6 +635,7 @@ import axios from 'axios';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { FaChartBar, FaFileInvoice, FaBoxes, FaCogs } from 'react-icons/fa'; // Import React icons
+import ExportExcel from './ExportExcel';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -674,8 +675,9 @@ const DashboardThongKe = () => {
   const renderHoaChatStats = () => (
     <div className="bg-white p-6 shadow-lg rounded-md mb-6 hover:scale-105 transition-all duration-300 ease-in-out">
       <h3 className="text-lg font-bold mb-4 flex items-center">
-        <FaCogs className="mr-2 text-indigo-500" /> Thống Kê Hóa Chất
+        <FaCogs className="mr-2 text-indigo-500" /> Thống Kê Hóa Chất 
       </h3>
+     
       <table className="min-w-full table-auto mb-4">
         <thead>
           <tr className="bg-gray-200">
@@ -845,7 +847,7 @@ const DashboardThongKe = () => {
   return (
     <div className="p-6">
       <h2 className="text-3xl font-bold mb-6 text-center">Thống Kê Quản Lý Hóa Chất</h2>
-
+      <ExportExcel />
       {/* Dropdown cho lựa chọn thống kê */}
       <div className="mb-6">
         <label htmlFor="statistics" className="block text-sm font-medium text-gray-700">Chọn thống kê</label>

@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 @import '@fortawesome/fontawesome-free/css/all.min.css';
+.line-through {
+  text-decoration: line-through;
+}
+
+.cursor-not-allowed {
+  cursor: not-allowed;
+}
 
 /*
 :root {
