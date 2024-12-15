@@ -14,7 +14,7 @@ CREATE TABLE NguoiDung (
     NgayTao DATE NOT NULL,
     HinhAnh NVARCHAR(255)
 );
-
+go
 -- Bảng Phiếu Thanh Lý
 CREATE TABLE PhieuThanhLy (
     [MaPhieuTL] INT IDENTITY(1,1) NOT NULL,
@@ -26,6 +26,7 @@ CREATE TABLE PhieuThanhLy (
     CONSTRAINT PK_PhieuThanhLy PRIMARY KEY ([MaPhieuTL]),
     CONSTRAINT PK_PhieuThanhLy_NguoiDung FOREIGN KEY ([MaNguoiDung] ) REFERENCES NguoiDung(MaNguoiDung)
 );
+go
 -- Bảng Duyệt Phiếu Thanh Lý
 CREATE TABLE DuyetPhieuTL (
 	MaLichSu INT PRIMARY KEY IDENTITY,
@@ -38,6 +39,7 @@ CREATE TABLE DuyetPhieuTL (
 	CONSTRAINT FK_DuyetPhieuTL_NguoiDung FOREIGN KEY (MaNguoiDung) REFERENCES NguoiDung(MaNguoiDung),
 	CONSTRAINT FK_DuyetPhieuTL_PhongThanhLy FOREIGN KEY (MaPhieuTL) REFERENCES PhieuThanhLy(MaPhieuTL)
 );
+go
 --ALTER TABLE DuyetPhieuTL DROP CONSTRAINT PK__DuyetPhi__B45DAA35A6058CC7;
 --ALTER TABLE DuyetPhieuTL ADD MaLichSu INT IDENTITY(1,1);
 --ALTER TABLE DuyetPhieuTL ADD CONSTRAINT PK_DuyetPhieuTL PRIMARY KEY (MaLichSu);
@@ -47,7 +49,7 @@ CREATE TABLE MonHoc (
     MaMon INT PRIMARY KEY IDENTITY,
     TenMon NVARCHAR(255) NOT NULL,
     SoTC INT NOT NULL
-);
+);go
 -- Bảng Lớp Học Phần
 CREATE TABLE LopHocPhan (
     MaLHP INT PRIMARY KEY IDENTITY,
@@ -57,7 +59,7 @@ CREATE TABLE LopHocPhan (
     MaMon INT NOT NULL,
     FOREIGN KEY (MaMon) REFERENCES MonHoc(MaMon),
 );
-
+go
 -- Bảng Phiếu Phân Bổ
 CREATE TABLE PhieuPhanBo (
     MaPhieuPB INT PRIMARY KEY IDENTITY,
@@ -67,7 +69,7 @@ CREATE TABLE PhieuPhanBo (
 	FOREIGN KEY (MaLHP) REFERENCES LopHocPhan(MaLHP)
 );
 
-
+go
 
 -- Bảng Phiếu Đề Xuất
 CREATE TABLE PhieuDeXuat (
@@ -78,7 +80,7 @@ CREATE TABLE PhieuDeXuat (
     MaNguoiDung INT NOT NULL, 
     FOREIGN KEY (MaNguoiDung) REFERENCES NguoiDung(MaNguoiDung)
 );
-
+go
 -- Bảng Duyệt Phiếu Đề Xuất
 CREATE TABLE DuyetPhieuDX (
 	MaLichSu INT PRIMARY KEY IDENTITY,
@@ -90,7 +92,7 @@ CREATE TABLE DuyetPhieuDX (
 	--PRIMARY KEY (MaPhieuDX, MaNguoiDung),
 	FOREIGN KEY (MaNguoiDung) REFERENCES NguoiDung(MaNguoiDung),
 	FOREIGN KEY (MaPhieuDX) REFERENCES PhieuDeXuat(MaPhieuDX)
-);
+);go
 --ALTER TABLE DuyetPhieuDX DROP CONSTRAINT PK__DuyetPhi__B45F542D959A38D7;
 --ALTER TABLE DuyetPhieuDX ADD MaLichSu INT IDENTITY(1,1);
 --ALTER TABLE DuyetPhieuDX ADD CONSTRAINT PK_DuyetPhieuDX PRIMARY KEY (MaLichSu);
@@ -110,7 +112,7 @@ CREATE TABLE HoaChat (
     NgayTao DATE NOT NULL
 );
 
-
+go
 -- Bảng Chi Tiết Đề Xuất (Kết nối nhiều-nhiều giữa Phiếu Đề Xuất và Hóa Chất)
 CREATE TABLE ChiTietDeXuat (
     MaPhieuDX INT NOT NULL,
@@ -121,7 +123,7 @@ CREATE TABLE ChiTietDeXuat (
     FOREIGN KEY (MaPhieuDX) REFERENCES PhieuDeXuat(MaPhieuDX),
     FOREIGN KEY (MaHoaChat) REFERENCES HoaChat(MaHoaChat)
 );
-
+go
 -- Bảng Phiếu Nhập
 CREATE TABLE PhieuNhap (
     MaPhieuNhap INT PRIMARY KEY IDENTITY,
@@ -131,7 +133,7 @@ CREATE TABLE PhieuNhap (
     MaNguoiDung INT NOT NULL,
     FOREIGN KEY (MaNguoiDung) REFERENCES NguoiDung(MaNguoiDung)
 );
-
+go
 -- Bảng Lô Hóa Chất
 CREATE TABLE LoHoaChat (
     MaLo INT PRIMARY KEY IDENTITY,
@@ -149,7 +151,7 @@ CREATE TABLE LoHoaChat (
 	FOREIGN KEY (MaPhieuTL) REFERENCES PhieuThanhLy(MaPhieuTL),
 	FOREIGN KEY (MaPhieuNhap) REFERENCES PhieuNhap(MaPhieuNhap)
 );
-
+go
 -- Bảng Chi Tiết Phân Bổ (Kết nối nhiều-nhiều giữa Phiếu Phân Bổ và Lớp Học Phần)
 CREATE TABLE ChiTietPhanBo (
     MaPhieuPB INT NOT NULL,
@@ -160,7 +162,7 @@ CREATE TABLE ChiTietPhanBo (
     FOREIGN KEY (MaLo) REFERENCES LoHoaChat(MaLo)
 );
 
-
+go
 -- Bảng Bài Thí Nghiệm
 CREATE TABLE BaiThiNghiem (
     MaBaiTN INT PRIMARY KEY IDENTITY,
@@ -168,7 +170,7 @@ CREATE TABLE BaiThiNghiem (
     MaMon INT NOT NULL,
     FOREIGN KEY (MaMon) REFERENCES MonHoc(MaMon)
 );
-
+go
 -- Bảng Dự Trữ (Kết nối nhiều-nhiều giữa Lô Hóa Chất và Phiếu Nhập)
 CREATE TABLE DuTru (
     --MaLo INT NOT NULL,
@@ -178,7 +180,7 @@ CREATE TABLE DuTru (
     PRIMARY KEY (MaHoaChat, MaBaiTN),
     FOREIGN KEY (MaBaiTN) REFERENCES BaiThiNghiem(MaBaiTN),
     FOREIGN KEY (MaHoaChat) REFERENCES HoaChat(MaHoaChat)
-);
+);go
 --NguoiDung(MaNguoiDung, TenDangNhap,TenNguoiDung, MatKhauHash, Email, VaiTro ,NgayTao, HinhAnh )
 INSERT INTO NguoiDung (TenDangNhap, TenNguoiDung, MatKhauHash, Email, VaiTro, NgayTao, HinhAnh) 
 VALUES 
@@ -194,7 +196,7 @@ VALUES
 ('user10', N'Xuân Mạnh', '162de50854fb25ea3fd8640282cb67b4', 'user10@example.com', N'Giảng viên', '2024-01-10', 'image10.jpg');
 Select * from NguoiDung
 --dở ở đây
-
+go
 --PhieuThanhLy (MaPhieuTL, LyDo, TrangThai, PhuongThucThanhLy, NgayTao, MaNguoiDung)
 INSERT INTO PhieuThanhLy (LyDo, TrangThai, PhuongThucThanhLy, NgayTao, MaNguoiDung) 
 VALUES 
@@ -202,12 +204,13 @@ VALUES
 (N'Hóa chất hết hạn sử dụng', N'Chờ duyệt', N'Hủy', '2024-11-25', 2),    -- Dữ liệu mẫu 2
 (N'Thanh lý do không cần thiết nữa', N'Chờ duyệt', N'Bán', '2024-11-26', 3); -- Dữ liệu mẫu 3
 --DuyetPhieuTL (MaPhieuTL, MaNguoiDung, NgayDuyet, TrangThai)
+go
 INSERT INTO DuyetPhieuTL (MaPhieuTL, MaNguoiDung, NgayDuyet, TrangThai) 
 VALUES 
 (1, 2, '2024-11-25', N'Chờ duyệt'),  
 (2, 2, '2024-11-26', N'Chờ duyệt'), 
 (3, 4, '2024-11-27', N'Chờ duyệt');   
-
+go
 --MonHoc (MaMon, TenMon, SoTC)
 INSERT INTO MonHoc (TenMon, SoTC) 
 VALUES 
@@ -221,7 +224,7 @@ VALUES
 (N'Pháp chế hóa chất', 3),
 (N'Ứng dụng hóa chất trong công nghiệp', 2),
 (N'Thực hành thí nghiệm hóa học', 1);
-
+go
 --LopHocPhan (MaLHP, SiSo, GVDay, MaMon,TenLopHocPhan)
 INSERT INTO LopHocPhan (SiSo, GVDay, MaMon,TenLopHocPhan) 
 VALUES 
@@ -235,7 +238,7 @@ VALUES
 (28, N'Thầy Chí Cường', 8,'LOPSH04'),
 (32, N'Cô Kim Hoa', 9,'LOPSH05'),
 (38, N'Thầy XUân Mạnh', 10,'LOPSH06');
-
+go
 --PhieuPhanBo (MaPhieuPB, NgayLap, NoiDung, MaLHP)
 INSERT INTO PhieuPhanBo (NgayLap, NoiDung, MaLHP) 
 VALUES 
@@ -249,7 +252,7 @@ VALUES
 ('2024-04-08', N'Phân bổ hóa chất', 8),
 ('2024-04-09', N'Phân bổ hóa chất', 9),
 ('2024-04-10', N'Phân bổ hóa chất', 10);
-
+go
 --PhieuDeXuat (MaPhieuDX, SoLuongDeXuat, LyDo, TrangThai, NgayTao, MaNguoiDung)
 INSERT INTO PhieuDeXuat (LyDo, TrangThai, NgayTao, MaNguoiDung) 
 VALUES 
@@ -263,7 +266,7 @@ VALUES
 (N'Bổ sung hóa chất', N'Chờ duyệt', '2024-05-08', 9),
 (N'Cần thêm cho thí nghiệm', N'Đã duyệt', '2024-05-09', 9),
 (N'Phân bổ cho lớp', N'Chờ duyệt', '2024-05-10', 10);
-
+go
 --DuyetPhieuDX (MaPhieuDX, MaNguoiDung, NgayDuyet, TrangThai)
 INSERT INTO DuyetPhieuDX (MaPhieuDX, MaNguoiDung, NgayDuyet, TrangThai) 
 VALUES 
@@ -273,7 +276,7 @@ VALUES
 (7, 4, '2024-06-07', N'Đã duyệt'),
 (9, 8, '2024-06-09', N'Đã duyệt'),
 (10, 8, '2024-06-10', N'Từ Chối');
-
+go
 --HoaChat (MaHoaChat, SoCAS, TenHoaChat, DonVi, MoTa, CongThucHoaHoc, NguyHiem, SoLieuAnToan, ThoiHanSuDung, HinhAnh, NgayTao)
 INSERT INTO HoaChat (SoCAS, TenHoaChat, DonVi, MoTa, CongThucHoaHoc, NguyHiem, SoLieuAnToan, ThoiHanSuDung, HinhAnh, NgayTao)
 VALUES
@@ -282,7 +285,7 @@ VALUES
 ('130-23-4', '1-amino-2 naphtol-4 sunfonic acid', 'g', N'Chất màu dùng trong nghiên cứu hóa học', 'C10H9NO4S', N'Tiếp xúc lâu dài có thể gây tổn thương nội tạng', N'Sử dụng kính bảo hộ và mặt nạ', '2025-01-01', 'image3.jpg', '2024-10-01'),
 ('62-53-3', 'Aniline', 'mL', N'Dung môi phổ biến trong phòng thí nghiệm', 'C6H5NH2', N'Độc hại khi uống, nguy hiểm khi hít phải', N'Không ăn uống hoặc hút thuốc khi sử dụng', '2025-01-01', 'image4.jpg', '2024-10-01'),
 ('69-72-7', 'Salicylic Acid', 'g', N'Chất sử dụng trong dược phẩm và mỹ phẩm', 'C7H6O3', N'Gây kích ứng mắt và da, có thể gây dị ứng', N'Rửa sạch bằng nước sau khi tiếp xúc', '2025-01-01', 'image5.jpg', '2024-10-01');
-
+go
 INSERT INTO HoaChat (SoCAS, TenHoaChat, DonVi, MoTa, CongThucHoaHoc, NguyHiem, SoLieuAnToan, ThoiHanSuDung, HinhAnh, NgayTao)
 VALUES
 ('51-28-5', '2,4-Dinitrophenyl hydrazin', 'g', N'Hợp chất hữu cơ dễ cháy dùng trong phân tích', 'C6H6N4O4', N'Dễ cháy, độc hại nếu hít phải', N'Bảo quản tránh xa nhiệt và lửa', '2025-02-01', 'image6.jpg', '2024-10-01'),
@@ -296,7 +299,7 @@ VALUES
 ('108-95-2', 'Phenol', 'g', N'Dùng làm nguyên liệu cho nhựa tổng hợp', 'C6H6O', N'Cực kỳ độc hại, gây bỏng nếu tiếp xúc', N'Deo kính bảo hộ và găng tay', '2025-02-01', 'image14.jpg', '2024-10-01'),
 ('71-43-2', 'Benzene', 'mL', N'Nguyên liệu phổ biến trong sản xuất công nghiệp', 'C6H6',  N'Dễ cháy, gây ung thư khi tiếp xúc lâu dài', N'Bảo quản trong thùng kín', '2025-02-01', 'image15.jpg', '2024-10-01');
 
-
+go
 INSERT INTO HoaChat (SoCAS, TenHoaChat, DonVi, MoTa, CongThucHoaHoc, NguyHiem, SoLieuAnToan, ThoiHanSuDung, HinhAnh, NgayTao)
 VALUES
 ('110-54-3', 'Hexane', 'mL', N'Dung môi hữu cơ dễ cháy', 'C6H14', N'Dễ cháy, nguy hiểm cho hệ hô hấp', N'Sử dụng trong môi trường thông gió tốt', '2025-02-01', 'image16.jpg', '2024-10-01'),
@@ -309,7 +312,7 @@ VALUES
 ('67-64-1', 'Acetone', 'mL', N'Dung môi công nghiệp phổ biến', 'C3H6O', N'Nguy hiểm khi hít phải hoặc tiếp xúc lâu dài',  N'Làm việc trong môi trường thông gió tốt', '2025-02-01', 'image23.jpg', '2024-10-01'),
 ('108-05-4', 'Vinyl Acetate', 'mL', N'Dùng trong sản xuất nhựa tổng hợp', 'C4H6O2', N'Dễ cháy, có thể gây kích ứng da', N'Deo găng tay và kính bảo hộ khi sử dụng', '2025-02-01', 'image24.jpg', '2024-10-01'),
 ('75-09-2', 'Dichloromethane', 'mL', N'Dung môi hữu cơ không cháy', 'CH2Cl2', N'Có thể gây độc khi tiếp xúc hoặc hít phải',N'Sử dụng trong môi trường thoáng khí', '2025-02-01', 'image25.jpg', '2024-10-01');
-
+go
 INSERT INTO HoaChat (SoCAS, TenHoaChat, DonVi, MoTa, CongThucHoaHoc, NguyHiem, SoLieuAnToan, ThoiHanSuDung, HinhAnh, NgayTao)
 VALUES
 ('107-13-1', 'Acrylonitrile', 'mL', N'Chất dùng trong sản xuất sợi tổng hợp', 'C3H3N',  N'Nguy hiểm khi tiếp xúc lâu dài, dễ cháy', N'Deo kính bảo hộ và làm việc xa nguồn nhiệt', '2025-02-01', 'image27.jpg', '2024-10-01'),
@@ -322,7 +325,7 @@ VALUES
 ('108-24-7', 'Acetic Anhydride', 'mL', N'Dùng trong tổng hợp hóa chất', 'C4H6O3', N'Có thể gây bỏng da hoặc mắt', N'Deo kính bảo hộ và làm việc trong môi trường thông thoáng', '2025-02-01', 'image34.jpg', '2024-10-01'),
 ('110-00-9', 'Furan', 'mL', N'Hợp chất hữu cơ dùng trong công nghiệp', 'C4H4O',  N'Dễ cháy, có thể gây nguy hiểm cho hệ thần kinh', N'Deo kính và làm việc trong môi trường thông gió tốt', '2025-02-01', 'image35.jpg', '2024-10-01');
 
-
+go
 
 --ChiTietDeXuat (MaPhieuDX, MaHoaChat, SoLuong, DonGia)
 INSERT INTO ChiTietDeXuat (MaPhieuDX, MaHoaChat, SoLuong, DonGia) 
@@ -337,7 +340,7 @@ VALUES
 (8, 8, 16, 16000),
 (9, 9, 14, 14000),
 (10, 10, 17, 17000);
-
+go
 --PhieuNhap (MaPhieuNhap, SoLuongNhap, NgayNhap, GhiChu, MaNguoiDung)
 INSERT INTO PhieuNhap (SoLuongNhap, NgayNhap, GhiChu, MaNguoiDung) 
 VALUES 
@@ -351,20 +354,20 @@ VALUES
 (160, '2024-07-08', N'Nhập hàng đợt 8', 8),
 (140, '2024-07-09', N'Nhập hàng đợt 9', 9),
 (170, '2024-07-10', N'Nhập hàng đợt 10', 10);
-
+go
 --LoHoaChat (SoLo, NhaCungCap, HanSuDung, TrangThai, SoLuongTon, GhiChu, MaHoaChat, MaPhieuTL, MaPhieuNhap)
 INSERT INTO LoHoaChat (SoLo, NhaCungCap, SoLuong, HanSuDung, TrangThai, SoLuongTon, GhiChu, MaHoaChat, MaPhieuTL, MaPhieuNhap)
 VALUES
 ('LOT-66-71-7-001',N'Công ty Cổ phần Hóa chất TPHCM', 100,'2026-12-31', N'Đang sử dụng', 80, N'Lô nhập tháng 10', 1, 1, 1),
 ('LOT-123-91-1-001',N'Công ty TNHH Thương mại Dịch vụ Xuất Nhập khẩu Khánh An Sài Gòn', 50,'2026-12-31', N'Đang sử dụng', 50, N'Lô nhập tháng 10', 2, NULL, 2),
-('LOT-123-91-1-001',N'Công ty TNHH Thương mại Dịch vụ Xuất Nhập khẩu Khánh An Sài Gòn', 100,'2026-12-31', N'Đang sử dụng', 100, N'Lô nhập tháng 10', 1, NULL, 2),
+--('LOT-123-91-1-001',N'Công ty TNHH Thương mại Dịch vụ Xuất Nhập khẩu Khánh An Sài Gòn', 100,'2026-12-31', N'Đang sử dụng', 100, N'Lô nhập tháng 10', 1, NULL, 2),
 ('LOT-130-23-4-001',N'Công ty TNHH Hóa chất Thành Phương',200, '2026-12-31', N'Đang sử dụng', 100, N'Lô nhập tháng 10', 3, NULL, 3),
 ('LOT-62-53-3-001',N'Công ty Cổ phần Đầu tư Phát triển Lộc Thiên',60, '2026-12-31', N'Đang sử dụng', 40, N'Lô nhập tháng 10', 4, NULL, 4),
-('LOT-62-53-3-001',N'Công ty Cổ phần Đầu tư Phát triển Lộc Thiên', 60,'2026-12-31', N'Đang sử dụng', 40, N'Lô nhập tháng 10', 6, NULL, 4),
+--('LOT-62-53-3-001',N'Công ty Cổ phần Đầu tư Phát triển Lộc Thiên', 60,'2026-12-31', N'Đang sử dụng', 40, N'Lô nhập tháng 10', 6, NULL, 4),
 ('LOT-76-72-7-001',N'Công ty Cổ phần Hóa chất Cơ bản Miền Nam', 60,'2026-12-31', N'Hết hạn sử dụng', 30, N'Lô nhập tháng 10', 1, 2, 6),
-('LOT-69-72-7-001',N'Công ty Cổ phần Hóa chất Cơ bản Miền Nam', 70,'2026-12-31', N'Đang sử dụng', 60, N'Lô nhập tháng 10', 5, 3, 5),
+--('LOT-69-72-7-001',N'Công ty Cổ phần Hóa chất Cơ bản Miền Nam', 70,'2026-12-31', N'Đang sử dụng', 60, N'Lô nhập tháng 10', 5, 3, 5),
 ('LOT-69-72-7-001',N'Công ty Cổ phần Hóa chất Cơ bản Miền Nam', 60,'2026-12-31', N'Đang sử dụng', 60, N'Lô nhập tháng 10', 1, 3, 5);
-
+go
 --ChiTietPhanBo (MaPhieuPB, MaLo, SoLuong)
 INSERT INTO ChiTietPhanBo (MaPhieuPB, MaLo, SoLuong) 
 VALUES 
@@ -378,7 +381,7 @@ VALUES
 --(8, 8, 16),
 --(9, 9, 14),
 --(10, 10, 17);
-
+go
 --BaiThiNghiem (MaBaiTN, TenBaiTN, MaMon)
 INSERT INTO BaiThiNghiem (TenBaiTN, MaMon) 
 VALUES 
@@ -392,7 +395,7 @@ VALUES
 (N'Thí nghiệm Pháp chế hóa chất', 8),
 (N'Thí nghiệm Ứng dụng hóa chất trong công nghiệp', 9),
 (N'Thí nghiệm Thực hành thí nghiệm hóa học', 10);
-
+go
 --DuTru (MaHoaChat, MaBaiTN, SoLuong)
 INSERT INTO DuTru (MaHoaChat, MaBaiTN, SoLuong) 
 VALUES 
@@ -406,7 +409,7 @@ VALUES
 (8, 8, 16),
 (9, 9, 14),
 (10, 10, 17);
-
+go
 --====================================================PROCEDURE
 
 CREATE PROCEDURE [dbo].[GetPhieuThanhLyDetails]

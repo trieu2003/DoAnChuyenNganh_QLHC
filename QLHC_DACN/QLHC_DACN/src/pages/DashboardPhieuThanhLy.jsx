@@ -290,6 +290,7 @@ import React, { useState } from 'react';
 import PhieuThanhLyList from '../components/PhieuThanhLyList';
 import CreatePhieuThanhLyForm from '../components/CreatePhieuThanhLyForm';
 import axios from 'axios';
+import DuyetPhieuThanhLyList from '../components/DuyetPhieuThanhLyList';
 
 const DashboardPhieuThanhLy = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -308,6 +309,7 @@ const DashboardPhieuThanhLy = () => {
 
   return (
     <div className="container mx-auto p-4">
+      <DuyetPhieuThanhLyList /> 
       {/* <h1 className="text-3xl font-bold mb-4">Quản Lý Phiếu Thanh Lý</h1> */}
 
       {/* Nút Tạo Phiếu Thanh Lý */}
@@ -328,6 +330,7 @@ const DashboardPhieuThanhLy = () => {
         />
       ) : (
         <PhieuThanhLyList />
+        
       )}
     </div>
   );
