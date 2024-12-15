@@ -83,8 +83,7 @@
               "RelativeToolTip": "API_QLHC_DOAN\\Models\\PhieuThanhLy.cs",
               "ViewState": "AgIAAKIAAAAAAAAAAAAxwMIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-14T19:32:45.831Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-14T19:32:45.831Z"
             },
             {
               "$type": "Document",
@@ -96,8 +95,7 @@
               "RelativeToolTip": "API_QLHC_DOAN\\Models\\LoHoaChat.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAFEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-12T16:18:02.432Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-12T16:18:02.432Z"
             },
             {
               "$type": "Document",
@@ -109,8 +107,7 @@
               "RelativeToolTip": "API_QLHC_DOAN\\Controllers\\PhieuThanhLyController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-12T16:14:24.04Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-12T16:14:24.04Z"
             },
             {
               "$type": "Document",
@@ -122,8 +119,7 @@
               "RelativeToolTip": "API_QLHC_DOAN\\Data\\AppDbContext.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-14T20:26:20.728Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-14T20:26:20.728Z"
             },
             {
               "$type": "Document",
@@ -135,8 +131,7 @@
               "RelativeToolTip": "API_QLHC_DOAN\\Data\\YourDbContext.cs",
               "ViewState": "AgIAACUAAAAAAAAAAAAAADAAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-14T20:26:21.788Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-14T20:26:21.788Z"
             },
             {
               "$type": "Document",
@@ -148,8 +143,7 @@
               "RelativeToolTip": "API_QLHC_DOAN\\Models\\LopHocPhan.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-14T20:25:18.119Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-14T20:25:18.119Z"
             },
             {
               "$type": "Document",
@@ -161,8 +155,7 @@
               "RelativeToolTip": "API_QLHC_DOAN\\Controllers\\InventoryManagementController.cs",
               "ViewState": "AgIAADsAAAAAAAAAAAAUwEYAAABIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-12T16:17:57.007Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-12T16:17:57.007Z"
             },
             {
               "$type": "Document",
@@ -174,8 +167,7 @@
               "RelativeToolTip": "API_QLHC_DOAN\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-12-14T18:16:19.859Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-14T18:16:19.859Z"
             },
             {
               "$type": "Document",
@@ -187,8 +179,7 @@
               "RelativeToolTip": "API_QLHC_DOAN\\Controllers\\UsersController.cs",
               "ViewState": "AgIAAFYAAAAAAAAAAAAAwFkAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-12T16:00:14.815Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-12T16:00:14.815Z"
             }
           ]
         }

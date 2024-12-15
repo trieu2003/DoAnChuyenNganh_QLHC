@@ -164,6 +164,7 @@ const ModalPhieuThanhLy = ({ maPhieuTL, onClose, onDuyet, onTuChoi }) => {
   if (loading) return <div>Đang tải chi tiết...</div>;
   if (error) return <div className="text-red-500">{error}</div>;
 
+    const duongdananh=   "/src/assets/Images/";
   return (
     <div className="p-6">
       <h2 className="text-3xl font-bold mb-6 text-center">Xem chi tiết phiếu thanh lý {maPhieuTL}</h2>
@@ -220,7 +221,8 @@ const ModalPhieuThanhLy = ({ maPhieuTL, onClose, onDuyet, onTuChoi }) => {
               <td className="px-4 py-2 border">{phieu.tenHoaChat}</td>
               <td className="px-4 py-2 border">{phieu.ghiChu}</td>
               <td className="px-4 py-2 border">{phieu.donVi}</td>   
-              <td className="px-4 py-2 border">{phieu.hinhAnh}</td>
+              <td className="px-4 py-2 border"><img  src={`src/assets/Images/${phieu.hinhAnh}`} alt ="${phieu.hinhAnh}"></img></td>
+             
               <td className="px-4 py-2 border">{phieu.moTa}</td>
               <td className="px-4 py-2 border">{phieu.nguyHiem}</td>
               <td className="px-4 py-2 border">{phieu.soLieuAnToan}</td>
