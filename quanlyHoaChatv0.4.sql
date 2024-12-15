@@ -33,6 +33,7 @@ CREATE TABLE DuyetPhieuTL (
 	MaNguoiDung INT NOT NULL,
     NgayDuyet DATE NOT NULL,
     TrangThai NVARCHAR(50),
+	LyDoTuChoi NVARCHAR(255),
 	--PRIMARY KEY (MaPhieuTL, MaNguoiDung),
 	CONSTRAINT FK_DuyetPhieuTL_NguoiDung FOREIGN KEY (MaNguoiDung) REFERENCES NguoiDung(MaNguoiDung),
 	CONSTRAINT FK_DuyetPhieuTL_PhongThanhLy FOREIGN KEY (MaPhieuTL) REFERENCES PhieuThanhLy(MaPhieuTL)
