@@ -56,6 +56,7 @@ namespace API_QLHC_DOAN.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<MaxQuantityLotDto>().HasNoKey();
             // Cấu hình các mối quan hệ giữa các bảng
             modelBuilder.Entity<PhieuThanhLy>()
                 .HasOne(p => p.NguoiDung)

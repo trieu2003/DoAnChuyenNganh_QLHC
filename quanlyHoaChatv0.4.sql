@@ -1,7 +1,7 @@
---DROP DATABASE QLHC_NHOM93
-CREATE DATABASE QLHC_NHOM93
+--DROP DATABASE QLHC_NHOM94
+CREATE DATABASE QLHC_NHOM94
 GO
-USE QLHC_NHOM93
+USE QLHC_NHOM94
 GO
 -- Bảng Người Dùng
 CREATE TABLE NguoiDung (
@@ -28,15 +28,18 @@ CREATE TABLE PhieuThanhLy (
 );
 -- Bảng Duyệt Phiếu Thanh Lý
 CREATE TABLE DuyetPhieuTL (
+	MaLichSu INT PRIMARY KEY IDENTITY,
     MaPhieuTL INT NOT NULL,
 	MaNguoiDung INT NOT NULL,
     NgayDuyet DATE NOT NULL,
     TrangThai NVARCHAR(50),
-	PRIMARY KEY (MaPhieuTL, MaNguoiDung),
+	--PRIMARY KEY (MaPhieuTL, MaNguoiDung),
 	CONSTRAINT FK_DuyetPhieuTL_NguoiDung FOREIGN KEY (MaNguoiDung) REFERENCES NguoiDung(MaNguoiDung),
 	CONSTRAINT FK_DuyetPhieuTL_PhongThanhLy FOREIGN KEY (MaPhieuTL) REFERENCES PhieuThanhLy(MaPhieuTL)
 );
-
+--ALTER TABLE DuyetPhieuTL DROP CONSTRAINT PK__DuyetPhi__B45DAA35A6058CC7;
+--ALTER TABLE DuyetPhieuTL ADD MaLichSu INT IDENTITY(1,1);
+--ALTER TABLE DuyetPhieuTL ADD CONSTRAINT PK_DuyetPhieuTL PRIMARY KEY (MaLichSu);
 
 -- Bảng Môn Học
 CREATE TABLE MonHoc (
@@ -47,6 +50,7 @@ CREATE TABLE MonHoc (
 -- Bảng Lớp Học Phần
 CREATE TABLE LopHocPhan (
     MaLHP INT PRIMARY KEY IDENTITY,
+	TenLopHocPhan VARCHAR(15),
     SiSo INT NOT NULL,
     GVDay NVARCHAR(100),
     MaMon INT NOT NULL,
@@ -76,15 +80,19 @@ CREATE TABLE PhieuDeXuat (
 
 -- Bảng Duyệt Phiếu Đề Xuất
 CREATE TABLE DuyetPhieuDX (
+	MaLichSu INT PRIMARY KEY IDENTITY,
     MaPhieuDX INT NOT NULL,
 	MaNguoiDung INT NOT NULL,
     NgayDuyet DATETIME NOT NULL,
     TrangThai NVARCHAR(50) NOT NULL,
 	LyDoTuChoi NVARCHAR(255),
-	PRIMARY KEY (MaPhieuDX, MaNguoiDung),
+	--PRIMARY KEY (MaPhieuDX, MaNguoiDung),
 	FOREIGN KEY (MaNguoiDung) REFERENCES NguoiDung(MaNguoiDung),
 	FOREIGN KEY (MaPhieuDX) REFERENCES PhieuDeXuat(MaPhieuDX)
 );
+--ALTER TABLE DuyetPhieuDX DROP CONSTRAINT PK__DuyetPhi__B45F542D959A38D7;
+--ALTER TABLE DuyetPhieuDX ADD MaLichSu INT IDENTITY(1,1);
+--ALTER TABLE DuyetPhieuDX ADD CONSTRAINT PK_DuyetPhieuDX PRIMARY KEY (MaLichSu);
 
 -- Bảng Hóa Chất
 CREATE TABLE HoaChat (
@@ -170,20 +178,21 @@ CREATE TABLE DuTru (
     FOREIGN KEY (MaBaiTN) REFERENCES BaiThiNghiem(MaBaiTN),
     FOREIGN KEY (MaHoaChat) REFERENCES HoaChat(MaHoaChat)
 );
---NguoiDung(MaNguoiDung, TenDangNhap, MatKhauHash, Email, VaiTro ,NgayTao, HinhAnh )
-INSERT INTO NguoiDung (TenDangNhap, MatKhauHash, Email, VaiTro, NgayTao, HinhAnh) 
+--NguoiDung(MaNguoiDung, TenDangNhap,TenNguoiDung, MatKhauHash, Email, VaiTro ,NgayTao, HinhAnh )
+INSERT INTO NguoiDung (TenDangNhap, TenNguoiDung, MatKhauHash, Email, VaiTro, NgayTao, HinhAnh) 
 VALUES 
-('user1', '00c6ee2e21a7548de6260cf72c4f4b5b', 'user1@example.com', 'Admin', '2024-01-01', 'image1.jpg'),
-('user2', '58833651db311ba4bc11cb26b1900b0f', 'user2@example.com', 'User', '2024-01-02', 'image2.jpg'),
-('user3', '1a4ead8b39d17dfe89418452c9bba770', 'user3@example.com', 'Admin', '2024-01-03', 'image3.jpg'),
-('user4', 'd80b0d6020798ff15e8d5416911201aa', 'user4@example.com', 'User', '2024-01-04', 'image4.jpg'),
-('user5', '2ce8a4621b2843043725992ab2a61acc', 'user5@example.com', 'Admin', '2024-01-05', 'image5.jpg'),
-('user6', 'be796e420febda49c29e38745db3cae2', 'user6@example.com', 'User', '2024-01-06', 'image6.jpg'),
-('user7', '6c72a0f18b5230ecc4ff7e278991e5c5', 'user7@example.com', 'Admin', '2024-01-07', 'image7.jpg'),
-('user8', '35e8b4b7776fc46cc10e7970935f2ca6', 'user8@example.com', 'User', '2024-01-08', 'image8.jpg'),
-('user9', '1167fa03beba0659fdabc33b4620599d', 'user9@example.com', 'Admin', '2024-01-09', 'image9.jpg'),
-('user10', '162de50854fb25ea3fd8640282cb67b4', 'user10@example.com', 'User', '2024-01-10', 'image10.jpg');
+('user1', N'Thanh Triệu', '00c6ee2e21a7548de6260cf72c4f4b5b', 'user1@example.com', 'Admin', '2024-01-01', 'image1.jpg'),
+('user2', N'Tuấn Khang', '58833651db311ba4bc11cb26b1900b0f', 'user2@example.com', 'User', '2024-01-02', 'image2.jpg'),
+('user3', N'Trần Tuấn', '1a4ead8b39d17dfe89418452c9bba770', 'user3@example.com', N'Giảng viên', '2024-01-03', 'image3.jpg'),
+('user4', N'Tri Thuỷ', 'd80b0d6020798ff15e8d5416911201aa', 'user4@example.com', 'User', '2024-01-04', 'image4.jpg'),
+('user5', N'Ngọc Lan', '2ce8a4621b2843043725992ab2a61acc', 'user5@example.com', N'Giảng viên', '2024-01-05', 'image5.jpg'),
+('user6', N'Minh Đức', 'be796e420febda49c29e38745db3cae2', 'user6@example.com', N'Giảng viên', '2024-01-06', 'image6.jpg'),
+('user7', N'Nhật Lệ', '6c72a0f18b5230ecc4ff7e278991e5c5', 'user7@example.com', N'Giảng viên', '2024-01-07', 'image7.jpg'),
+('user8', N'Kim Hoa', '35e8b4b7776fc46cc10e7970935f2ca6', 'user8@example.com', 'User', '2024-01-08', 'image8.jpg'),
+('user9', N'Chí Cường', '1167fa03beba0659fdabc33b4620599d', 'user9@example.com', N'Giảng viên', '2024-01-09', 'image9.jpg'),
+('user10', N'Xuân Mạnh', '162de50854fb25ea3fd8640282cb67b4', 'user10@example.com', N'Giảng viên', '2024-01-10', 'image10.jpg');
 Select * from NguoiDung
+--dở ở đây
 
 --PhieuThanhLy (MaPhieuTL, LyDo, TrangThai, PhuongThucThanhLy, NgayTao, MaNguoiDung)
 INSERT INTO PhieuThanhLy (LyDo, TrangThai, PhuongThucThanhLy, NgayTao, MaNguoiDung) 
@@ -194,9 +203,9 @@ VALUES
 --DuyetPhieuTL (MaPhieuTL, MaNguoiDung, NgayDuyet, TrangThai)
 INSERT INTO DuyetPhieuTL (MaPhieuTL, MaNguoiDung, NgayDuyet, TrangThai) 
 VALUES 
-(1, 1, '2024-11-25', N'Đã duyệt'),  -- Duyệt phiếu thanh lý số 1
-(2, 2, '2024-11-26', N'Đã từ chối'), -- Từ chối phiếu thanh lý số 2
-(3, 3, '2024-11-27', N'Đã duyệt');   -- Duyệt phiếu thanh lý số 3
+(1, 2, '2024-11-25', N'Chờ duyệt'),  
+(2, 2, '2024-11-26', N'Chờ duyệt'), 
+(3, 4, '2024-11-27', N'Chờ duyệt');   
 
 --MonHoc (MaMon, TenMon, SoTC)
 INSERT INTO MonHoc (TenMon, SoTC) 
@@ -212,19 +221,19 @@ VALUES
 (N'Ứng dụng hóa chất trong công nghiệp', 2),
 (N'Thực hành thí nghiệm hóa học', 1);
 
---LopHocPhan (MaLHP, SiSo, GVDay, MaMon,TenLHP)
-INSERT INTO LopHocPhan (SiSo, GVDay, MaMon,TenLHP) 
+--LopHocPhan (MaLHP, SiSo, GVDay, MaMon,TenLopHocPhan)
+INSERT INTO LopHocPhan (SiSo, GVDay, MaMon,TenLopHocPhan) 
 VALUES 
-(30, N'Thầy Anh', 1,'LOPH001'),
+(30, N'Thầy Trần Tuấn', 1,'LOPH001'),
 (25, N'Thầy Bình', 2,'LOPH002'),
-(40, N'Cô Cúc', 3,'LOPH003'),
+(40, N'Cô Nhật Lệ', 3,'LOPH003'),
 (35, N'Thầy Dương', 4,'LOPH004'),
-(20, N'Cô ÁNh', 5,'LOPSH01'),
-(45, N'Thầy Phát', 6,'LOPSH02'),
+(20, N'Cô Ngọc Lan', 5,'LOPSH01'),
+(45, N'Thầy Minh Đức', 6,'LOPSH02'),
 (50, N'Cô Giang', 7,'LOPSH03'),
-(28, N'Thầy Hùng', 8,'LOPSH04'),
-(32, N'Cô Kính', 9,'LOPSH05'),
-(38, N'Thầy Khoa', 10,'LOPSH06');
+(28, N'Thầy Chí Cường', 8,'LOPSH04'),
+(32, N'Cô Kim Hoa', 9,'LOPSH05'),
+(38, N'Thầy XUân Mạnh', 10,'LOPSH06');
 
 --PhieuPhanBo (MaPhieuPB, NgayLap, NoiDung, MaLHP)
 INSERT INTO PhieuPhanBo (NgayLap, NoiDung, MaLHP) 
@@ -243,14 +252,14 @@ VALUES
 --PhieuDeXuat (MaPhieuDX, SoLuongDeXuat, LyDo, TrangThai, NgayTao, MaNguoiDung)
 INSERT INTO PhieuDeXuat (LyDo, TrangThai, NgayTao, MaNguoiDung) 
 VALUES 
-(N'Cần cho thí nghiệm', N'Đã duyệt', '2024-05-01', 1),
-(N'Cần thêm hóa chất', N'Chờ duyệt', '2024-05-02', 2),
+(N'Cần cho thí nghiệm', N'Đã duyệt', '2024-05-01', 3),
+(N'Cần thêm hóa chất', N'Chờ duyệt', '2024-05-02', 5),
 (N'Dự trữ', N'Đã duyệt', '2024-05-03', 3),
-(N'Dùng cho lớp học', N'Chờ duyệt', '2024-05-04', 4),
+(N'Dùng cho lớp học', N'Chờ duyệt', '2024-05-04', 6),
 (N'Dự trữ hóa chất', N'Đã duyệt', '2024-05-05', 5),
 (N'Cần gấp', N'Chờ duyệt', N'2024-05-06', 6),
 (N'Dùng cho thí nghiệm', N'Đã duyệt', '2024-05-07', 7),
-(N'Bổ sung hóa chất', N'Chờ duyệt', '2024-05-08', 8),
+(N'Bổ sung hóa chất', N'Chờ duyệt', '2024-05-08', 9),
 (N'Cần thêm cho thí nghiệm', N'Đã duyệt', '2024-05-09', 9),
 (N'Phân bổ cho lớp', N'Chờ duyệt', '2024-05-10', 10);
 
@@ -258,15 +267,11 @@ VALUES
 INSERT INTO DuyetPhieuDX (MaPhieuDX, MaNguoiDung, NgayDuyet, TrangThai) 
 VALUES 
 (1, 2, '2024-06-01', N'Đã duyệt'),
-(2, 3, '2024-06-02', N'Chờ duyệt'),
 (3, 4, '2024-06-03', N'Đã duyệt'),
-(4, 5, '2024-06-04', N'Chờ duyệt'),
-(5, 6, '2024-06-05',N'Đã duyệt'),
-(6, 7, '2024-06-06', N'Chờ duyệt'),
-(7, 8, '2024-06-07', N'Đã duyệt'),
-(8, 9, '2024-06-08', N'Chờ duyệt'),
-(9, 10, '2024-06-09', N'Đã duyệt'),
-(10, 1, '2024-06-10', N'Chờ duyệt');
+(5, 2, '2024-06-05',N'Đã duyệt'),
+(7, 4, '2024-06-07', N'Đã duyệt'),
+(9, 8, '2024-06-09', N'Đã duyệt'),
+(10, 8, '2024-06-10', N'Từ Chối');
 
 --HoaChat (MaHoaChat, SoCAS, TenHoaChat, DonVi, MoTa, CongThucHoaHoc, NguyHiem, SoLieuAnToan, ThoiHanSuDung, HinhAnh, NgayTao)
 INSERT INTO HoaChat (SoCAS, TenHoaChat, DonVi, MoTa, CongThucHoaHoc, NguyHiem, SoLieuAnToan, ThoiHanSuDung, HinhAnh, NgayTao)
@@ -418,9 +423,19 @@ BEGIN
         lh.MaLo,
         lh.NhaCungCap,
         lh.SoLuong,
+				lh.SoLuongTon,
+		lh.GhiChu,
         lh.HanSuDung,
         lh.TrangThai AS LoTrangThai,
         hc.TenHoaChat,
+			hc.DonVi,
+		hc.CongThucHoaHoc,
+		hc.HinhAnh,
+		hc.MoTa,
+		hc.NguyHiem,
+		hc.SoLieuAnToan,
+	
+		dh.NgayDuyet,
         lh.SoLo AS HoaChatSoLo,
         hc.SoCAS AS HoaChatSoCAS,
         dh.MaNguoiDung AS DuyetPhieuTL_MaNguoiDung,
@@ -490,9 +505,20 @@ BEGIN
         lh.MaLo,
         lh.NhaCungCap,
         lh.SoLuong,
+		lh.SoLuongTon,
+		lh.GhiChu,
         lh.HanSuDung,
         lh.TrangThai AS LoTrangThai,
         hc.TenHoaChat,
+		hc.DonVi,
+		hc.CongThucHoaHoc,
+		hc.HinhAnh,
+		hc.MoTa,
+		hc.NguyHiem,
+		hc.SoLieuAnToan,
+	
+		dh.NgayDuyet,
+		
         lh.SoLo AS HoaChatSoLo,
         hc.SoCAS AS HoaChatSoCAS,
         dh.MaNguoiDung AS DuyetPhieuTL_MaNguoiDung,
@@ -507,3 +533,42 @@ BEGIN
     ORDER BY p.NgayTao DESC;
 END
 GO
+
+--PROC & TRIGGER KHANG
+CREATE TRIGGER UpdateSoLuongTon
+ON ChiTietPhanBo
+AFTER INSERT
+AS
+BEGIN
+    -- Declare variables to hold the inserted values
+    DECLARE @MaLo INT;
+    DECLARE @SoLuong INT;
+
+    -- Get the values from the inserted row in ChiTietPhanBo
+    SELECT @MaLo = MaLo, @SoLuong = SoLuong
+    FROM INSERTED;
+
+    -- Update the SoLuongTon in LoHoaChat
+    UPDATE LoHoaChat
+    SET SoLuongTon = SoLuongTon - @SoLuong
+    WHERE MaLo = @MaLo;
+END;
+
+GO
+CREATE PROCEDURE GetMaxQuantityLotByChemicalName
+    @TenHoaChat NVARCHAR(255)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT TOP 1 
+        Lo.MaLo, 
+        Lo.SoLuongTon, 
+        Lo.MaPhieuTL
+    FROM LoHoaChat AS Lo
+    INNER JOIN HoaChat AS HC ON Lo.MaHoaChat = HC.MaHoaChat
+    WHERE HC.TenHoaChat = @TenHoaChat
+      AND Lo.MaPhieuTL IS NULL
+    ORDER BY Lo.SoLuongTon DESC;
+END;
+--EXEC GetMaxQuantityLotByChemicalName @TenHoaChat = N'1,10-Phenanthroline';

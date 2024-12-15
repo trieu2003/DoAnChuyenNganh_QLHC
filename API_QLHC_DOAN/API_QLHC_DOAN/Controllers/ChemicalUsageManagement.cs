@@ -24,7 +24,8 @@ namespace API_QLHC_DOAN.Controllers
             {
                 lhp.MaLHP,
                 lhp.GVDay,
-                lhp.SiSo
+                lhp.SiSo,
+                lhp.TenLopHocPhan
             }).ToList();
 
             if (!classes.Any())
@@ -86,12 +87,6 @@ namespace API_QLHC_DOAN.Controllers
 
             return Ok(chiTietPhanBo);
         }
-
-
-
-
-
-
         // 4. API: Lấy danh sách các phiếu phân bổ
         [HttpGet("GetPhieuPhanBo")]
         public IActionResult GetPhieuPhanBo()
@@ -121,6 +116,141 @@ namespace API_QLHC_DOAN.Controllers
 
             return Ok(phieuPhanBoList);
         }
+        [HttpGet("GetClassInfoByPhieuPhanBo/{maPhieuPB}")]
+        public IActionResult GetClassInfoByPhieuPhanBo(int maPhieuPB)
+        {
+            var classInfo = _context.PhieuPhanBo
+                .Where(p => p.MaPhieuPB == maPhieuPB)
+                .Join(
+                    _context.LopHocPhan,
+                    phieuPhanBo => phieuPhanBo.MaLHP,
+                    lopHocPhan => lopHocPhan.MaLHP,
+                    (phieuPhanBo, lopHocPhan) => new
+                    {
+                        lopHocPhan.TenLopHocPhan,
+                        lopHocPhan.GVDay,
+                        lopHocPhan.SiSo
+                    }
+                )
+                .FirstOrDefault();
+
+            if (classInfo == null)
+            {
+                return NotFound($"Không tìm thấy thông tin lớp học phần cho mã phiếu phân bổ {maPhieuPB}.");
+            }
+
+            return Ok(classInfo);
+        }
+        [HttpPut("UpdatePhieuPhanBo/{maPhieuPB}")]
+        public async Task<IActionResult> UpdatePhieuPhanBo(int maPhieuPB, [FromBody] PhieuPhanBo updatedPhieuPhanBo)
+        {
+            if (maPhieuPB != updatedPhieuPhanBo.MaPhieuPB)
+            {
+                return BadRequest("Mã phiếu phân bổ không khớp.");
+            }
+
+            var existingPhieuPhanBo = await _context.PhieuPhanBo.FindAsync(maPhieuPB);
+            if (existingPhieuPhanBo == null)
+            {
+                return NotFound($"Không tìm thấy phiếu phân bổ với mã {maPhieuPB}.");
+            }
+
+            // Cập nhật thông tin
+            existingPhieuPhanBo.NoiDung = updatedPhieuPhanBo.NoiDung;
+            existingPhieuPhanBo.NgayLap = updatedPhieuPhanBo.NgayLap;
+            existingPhieuPhanBo.MaLHP = updatedPhieuPhanBo.MaLHP;
+
+            // Lưu thay đổi
+            await _context.SaveChangesAsync();
+
+            return NoContent(); // Thành công nhưng không trả về nội dung
+        }
+        [HttpPut("UpdateChiTietPhanBo/{maPhieuPB}/{maLo}")]
+        public async Task<IActionResult> UpdateChiTietPhanBo(int maPhieuPB, int maLo, [FromBody] ChiTietPhanBo updatedChiTietPhanBo)
+        {
+            var existingChiTiet = await _context.ChiTietPhanBo
+                .FirstOrDefaultAsync(ct => ct.MaPhieuPB == maPhieuPB && ct.MaLo == maLo);
+
+            if (existingChiTiet == null)
+            {
+                return NotFound($"Không tìm thấy chi tiết phân bổ với mã phiếu {maPhieuPB} và mã lô {maLo}.");
+            }
+
+            // Cập nhật thông tin
+            existingChiTiet.SoLuong = updatedChiTietPhanBo.SoLuong;
+
+            // Lưu thay đổi
+            await _context.SaveChangesAsync();
+
+            return NoContent(); // Thành công nhưng không trả về nội dung
+        }
+        [HttpGet("GetMaxQuantityLotByChemicalName/{tenHoaChat}")]
+        public IActionResult GetMaxQuantityLotByChemicalName(string tenHoaChat)
+        {
+            var result = _context.Set<MaxQuantityLotDto>()
+                .FromSqlInterpolated($"EXEC GetMaxQuantityLotByChemicalName @TenHoaChat = {tenHoaChat}")
+                .ToList();
+
+            if (!result.Any())
+            {
+                return NotFound("No lot found for the given chemical name.");
+            }
+
+            return Ok(result.First());
+        }
+
+
+
+        [HttpGet("GetChemicalNames")]
+        public IActionResult GetChemicalNames()
+        {
+            var names = _context.HoaChat.Select(hc => new
+            {
+                hc.MaHoaChat,
+                hc.TenHoaChat
+            }).ToList();
+
+            return Ok(names);
+        }
+
+
+        [HttpGet("GetChemicalByLot/{maLo}")]
+        public IActionResult GetChemicalByLot(int maLo)
+        {
+            try
+            {
+                // Truy vấn thông tin hóa chất dựa trên mã lô
+                var result = _context.LoHoaChat
+                    .Where(lo => lo.MaLo == maLo)
+                    .Join(
+                        _context.HoaChat,
+                        lo => lo.MaHoaChat,
+                        hc => hc.MaHoaChat,
+                        (lo, hc) => new
+                        {
+                            lo.MaLo,
+                            hc.TenHoaChat
+                        }
+                    )
+                    .FirstOrDefault();
+
+                if (result == null)
+                {
+                    return NotFound($"Không tìm thấy hóa chất cho mã lô {maLo}.");
+                }
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                // Trả về lỗi nếu có vấn đề xảy ra
+                return StatusCode(500, new { message = "Đã xảy ra lỗi", error = ex.Message });
+            }
+        }
+
+
+
 
     }
+
 }

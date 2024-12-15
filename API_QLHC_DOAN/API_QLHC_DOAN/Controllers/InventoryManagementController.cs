@@ -17,13 +17,28 @@ namespace API_QLHC_DOAN.Controllers
             _context = context;
         }
 
-        // Lấy danh sách tất cả phiếu nhập
         [HttpGet("GetAllPhieuNhap")]
-        public async Task<ActionResult<IEnumerable<PhieuNhap>>> GetAllPhieuNhap()
+        public async Task<ActionResult<IEnumerable<object>>> GetAllPhieuNhap()
         {
-            var phieuNhapList = await _context.PhieuNhap.ToListAsync();
+            var phieuNhapList = await _context.PhieuNhap
+                .Join(
+                    _context.NguoiDung,                 // Bảng join
+                    phieuNhap => phieuNhap.MaNguoiDung, // Khóa ngoại trong PhieuNhap
+                    nguoiDung => nguoiDung.MaNguoiDung, // Khóa chính trong NguoiDung
+                    (phieuNhap, nguoiDung) => new       // Kết quả join
+                    {
+                        phieuNhap.MaPhieuNhap,
+                        phieuNhap.NgayNhap,
+                        phieuNhap.SoLuongNhap,
+                        phieuNhap.GhiChu,
+                        TenNguoiDung = nguoiDung.TenNguoiDung
+                    }
+                )
+                .ToListAsync();
+
             return Ok(phieuNhapList);
         }
+
 
         [HttpPost("AddPhieuNhap")]
         public async Task<ActionResult<PhieuNhap>> AddPhieuNhap([FromBody] PhieuNhap newPhieuNhap)
@@ -77,22 +92,51 @@ namespace API_QLHC_DOAN.Controllers
 
             try
             {
-                // Kiểm tra các giá trị khóa ngoại và ràng buộc dữ liệu
-                foreach (var lot in lots)
+                foreach (var lotDTO in lots)
                 {
                     // Kiểm tra khóa ngoại MaHoaChat
-                    var hoaChatExists = _context.HoaChat.Any(hc => hc.MaHoaChat == lot.MaHoaChat);
+                    var hoaChatExists = _context.HoaChat.Any(hc => hc.MaHoaChat == lotDTO.MaHoaChat);
                     if (!hoaChatExists)
                     {
-                        return BadRequest($"Chemical ID {lot.MaHoaChat} does not exist.");
+                        return BadRequest($"Chemical ID {lotDTO.MaHoaChat} does not exist.");
                     }
 
+                    // Kiểm tra khóa ngoại MaPhieuTL (nếu có)
+                    if (lotDTO.MaPhieuTL.HasValue)
+                    {
+                        var phieuThanhLyExists = _context.PhieuThanhLy.Any(ptl => ptl.MaPhieuTL == lotDTO.MaPhieuTL.Value);
+                        if (!phieuThanhLyExists)
+                        {
+                            return BadRequest($"Phieu Thanh Ly ID {lotDTO.MaPhieuTL} does not exist.");
+                        }
+                    }
+
+                    // Kiểm tra khóa ngoại MaPhieuNhap (nếu có)
+                    if (lotDTO.MaPhieuNhap.HasValue)
+                    {
+                        var phieuNhapExists = _context.PhieuNhap.Any(pn => pn.MaPhieuNhap == lotDTO.MaPhieuNhap.Value);
+                        if (!phieuNhapExists)
+                        {
+                            return BadRequest($"Phieu Nhap ID {lotDTO.MaPhieuNhap} does not exist.");
+                        }
+                    }
+
+                    // Chuyển đổi DTO thành Entity (LoHoaChat)
+                    var lot = new LoHoaChat
+                    {
+                        NhaCungCap = lotDTO.NhaCungCap,
+                        SoLuong = lotDTO.SoLuong,
+                        HanSuDung = lotDTO.HanSuDung,
+                        TrangThai = lotDTO.TrangThai,
+                        SoLuongTon = lotDTO.SoLuongTon,
+                        GhiChu = lotDTO.GhiChu,
+                        MaHoaChat = lotDTO.MaHoaChat,
+                        MaPhieuTL = lotDTO.MaPhieuTL,
+                        MaPhieuNhap = lotDTO.MaPhieuNhap
+                    };
 
                     // Thêm lô hóa chất vào context
-                    var loHoaChatEntity = MapDtoToEntity(lot);
-                    _context.LoHoaChat.Add(loHoaChatEntity);
-
-                    //_context.LoHoaChat.Add(lot);
+                    _context.LoHoaChat.Add(lot);
                 }
 
                 // Lưu thay đổi vào cơ sở dữ liệu
@@ -110,23 +154,7 @@ namespace API_QLHC_DOAN.Controllers
                 return StatusCode(500, "Error saving lots: " + ex.Message);
             }
         }
-        private LoHoaChat MapDtoToEntity(LoHoaChatDTO dto)
-        {
-            return new LoHoaChat
-            {
-                MaLo = dto.MaLo,
-                SoLo = dto.SoLo,
-                NhaCungCap = dto.NhaCungCap,
-                SoLuong = dto.SoLuong,
-                HanSuDung = dto.HanSuDung,
-                TrangThai = dto.TrangThai,
-                SoLuongTon = dto.SoLuongTon,
-                GhiChu = dto.GhiChu,
-                MaHoaChat = dto.MaHoaChat,
-                MaPhieuTL = dto.MaPhieuTL,
-                MaPhieuNhap = dto.MaPhieuNhap
-            };
-        }
+
 
         [HttpGet("api/lohoaChat/{maPhieuNhap}")]
         public async Task<IActionResult> GetChemicalLotsByPhieuNhap(int maPhieuNhap)
@@ -159,5 +187,24 @@ namespace API_QLHC_DOAN.Controllers
 
             return Ok(phieuNhap);
         }
+        [HttpGet("GetChemicals")]
+        public async Task<ActionResult<IEnumerable<HoaChat>>> GetChemicals()
+        {
+            var chemicals = await _context.HoaChat
+                .Select(hc => new
+                {
+                    hc.MaHoaChat,
+                    hc.TenHoaChat
+                })
+                .ToListAsync();
+
+            if (chemicals == null || !chemicals.Any())
+            {
+                return NotFound("No chemicals found.");
+            }
+
+            return Ok(chemicals);
+        }
+
     }
 }

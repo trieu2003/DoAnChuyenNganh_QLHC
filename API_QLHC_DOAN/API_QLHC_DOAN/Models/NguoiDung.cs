@@ -42,7 +42,7 @@ namespace API_QLHC_DOAN.Models
         [Required]
         [MaxLength(50)]
         public string TenDangNhap { get; set; }
-
+        public string TenNguoiDung { get; set; }
         [Required]
         public string MatKhauHash { get; set; }
 

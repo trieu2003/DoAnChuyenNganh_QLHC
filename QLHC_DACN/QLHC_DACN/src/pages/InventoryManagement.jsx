@@ -6,9 +6,10 @@ const InventoryManagement = () => {
   const [lots, setLots] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const maNguoiDung = parseInt(localStorage.getItem("maNguoiDung"), 10); //Thêm hàm cho phép lấy mã người dùng hiện đang đăng nhập
+  const [chemicalList, setChemicalList] = useState([]);
   const [newPhieuNhap, setNewPhieuNhap] = useState({
     soLuongNhap: 0,
-    ngayNhap: "",
+    ngayNhap: new Date().toISOString().split("T")[0],
     nguoiNhap: "user123",
     ghiChu: "",
     maNguoiDung: maNguoiDung, // Default value for user ID
@@ -17,6 +18,7 @@ const InventoryManagement = () => {
   const [newLot, setNewLot] = useState({
     nhaCungCap: "",
     soLuong: 0,
+    soLo: "",
     hanSuDung: "",
     maHoaChat: "",
     soLuongTon: 0,
@@ -35,6 +37,15 @@ const InventoryManagement = () => {
       .catch((error) => {
         console.error("Error fetching Phieu Nhap data:", error);
       });
+  }, []);
+  useEffect(() => {
+    fetch("https://localhost:7240/api/InventoryManagement/GetChemicals")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Fetched chemicals:", data); // Kiểm tra dữ liệu
+        setChemicalList(data);
+      })
+      .catch((error) => console.error("Error fetching chemicals:", error));
   }, []);
 
   // Handle input change for Phieu Nhap
@@ -129,6 +140,7 @@ const InventoryManagement = () => {
     setNewLot({
       nhaCungCap: "",
       soLuong: 0,
+      soLo: "",
       hanSuDung: "",
       maHoaChat: "",
       soLuongTon: 0,
@@ -202,7 +214,7 @@ const InventoryManagement = () => {
                       {phieu.ngayNhap}
                     </td>
                     <td className="px-6 py-3 text-sm text-gray-600">
-                      {phieu.maNguoiDung}
+                      {phieu.tenNguoiDung}
                     </td>
                     <td className="px-6 py-3 text-sm text-gray-600">
                       {phieu.ghiChu || "N/A"}
@@ -328,6 +340,18 @@ const InventoryManagement = () => {
                 </div>
                 <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-700">
+                    So Lo
+                  </label>
+                  <input
+                    type="text"
+                    name="soLo"
+                    className="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    value={newLot.soLo}
+                    onChange={handleLotChange}
+                  />
+                </div>
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700">
                     Hạn Sử Dụng
                   </label>
                   <input
@@ -363,18 +387,29 @@ const InventoryManagement = () => {
                     onChange={handleLotChange}
                   />
                 </div>
+
                 <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-700">
-                    Mã Hóa Chất
+                    Chọn Hóa Chất
                   </label>
-                  <input
-                    type="text"
+                  <select
                     name="maHoaChat"
-                    className="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     value={newLot.maHoaChat}
                     onChange={handleLotChange}
-                  />
+                    className="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  >
+                    <option value="">Chọn hóa chất</option>
+                    {chemicalList.map((chemical) => (
+                      <option
+                        key={chemical.maHoaChat}
+                        value={chemical.maHoaChat}
+                      >
+                        {chemical.tenHoaChat}
+                      </option>
+                    ))}
+                  </select>
                 </div>
+
                 <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-700">
                     Ghi Chú
@@ -410,6 +445,9 @@ const InventoryManagement = () => {
                       Số Lượng
                     </th>
                     <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">
+                      Số Lô
+                    </th>
+                    <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">
                       Hạn Sử Dụng
                     </th>
                     <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">
@@ -440,6 +478,9 @@ const InventoryManagement = () => {
                       </td>
                       <td className="px-4 py-2 text-sm text-gray-600">
                         {lot.soLuong}
+                      </td>
+                      <td className="px-4 py-2 text-sm text-gray-600">
+                        {lot.soLo}
                       </td>
                       <td className="px-4 py-2 text-sm text-gray-600">
                         {lot.hanSuDung}
@@ -486,4 +527,4 @@ const InventoryManagement = () => {
   );
 };
 
-export default InventoryManagement; 
+export default InventoryManagement;
