@@ -21,7 +21,11 @@ namespace API_QLHC_DOAN.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<NguoiDung>>> GetNguoiDung()
         {
-            return await _context.NguoiDung.ToListAsync();
+            //return await _context.NguoiDung.ToListAsync();
+            var nguoiDungs = await _context.NguoiDung
+                                    .Where(nd => nd.VaiTro != "Admin")
+                                    .ToListAsync();
+            return nguoiDungs;
         }
 
         // GET: api/Users/{id}

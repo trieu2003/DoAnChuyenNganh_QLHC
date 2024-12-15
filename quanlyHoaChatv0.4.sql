@@ -33,6 +33,7 @@ CREATE TABLE DuyetPhieuTL (
 	MaNguoiDung INT NOT NULL,
     NgayDuyet DATE NOT NULL,
     TrangThai NVARCHAR(50),
+	LyDoTuChoi NVARCHAR(255),
 	--PRIMARY KEY (MaPhieuTL, MaNguoiDung),
 	CONSTRAINT FK_DuyetPhieuTL_NguoiDung FOREIGN KEY (MaNguoiDung) REFERENCES NguoiDung(MaNguoiDung),
 	CONSTRAINT FK_DuyetPhieuTL_PhongThanhLy FOREIGN KEY (MaPhieuTL) REFERENCES PhieuThanhLy(MaPhieuTL)
@@ -40,7 +41,7 @@ CREATE TABLE DuyetPhieuTL (
 --ALTER TABLE DuyetPhieuTL DROP CONSTRAINT PK__DuyetPhi__B45DAA35A6058CC7;
 --ALTER TABLE DuyetPhieuTL ADD MaLichSu INT IDENTITY(1,1);
 --ALTER TABLE DuyetPhieuTL ADD CONSTRAINT PK_DuyetPhieuTL PRIMARY KEY (MaLichSu);
-
+--ALTER TABLE DuyetPhieuTL ADD LyDoTuChoi NVARCHAR(255)
 -- Bảng Môn Học
 CREATE TABLE MonHoc (
     MaMon INT PRIMARY KEY IDENTITY,
@@ -182,17 +183,16 @@ CREATE TABLE DuTru (
 INSERT INTO NguoiDung (TenDangNhap, TenNguoiDung, MatKhauHash, Email, VaiTro, NgayTao, HinhAnh) 
 VALUES 
 ('user1', N'Thanh Triệu', '00c6ee2e21a7548de6260cf72c4f4b5b', 'user1@example.com', 'Admin', '2024-01-01', 'image1.jpg'),
-('user2', N'Tuấn Khang', '58833651db311ba4bc11cb26b1900b0f', 'user2@example.com', 'User', '2024-01-02', 'image2.jpg'),
-('user3', N'Trần Tuấn', '1a4ead8b39d17dfe89418452c9bba770', 'user3@example.com', N'Giảng viên', '2024-01-03', 'image3.jpg'),
-('user4', N'Tri Thuỷ', 'd80b0d6020798ff15e8d5416911201aa', 'user4@example.com', 'User', '2024-01-04', 'image4.jpg'),
-('user5', N'Ngọc Lan', '2ce8a4621b2843043725992ab2a61acc', 'user5@example.com', N'Giảng viên', '2024-01-05', 'image5.jpg'),
+('user2', N'Tuấn Khang', '58833651db311ba4bc11cb26b1900b0f', 'user2@example.com', 'Admin', '2024-01-02', 'image2.jpg'),
+('user3', N'Trần Tuấn', '1a4ead8b39d17dfe89418452c9bba770', 'user3@example.com', N'Nhân viên', '2024-01-03', 'image3.jpg'),
+('user4', N'Tri Thuỷ', 'd80b0d6020798ff15e8d5416911201aa', 'user4@example.com', 'Nhân viên', '2024-01-04', 'image4.jpg'),
+('user5', N'Ngọc Lan', '2ce8a4621b2843043725992ab2a61acc', 'user5@example.com', N'Nhân viên', '2024-01-05', 'image5.jpg'),
 ('user6', N'Minh Đức', 'be796e420febda49c29e38745db3cae2', 'user6@example.com', N'Giảng viên', '2024-01-06', 'image6.jpg'),
 ('user7', N'Nhật Lệ', '6c72a0f18b5230ecc4ff7e278991e5c5', 'user7@example.com', N'Giảng viên', '2024-01-07', 'image7.jpg'),
-('user8', N'Kim Hoa', '35e8b4b7776fc46cc10e7970935f2ca6', 'user8@example.com', 'User', '2024-01-08', 'image8.jpg'),
+('user8', N'Kim Hoa', '35e8b4b7776fc46cc10e7970935f2ca6', 'user8@example.com', 'Nhân viên', '2024-01-08', 'image8.jpg'),
 ('user9', N'Chí Cường', '1167fa03beba0659fdabc33b4620599d', 'user9@example.com', N'Giảng viên', '2024-01-09', 'image9.jpg'),
 ('user10', N'Xuân Mạnh', '162de50854fb25ea3fd8640282cb67b4', 'user10@example.com', N'Giảng viên', '2024-01-10', 'image10.jpg');
 Select * from NguoiDung
---dở ở đây
 
 --PhieuThanhLy (MaPhieuTL, LyDo, TrangThai, PhuongThucThanhLy, NgayTao, MaNguoiDung)
 INSERT INTO PhieuThanhLy (LyDo, TrangThai, PhuongThucThanhLy, NgayTao, MaNguoiDung) 
@@ -205,7 +205,7 @@ INSERT INTO DuyetPhieuTL (MaPhieuTL, MaNguoiDung, NgayDuyet, TrangThai)
 VALUES 
 (1, 2, '2024-11-25', N'Chờ duyệt'),  
 (2, 2, '2024-11-26', N'Chờ duyệt'), 
-(3, 4, '2024-11-27', N'Chờ duyệt');   
+(3, 1, '2024-11-27', N'Chờ duyệt');   
 
 --MonHoc (MaMon, TenMon, SoTC)
 INSERT INTO MonHoc (TenMon, SoTC) 
@@ -252,11 +252,11 @@ VALUES
 --PhieuDeXuat (MaPhieuDX, SoLuongDeXuat, LyDo, TrangThai, NgayTao, MaNguoiDung)
 INSERT INTO PhieuDeXuat (LyDo, TrangThai, NgayTao, MaNguoiDung) 
 VALUES 
-(N'Cần cho thí nghiệm', N'Đã duyệt', '2024-05-01', 3),
-(N'Cần thêm hóa chất', N'Chờ duyệt', '2024-05-02', 5),
-(N'Dự trữ', N'Đã duyệt', '2024-05-03', 3),
+(N'Cần cho thí nghiệm', N'Đã duyệt', '2024-05-01', 6),
+(N'Cần thêm hóa chất', N'Chờ duyệt', '2024-05-02', 7),
+(N'Dự trữ', N'Đã duyệt', '2024-05-03', 6),
 (N'Dùng cho lớp học', N'Chờ duyệt', '2024-05-04', 6),
-(N'Dự trữ hóa chất', N'Đã duyệt', '2024-05-05', 5),
+(N'Dự trữ hóa chất', N'Đã duyệt', '2024-05-05', 7),
 (N'Cần gấp', N'Chờ duyệt', N'2024-05-06', 6),
 (N'Dùng cho thí nghiệm', N'Đã duyệt', '2024-05-07', 7),
 (N'Bổ sung hóa chất', N'Chờ duyệt', '2024-05-08', 9),
@@ -266,12 +266,12 @@ VALUES
 --DuyetPhieuDX (MaPhieuDX, MaNguoiDung, NgayDuyet, TrangThai)
 INSERT INTO DuyetPhieuDX (MaPhieuDX, MaNguoiDung, NgayDuyet, TrangThai) 
 VALUES 
-(1, 2, '2024-06-01', N'Đã duyệt'),
-(3, 4, '2024-06-03', N'Đã duyệt'),
+(1, 1, '2024-06-01', N'Đã duyệt'),
+(3, 2, '2024-06-03', N'Đã duyệt'),
 (5, 2, '2024-06-05',N'Đã duyệt'),
-(7, 4, '2024-06-07', N'Đã duyệt'),
-(9, 8, '2024-06-09', N'Đã duyệt'),
-(10, 8, '2024-06-10', N'Từ Chối');
+(7, 1, '2024-06-07', N'Đã duyệt'),
+(9, 2, '2024-06-09', N'Đã duyệt'),
+(10, 2, '2024-06-10', N'Từ Chối');
 
 --HoaChat (MaHoaChat, SoCAS, TenHoaChat, DonVi, MoTa, CongThucHoaHoc, NguyHiem, SoLieuAnToan, ThoiHanSuDung, HinhAnh, NgayTao)
 INSERT INTO HoaChat (SoCAS, TenHoaChat, DonVi, MoTa, CongThucHoaHoc, NguyHiem, SoLieuAnToan, ThoiHanSuDung, HinhAnh, NgayTao)
@@ -340,29 +340,29 @@ VALUES
 --PhieuNhap (MaPhieuNhap, SoLuongNhap, NgayNhap, GhiChu, MaNguoiDung)
 INSERT INTO PhieuNhap (SoLuongNhap, NgayNhap, GhiChu, MaNguoiDung) 
 VALUES 
-(100, '2024-07-01', N'Nhập hàng đợt 1', 1),
-(150, '2024-07-02', N'Nhập hàng đợt 2', 2),
-(200, '2024-07-03', N'Nhập hàng đợt 3', 3),
-(120, '2024-07-04', N'Nhập hàng đợt 4', 4),
+(100, '2024-07-01', N'Nhập hàng đợt 1', 3),
+(150, '2024-07-02', N'Nhập hàng đợt 2', 4),
+(200, '2024-07-03', N'Nhập hàng đợt 3', 5),
+(120, '2024-07-04', N'Nhập hàng đợt 4', 3),
 (130, '2024-07-05', N'Nhập hàng đợt 5', 5),
-(180, '2024-07-06', N'Nhập hàng đợt 6', 6),
-(110, '2024-07-07', N'Nhập hàng đợt 7', 7),
+(180, '2024-07-06', N'Nhập hàng đợt 6', 3),
+(110, '2024-07-07', N'Nhập hàng đợt 7', 8),
 (160, '2024-07-08', N'Nhập hàng đợt 8', 8),
-(140, '2024-07-09', N'Nhập hàng đợt 9', 9),
-(170, '2024-07-10', N'Nhập hàng đợt 10', 10);
+(140, '2024-07-09', N'Nhập hàng đợt 9', 8),
+(170, '2024-07-10', N'Nhập hàng đợt 10', 5);
 
 --LoHoaChat (SoLo, NhaCungCap, HanSuDung, TrangThai, SoLuongTon, GhiChu, MaHoaChat, MaPhieuTL, MaPhieuNhap)
 INSERT INTO LoHoaChat (SoLo, NhaCungCap, SoLuong, HanSuDung, TrangThai, SoLuongTon, GhiChu, MaHoaChat, MaPhieuTL, MaPhieuNhap)
 VALUES
 ('LOT-66-71-7-001',N'Công ty Cổ phần Hóa chất TPHCM', 100,'2026-12-31', N'Đang sử dụng', 80, N'Lô nhập tháng 10', 1, 1, 1),
 ('LOT-123-91-1-001',N'Công ty TNHH Thương mại Dịch vụ Xuất Nhập khẩu Khánh An Sài Gòn', 50,'2026-12-31', N'Đang sử dụng', 50, N'Lô nhập tháng 10', 2, NULL, 2),
-('LOT-123-91-1-001',N'Công ty TNHH Thương mại Dịch vụ Xuất Nhập khẩu Khánh An Sài Gòn', 100,'2026-12-31', N'Đang sử dụng', 100, N'Lô nhập tháng 10', 1, NULL, 2),
+('LOT-123-91-1-002',N'Công ty TNHH Thương mại Dịch vụ Xuất Nhập khẩu Khánh An Sài Gòn', 100,'2026-12-31', N'Đang sử dụng', 100, N'Lô nhập tháng 10', 1, NULL, 2),
 ('LOT-130-23-4-001',N'Công ty TNHH Hóa chất Thành Phương',200, '2026-12-31', N'Đang sử dụng', 100, N'Lô nhập tháng 10', 3, NULL, 3),
-('LOT-62-53-3-001',N'Công ty Cổ phần Đầu tư Phát triển Lộc Thiên',60, '2026-12-31', N'Đang sử dụng', 40, N'Lô nhập tháng 10', 4, NULL, 4),
+('LOT-62-53-3-003',N'Công ty Cổ phần Đầu tư Phát triển Lộc Thiên',60, '2026-12-31', N'Đang sử dụng', 40, N'Lô nhập tháng 10', 4, NULL, 4),
 ('LOT-62-53-3-001',N'Công ty Cổ phần Đầu tư Phát triển Lộc Thiên', 60,'2026-12-31', N'Đang sử dụng', 40, N'Lô nhập tháng 10', 6, NULL, 4),
 ('LOT-76-72-7-001',N'Công ty Cổ phần Hóa chất Cơ bản Miền Nam', 60,'2026-12-31', N'Hết hạn sử dụng', 30, N'Lô nhập tháng 10', 1, 2, 6),
-('LOT-69-72-7-001',N'Công ty Cổ phần Hóa chất Cơ bản Miền Nam', 70,'2026-12-31', N'Đang sử dụng', 60, N'Lô nhập tháng 10', 5, 3, 5),
-('LOT-69-72-7-001',N'Công ty Cổ phần Hóa chất Cơ bản Miền Nam', 60,'2026-12-31', N'Đang sử dụng', 60, N'Lô nhập tháng 10', 1, 3, 5);
+('LOT-69-72-7-003',N'Công ty Cổ phần Hóa chất Cơ bản Miền Nam', 70,'2026-12-31', N'Đang sử dụng', 60, N'Lô nhập tháng 10', 5, 3, 5),
+('LOT-69-72-7-002',N'Công ty Cổ phần Hóa chất Cơ bản Miền Nam', 60,'2026-12-31', N'Đang sử dụng', 60, N'Lô nhập tháng 10', 1, 3, 5);
 
 --ChiTietPhanBo (MaPhieuPB, MaLo, SoLuong)
 INSERT INTO ChiTietPhanBo (MaPhieuPB, MaLo, SoLuong) 

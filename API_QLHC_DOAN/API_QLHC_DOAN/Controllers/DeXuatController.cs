@@ -1,10 +1,8 @@
 ﻿using API_QLHC_DOAN.Data;
 using API_QLHC_DOAN.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace API_QLHC_DOAN.Controllers
 {
@@ -87,6 +85,11 @@ namespace API_QLHC_DOAN.Controllers
                     {
                         p.MaPhieuDX,
                         p.LyDo,
+                        LyDoTuChoi = _context.DuyetPhieuDX
+                                    .Where(c => c.MaPhieuDX == p.MaPhieuDX)
+                                    .OrderByDescending(c => c.NgayDuyet) // Thêm thứ tự sắp xếp rõ ràng
+                                    .Select(c => c.LyDoTuChoi)
+                                    .FirstOrDefault(),
                         p.TrangThai,
                         p.NgayTao,
                         p.MaNguoiDung,
@@ -173,49 +176,7 @@ namespace API_QLHC_DOAN.Controllers
                 });
             }
         }
-        [HttpGet("user-details")]
-        public async Task<IActionResult> GetDeXuatByUser([FromQuery] int createdBy)
-        {
-            try
-            {
-                var deXuatDetails = await _context.PhieuDeXuat
-                    .Where(p => p.MaNguoiDung == createdBy) // Lọc theo người dùng
-                    .OrderByDescending(p => p.NgayTao)     // Sắp xếp theo NgayTao
-                    .Select(p => new
-                    {
-                        p.MaPhieuDX,
-                        p.LyDo,
-                        p.TrangThai,
-                        p.NgayTao,
-                        p.MaNguoiDung,
-                        ChiTietDeXuat = _context.ChiTietDeXuat
-                            .Where(c => c.MaPhieuDX == p.MaPhieuDX)
-                            .OrderByDescending(c => c.MaHoaChat) // Nếu cần, thay bằng trường khác
-                            .Select(c => new
-                            {
-                                c.MaHoaChat,
-                                c.SoLuong,
-                                c.DonGia
-                            }).ToList()
-                    })
-                    .ToListAsync();
 
-                if (deXuatDetails == null || !deXuatDetails.Any())
-                {
-                    return NotFound(new { Message = "Không có phiếu đề xuất nào cho người dùng này." });
-                }
-
-                return Ok(deXuatDetails);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new
-                {
-                    Message = "Có lỗi xảy ra khi lấy danh sách phiếu đề xuất theo người dùng.",
-                    Error = ex.Message
-                });
-            }
-        }
         [HttpPut("updatePhieuDeXuat/{maPhieuDX}")]
         public async Task<IActionResult> UpdatePhieuDeXuat(int maPhieuDX, [FromBody] PhieuDeXuat updatedPhieuDeXuat)
         {
@@ -239,9 +200,11 @@ namespace API_QLHC_DOAN.Controllers
 
             return NoContent();  // Trả về trạng thái thành công nhưng không có nội dung
         }
-        [HttpPut("updateChiTietDeXuat/{maPhieuDX}/{maHoaChat}")]
+
+        [HttpPut("update-details/{maPhieuDX}/{maHoaChat}")]
         public async Task<IActionResult> UpdateChiTietDeXuat(int maPhieuDX, int maHoaChat, [FromBody] ChiTietDeXuat updatedChiTiet)
         {
+            // Tìm chi tiết đề xuất
             var existingChiTiet = await _context.ChiTietDeXuat
                 .Where(x => x.MaPhieuDX == maPhieuDX && x.MaHoaChat == maHoaChat)
                 .FirstOrDefaultAsync();
@@ -251,12 +214,40 @@ namespace API_QLHC_DOAN.Controllers
                 return NotFound("Không tìm thấy chi tiết đề xuất.");
             }
 
+            // Cập nhật số lượng và đơn giá
             existingChiTiet.SoLuong = updatedChiTiet.SoLuong;
             existingChiTiet.DonGia = updatedChiTiet.DonGia;
 
+            // Tìm phiếu đề xuất liên quan
+            var phieuDeXuat = await _context.PhieuDeXuat
+                .Where(x => x.MaPhieuDX == maPhieuDX)
+                .FirstOrDefaultAsync();
+
+            if (phieuDeXuat == null)
+            {
+                return NotFound("Không tìm thấy phiếu đề xuất.");
+            }
+
+            // Nếu trạng thái là "Từ chối", cập nhật lại thành "Chờ duyệt"
+            if (phieuDeXuat.TrangThai == "Từ chối")
+            {
+                phieuDeXuat.TrangThai = "Chờ duyệt";
+
+                //// Tìm và cập nhật trạng thái trong bảng DuyetPhieuDX
+                //var duyetPhieu = await _context.DuyetPhieuDX
+                //    .Where(x => x.MaPhieuDX == maPhieuDX)
+                //    .FirstOrDefaultAsync();
+
+                //if (duyetPhieu != null)
+                //{
+                //    duyetPhieu.TrangThai = "Chờ duyệt";
+                //}
+            }
+
+            // Lưu thay đổi
             await _context.SaveChangesAsync();
 
-            return NoContent();  // Trả về trạng thái thành công nhưng không có nội dung
+            return NoContent(); // Trả về trạng thái thành công nhưng không có nội dung
         }
 
 
@@ -448,6 +439,95 @@ namespace API_QLHC_DOAN.Controllers
                 }
             }
         }
+        [HttpPut("update-status/{maPhieuDX}")]
+        public async Task<IActionResult> UpdateStatus(int maPhieuDX, [FromBody] DuyetPhieuDX dto)
+        {
+            // Tìm phiếu đề xuất cần cập nhật
+            var phieu = await _context.PhieuDeXuat.FindAsync(maPhieuDX);
+            if (phieu == null)
+                return NotFound(new { message = "Phiếu đề xuất không tồn tại." });
+
+            // Cập nhật trạng thái phiếu đề xuất
+            phieu.TrangThai = dto.TrangThai;
+            _context.PhieuDeXuat.Update(phieu);
+
+            //// Kiểm tra nếu đã tồn tại bản ghi trong DuyetPhieuDX
+            //var existingDuyetPhieu = await _context.DuyetPhieuDX
+            //    .FirstOrDefaultAsync(dp => dp.MaPhieuDX == maPhieuDX);
+
+            //if (existingDuyetPhieu != null)
+            //{
+            //    // Update bản ghi đã tồn tại
+            //    existingDuyetPhieu.MaNguoiDung = dto.MaNguoiDung;
+            //    existingDuyetPhieu.NgayDuyet = DateTime.UtcNow;
+            //    existingDuyetPhieu.TrangThai = dto.TrangThai;
+            //    existingDuyetPhieu.LyDoTuChoi = dto.TrangThai == "Từ chối" ? dto.LyDoTuChoi : null;
+
+            //    _context.DuyetPhieuDX.Update(existingDuyetPhieu);
+            //}
+            //else
+            //{
+            // Tạo bản ghi mới nếu chưa tồn tại
+            var duyetPhieu = new DuyetPhieuDX
+            {
+                MaPhieuDX = maPhieuDX,
+                MaNguoiDung = dto.MaNguoiDung,
+                NgayDuyet = DateTime.Now,
+                TrangThai = dto.TrangThai,
+                LyDoTuChoi = dto.TrangThai == "Từ chối" ? dto.LyDoTuChoi : null
+            };
+            await _context.DuyetPhieuDX.AddAsync(duyetPhieu);
+            //}
+
+            // Lưu thay đổi vào cơ sở dữ liệu
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Cập nhật trạng thái thành công." });
+        }
+
+        [HttpGet("history/{maPhieuDX}")]
+        public async Task<IActionResult> LichSuDuyet(int maPhieuDX)
+        {
+            try
+            {
+                var duyetPhieuList = await _context.DuyetPhieuDX
+                    .Where(p => p.MaPhieuDX == maPhieuDX) // Lọc theo MaPhieuDX
+                    .OrderByDescending(p => p.NgayDuyet)
+                    .Select(p => new
+                    {
+                        p.MaPhieuDX,
+                        p.NgayDuyet,
+                        p.TrangThai,
+                        p.LyDoTuChoi,
+                        p.MaNguoiDung,
+                        NguoiDung = _context.NguoiDung
+                            .Where(c => c.MaNguoiDung == p.MaNguoiDung)
+                            .Select(c => new
+                            {
+                                c.TenNguoiDung,
+                                c.TenDangNhap
+                            })
+                            .FirstOrDefault()
+                    })
+                    .ToListAsync();
+
+                if (duyetPhieuList == null || duyetPhieuList.Count == 0)
+                {
+                    return NotFound(new { Message = "Không có lịch sử duyệt." });
+                }
+
+                return Ok(duyetPhieuList);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new
+                {
+                    Message = "Có lỗi xảy ra khi lấy thông tin lịch sử duyệt.",
+                    Error = ex.Message
+                });
+            }
+        }
+
 
 
 

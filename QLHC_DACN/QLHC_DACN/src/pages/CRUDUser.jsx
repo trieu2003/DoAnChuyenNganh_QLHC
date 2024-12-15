@@ -59,8 +59,21 @@ export const updateUser = async (id, user) => {
 
 
 export const deleteUser = async (id) => {
-  await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+  try {
+    const response = await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+
+    if (!response.ok) {
+      const errorMessage = await response.text(); // Lấy thông báo lỗi từ phản hồi (nếu có)
+      throw new Error(
+        `Không thể xóa người dùng. Mã lỗi: ${response.status}. ${errorMessage}`
+      );
+    }
+  } catch (error) {
+    console.error("Lỗi khi xóa người dùng:", error.message);
+    throw error; // Ném lỗi để xử lý trong `handleDelete`
+  }
 };
+
 
 export const updateRole = async (id, role) => {
   const response = await fetch(`${API_URL}/${id}/phanquyen`, {
@@ -78,7 +91,7 @@ const CRUDUser = () => {
   };
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Quản lý người dùng</h1>
+      <h1 className="text-2xl font-bold mb-4">Quản lý tài khoản</h1>
       <UserForm onUserAdded={handleRefresh} /> {/* Truyền hàm refresh xuống */}
       <UserList refresh={refresh} /> {/* Truyền refresh xuống */}
     </div>

@@ -156,9 +156,9 @@ const ChemicalManagement = () => {
               <th className="border px-6 py-3 text-left font-semibold text-sm">
                 Mô Tả
               </th>
-              <th className="border px-6 py-3 text-center font-semibold text-sm">
+              {/* <th className="border px-6 py-3 text-center font-semibold text-sm">
                 Hình Ảnh
-              </th>
+              </th> */}
               <th className="border px-6 py-3 text-center font-semibold text-sm">
                 Hành Động
               </th>
@@ -183,13 +183,13 @@ const ChemicalManagement = () => {
                   <td className="border px-6 py-3 text-gray-600 text-sm line-clamp-2">
                     {chemical.moTa || "N/A"}
                   </td>
-                  <td className="border px-6 py-3 text-center">
+                  {/* <td className="border px-6 py-3 text-center">
                     <img
                       src={`src/assets/Images/${chemical.hinhAnh}`}
                       alt={chemical.tenHoaChat}
                       className="h-14 w-14 object-cover rounded-lg shadow-md mx-auto"
                     />
-                  </td>
+                  </td> */}
                   <td className="border px-6 py-3 text-center">
                     <button
                       onClick={() => handleViewLots(chemical.maHoaChat)}
@@ -254,7 +254,7 @@ const ChemicalManagement = () => {
           className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50"
           onClick={handleOverlayClick}
         >
-          <div className="bg-white rounded-lg shadow-lg p-8 z-60 max-w-3xl w-full">
+          <div className="bg-white rounded-lg shadow-lg p-8 z-60 max-w-6xl w-full">
             <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
               Danh Sách Lô Hóa Chất
             </h2>
@@ -263,9 +263,11 @@ const ChemicalManagement = () => {
                 <thead>
                   <tr className="bg-gray-200 text-gray-700">
                     <th className="px-4 py-2 text-left">Mã Lô</th>
-                    <th className="px-4 py-2 text-left">Nhà Cung Cấp</th>
+                    <th className="px-4 py-2 text-left w-44">Số Lô</th>
+                    <th className="px-4 py-2 text-left w-56">Nhà Cung Cấp</th>
                     <th className="px-4 py-2 text-left">Số Lượng</th>
                     <th className="px-4 py-2 text-left">Số Lượng Tồn</th>
+                    <th className="px-4 py-2 text-left">Trạng thái</th>
                     <th className="px-4 py-2 text-left">Hạn Sử Dụng</th>
                     <th className="px-4 py-2 text-left">Ghi Chú</th>
                   </tr>
@@ -280,9 +282,11 @@ const ChemicalManagement = () => {
                       onClick={() => handleLotClick(lot.maLo)}
                     >
                       <td className="px-4 py-2">{lot.maLo}</td>
+                      <td className="px-4 py-2">{lot.soLo}</td>
                       <td className="px-4 py-2">{lot.nhaCungCap}</td>
                       <td className="px-4 py-2">{lot.soLuong}</td>
                       <td className="px-4 py-2">{lot.soLuongTon}</td>
+                      <td className="px-4 py-2">{lot.trangThai}</td>
                       <td className="px-4 py-2">{lot.hanSuDung}</td>
                       <td className="px-4 py-2">
                         {lot.ghiChu ? lot.ghiChu : "Không có ghi chú"}

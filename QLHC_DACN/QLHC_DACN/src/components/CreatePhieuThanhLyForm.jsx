@@ -69,7 +69,7 @@ const CreatePhieuThanhLyForm = ({ onClose, onRefresh }) => {
     } catch (error) {
       console.log(data);
       console.error("Có lỗi khi tạo phiếu thanh lý:", error);
- 
+      alert("Có lỗi khi tạo phiếu thanh lý. Vui lòng thử lại.");
     } finally {
       setLoading(false);
     }

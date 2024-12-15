@@ -1,9 +1,11 @@
 // UserList.jsx
 import { useEffect, useState } from 'react';
 import { getUsers,deleteUser,updateUser } from './CRUDUser'; // Đảm bảo đường dẫn đúng
+import { useNavigate } from "react-router-dom";
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
+  const navigate = useNavigate();
   const [editUserId, setEditUserId] = useState(null);
   const [editedUser, setEditedUser] = useState({
     tenDangNhap: '',
@@ -37,23 +39,51 @@ const UserList = () => {
       setUsers(updatedUsers); 
   };
 
-  // Hàm xử lý xóa người dùng
+  // // Hàm xử lý xóa người dùng
+  // const handleDelete = async (userId) => {
+  //   if (window.confirm("Bạn có chắc chắn muốn xóa người dùng này?")) {
+  //     try {
+  //       await deleteUser(userId); // Gọi API xóa người dùng
+  //       navigate(0) // Cập nhật danh sách sau khi xóa
+  //     } catch (error) {
+  //       if (error.response && error.response.status === 500) {
+  //         // Nếu lỗi là do liên kết dữ liệu
+  //         alert("Không thể xóa người dùng vì có dữ liệu liên kết!");
+  //       } else {
+  //         // Lỗi khác
+  //         alert("Đã xảy ra lỗi khi xóa người dùng!");
+  //       }
+  //     }
+  //   }
+  // };
   const handleDelete = async (userId) => {
     if (window.confirm("Bạn có chắc chắn muốn xóa người dùng này?")) {
-      await deleteUser(userId); // Gọi hàm xóa người dùng
-      setUsers(users.filter((user) => user.maNguoiDung !== userId)); // Cập nhật lại danh sách sau khi xóa
+      try {
+        await deleteUser(userId);
+        setUsers(users.filter((user) => user.maNguoiDung !== userId));
+        alert("Xóa người dùng thành công!");
+      } catch (error) {
+        if (error.message.includes("500")) {
+          alert("Không thể xóa người dùng vì có dữ liệu liên kết!");
+        } else {
+          alert("Đã xảy ra lỗi: " + error.message);
+        }
+      }
     }
   };
+  
 
   return (
+    <div>
     <table className="table-auto w-full text-left">
       <thead>
-        <tr>
-          <th className="px-4 py-2">Mã Người Dùng</th>
-          <th className="px-4 py-2">Tên Đăng Nhập</th>
-          <th className="px-4 py-2">Email</th>
-          <th className="px-4 py-2">Vai Trò</th>
-          <th className="px-4 py-2">Hành Động</th>
+        <tr className='border px-4 py-2'>
+          <th className="border px-4 py-2">Mã Người Dùng</th>
+          <th className="border px-4 py-2">Tên Đăng Nhập</th>
+          <th className="border px-4 py-2">Tên Người Dùng</th>
+          <th className="border px-4 py-2">Email</th>
+          <th className="border px-4 py-2">Vai Trò</th>
+          <th className="border px-4 py-2">Hành Động</th>
         </tr>
       </thead>
       <tbody>
@@ -69,6 +99,9 @@ const UserList = () => {
                     onChange={(e) => setEditedUser({ ...editedUser, tenDangNhap: e.target.value })}
                     className="border rounded px-2 py-1"
                   />
+                </td>
+                <td className="border px-4 py-2">
+                {user.tenNguoiDung}
                 </td>
                 <td className="border px-4 py-2">
                   <input
@@ -88,13 +121,9 @@ const UserList = () => {
                     <option value="Admin">Admin</option>
                   </select>
                 </td> */}
+                
                  <td className="border px-4 py-2">
-                  <input
-                    type="text"
-                    value={user.vaiTro}
-                    readOnly
-                    className="border rounded px-2 py-1 bg-gray-100" // Thêm class để làm mờ trường này
-                  />
+                 {user.vaiTro}
                 </td>
                 <td className="border px-4 py-2">
                   <button onClick={() => handleUpdate(user.maNguoiDung)} className="bg-blue-500 text-white px-4 py-2 rounded">Lưu</button>
@@ -104,6 +133,7 @@ const UserList = () => {
               <>
                 <td className="border px-4 py-2">{user.maNguoiDung}</td>
                 <td className="border px-4 py-2">{user.tenDangNhap}</td>
+                <td className="border px-4 py-2">{user.tenNguoiDung}</td>
                 <td className="border px-4 py-2">{user.email}</td>
                 <td className="border px-4 py-2">{user.vaiTro}</td>
                 <td className="border px-4 py-2">
@@ -116,6 +146,7 @@ const UserList = () => {
         ))}
       </tbody>
     </table>
+    </div>
   );
 };
 

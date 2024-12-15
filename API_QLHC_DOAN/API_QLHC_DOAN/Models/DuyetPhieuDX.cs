@@ -18,6 +18,7 @@ public class DuyetPhieuDX
     [MaxLength(50)]
     public string TrangThai { get; set; }
 
-    public string LyDoTuChoi { get; set; }
+    public string? LyDoTuChoi { get; set; }
+
 
 }

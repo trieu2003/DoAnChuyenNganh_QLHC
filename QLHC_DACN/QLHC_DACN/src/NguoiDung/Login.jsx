@@ -8,6 +8,7 @@ import axios from "axios";
 const Login = ({ onLogin }) => {
   const [maNguoiDung, setMaNguoiDung] = useState("");
   const [tenDangNhap, setTenDangNhap] = useState("");
+  
   const [matKhau, setMatKhau] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -45,6 +46,7 @@ const Login = ({ onLogin }) => {
       localStorage.setItem("maNguoiDung", data.userId);
       localStorage.setItem("tenDangNhap", tenDangNhap);
       localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("vaiTro", data.vaiTro);  // Lưu vai trò người dùng
       console.log("Lưu tên đăng nhập và trạng thái đăng nhập vào localStorage", localStorage.getItem("maNguoiDung"));
 
       // Gọi hàm onLogin từ App
@@ -55,13 +57,13 @@ const Login = ({ onLogin }) => {
 
       if (vaiTro === "admin") {
         console.log("Điều hướng tới trang Admin");
-        navigate("../user-management"); // Chuyển đến trang Admin
-      } else if (vaiTro === "user") {
+        navigate("../thong-ke"); // Chuyển đến trang Admin
+      } else if (vaiTro === "nhân viên") {
         console.log("Điều hướng tới trang Home");
         navigate("../home"); // Chuyển đến trang Home
-      } else if (vaiTro === "giangvien") {
+      } else if (vaiTro === "giảng viên") {
         console.log("Điều hướng tới trang Home");
-        navigate("../giangvien"); // Chuyển đến trang Home
+        navigate("../home"); // Chuyển đến trang Home
       } else {
         setError("Vai trò không xác định.");
       }

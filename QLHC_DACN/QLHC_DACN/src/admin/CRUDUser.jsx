@@ -59,8 +59,21 @@ export const updateUser = async (id, user) => {
 
 
 export const deleteUser = async (id) => {
-  await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+  try {
+    const response = await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+
+    if (!response.ok) {
+      const errorMessage = await response.text(); // Lấy thông báo lỗi từ phản hồi (nếu có)
+      throw new Error(
+        `Không thể xóa người dùng. Mã lỗi: ${response.status}. ${errorMessage}`
+      );
+    }
+  } catch (error) {
+    console.error("Lỗi khi xóa người dùng:", error.message);
+    throw error; // Ném lỗi để xử lý trong `handleDelete`
+  }
 };
+
 
 export const updateRole = async (id, role) => {
   const response = await fetch(`${API_URL}/${id}/phanquyen`, {

@@ -1,14 +1,16 @@
 // UserForm.jsx
 import { useState } from "react";
 import { createUser } from "../pages/CRUDUser"; // Đảm bảo đường dẫn đúng
+import { useNavigate } from "react-router-dom";
 
 const UserForm = () => {
   const [username, setUsername] = useState("");
+  const [nameUser, setnameUser] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState(""); // Thêm mật khẩu
-  const [role, setRole] = useState("User");
+  const [role, setRole] = useState("Nhân viên");
   const [errorMessage, setErrorMessage] = useState(""); // Thêm biến để lưu thông báo lỗi
-
+  const navigate = useNavigate();
   const validateEmail = (email) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Kiểm tra định dạng email hợp lệ
     return regex.test(email);
@@ -37,23 +39,29 @@ const UserForm = () => {
 
     const newUser = {
       tenDangNhap: username,
-      matKhauHash: password,
+      tenNguoiDung: nameUser,
+      matKhauHash: '00c6ee2e21a7548de6260cf72c4f4b5b',
       email: email,
       vaiTro: role,
     };
 
     try {
       await createUser(newUser);
-      
+      navigate(0);
     } catch (error) {
       setErrorMessage("Đã xảy ra lỗi khi thêm người dùng.");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto">
+    <form
+      onSubmit={handleSubmit}
+      className="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto"
+    >
       <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2">Tên đăng nhập</label>
+        <label className="block text-gray-700 text-sm font-bold mb-2">
+          Tên đăng nhập
+        </label>
         <input
           type="text"
           value={username}
@@ -62,9 +70,23 @@ const UserForm = () => {
           className="border rounded w-full py-2 px-3 text-gray-700"
         />
       </div>
-      
       <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2">Mật khẩu</label>
+        <label className="block text-gray-700 text-sm font-bold mb-2">
+          Tên người dùng
+        </label>
+        <input
+          type="text"
+          value={nameUser}
+          onChange={(e) => setnameUser(e.target.value)}
+          placeholder="Tên người dùng"
+          className="border rounded w-full py-2 px-3 text-gray-700"
+        />
+      </div>
+
+      {/* <div className="mb-4">
+        <label className="block text-gray-700 text-sm font-bold mb-2">
+          Mật khẩu
+        </label>
         <input
           type="password"
           value={password}
@@ -72,10 +94,12 @@ const UserForm = () => {
           placeholder="Mật khẩu"
           className="border rounded w-full py-2 px-3 text-gray-700"
         />
-      </div>
+      </div> */}
 
       <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2">Email</label>
+        <label className="block text-gray-700 text-sm font-bold mb-2">
+          Email
+        </label>
         <input
           type="email"
           value={email}
@@ -86,15 +110,16 @@ const UserForm = () => {
       </div>
 
       <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2">Vai trò</label>
+        <label className="block text-gray-700 text-sm font-bold mb-2">
+          Vai trò
+        </label>
         <select
           value={role}
           onChange={(e) => setRole(e.target.value)}
           className="border rounded w-full py-2 px-3 text-gray-700"
         >
-          <option value="User">User</option>
           <option value="Nhân viên">Nhân viên</option>
-          <option value="Admin">Admin</option>
+          <option value="Giảng viên">Giảng viên</option>
         </select>
       </div>
 
@@ -102,7 +127,10 @@ const UserForm = () => {
         <div className="text-red-500 text-sm mb-4">{errorMessage}</div>
       )}
 
-      <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      <button
+        type="submit"
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      >
         Thêm người dùng
       </button>
     </form>

@@ -30,6 +30,7 @@ import PurchaseRequestDetails from './components/DeXuatDetails';
 import PurchaseRequestAdd from './pages/PurchaseRequest_Add';
 import PurchaseRequestEdit from './pages/PurchaseRequest_Edit';
 import DuyetPurchaseRequest from './admin/DuyetPhieuDX';
+import LichSuDX from './admin/history';
 import CreatePhieuThanhLyForm from './components/CreatePhieuThanhLyForm';
 import PrivateRoute from './components/PrivateRoute';
 import ExportExcel from './pages/ExportExcel';
@@ -37,11 +38,13 @@ import ExportExcel from './pages/ExportExcel';
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn') === 'true');
   const [userName, setUserName] = useState(localStorage.getItem('tenDangNhap') || '');
+  
   const [sidebarOpen, setSidebarOpen] = useState(false); // Trạng thái Sidebar
   const [maNguoiDung, setMaNguoiDung] = useState(localStorage.getItem('maNguoiDung') || ''); // Thêm state để lưu mã người dùng
 
 
   const handleLogin = (userName) => {
+    
     setUserName(userName);
     setMaNguoiDung(maNguoiDung); // Lưu mã người dùng
     setIsLoggedIn(true);
@@ -115,8 +118,9 @@ const App = () => {
           <Route path="/purchase-request" element={<PurchaseRequest />} />
           <Route path="/purchase-request/details/:maPhieuDX" element={<PurchaseRequestDetails />} />
           <Route path="/purchase-request/add" element={<PurchaseRequestAdd />} />
-          <Route path='/purchase-request/edit/:id' element={<PurchaseRequestEdit></PurchaseRequestEdit>}/>
+          <Route path='/purchase-request/edit/:maPhieuDX' element={<PurchaseRequestEdit></PurchaseRequestEdit>}/>
           <Route path='/duyet-purchase-request' element={<DuyetPurchaseRequest></DuyetPurchaseRequest>}/>
+          <Route path='/duyet-purchase-request/history-purchase-request/:maPhieuDX' element={<LichSuDX></LichSuDX>}/>
 
           <Route path="/phieu-thanh-ly" element={<DashboardPhieuThanhLy />} />
           <Route path="/tao-phieu-thanh-ly" element={<CreatePhieuThanhLyForm />} /> 

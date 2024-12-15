@@ -334,7 +334,8 @@ namespace API_QLHC_DOAN.Controllers
                         l.MaLHP,
                         l.MaMon,
                         l.GVDay,
-                        l.SiSo
+                        l.SiSo,
+                        l.TenLopHocPhan
                     })
                     .ToListAsync();
 
