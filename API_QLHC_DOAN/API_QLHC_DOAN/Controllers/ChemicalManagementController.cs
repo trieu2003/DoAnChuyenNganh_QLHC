@@ -111,7 +111,36 @@ namespace API_QLHC_DOAN.Controllers
 
             return Ok(lotDetails); // Trả về thông tin chi tiết của lô hóa chất
         }
+        [HttpGet("{id}/TotalStock")]
+        public async Task<IActionResult> GetTotalStockByChemical(int id)
+        {
+            // Tìm tất cả các lô hóa chất liên quan đến MaHoaChat
+            var totalStock = await _context.LoHoaChat
+                .Where(l => l.MaHoaChat == id) // Lọc theo MaHoaChat
+                .GroupBy(l => l.MaHoaChat)
+                .Select(group => new
+                {
+                    MaHoaChat = group.Key, // Mã hóa chất
+                    TenHoaChat = _context.HoaChat
+                        .Where(h => h.MaHoaChat == group.Key)
+                        .Select(h => h.TenHoaChat)
+                        .FirstOrDefault(), // Tên hóa chất
+                    TongSoLuongTon = group.Sum(l => l.SoLuongTon) // Tổng số lượng tồn của tất cả các lô
+                })
+                .FirstOrDefaultAsync();
+
+            // Kiểm tra nếu không tìm thấy dữ liệu
+            if (totalStock == null)
+            {
+
+                return NotFound($"No stock data found for chemical ID {id}.");
+            }
+
+            return Ok(totalStock); // Trả về kết quả
+        }
+
+
     }
-        
+
 
 }

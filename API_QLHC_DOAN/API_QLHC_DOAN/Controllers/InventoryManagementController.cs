@@ -132,7 +132,8 @@ namespace API_QLHC_DOAN.Controllers
                         GhiChu = lotDTO.GhiChu,
                         MaHoaChat = lotDTO.MaHoaChat,
                         MaPhieuTL = lotDTO.MaPhieuTL,
-                        MaPhieuNhap = lotDTO.MaPhieuNhap
+                        MaPhieuNhap = lotDTO.MaPhieuNhap,
+                        SoLo = lotDTO.SoLo
                     };
 
                     // Thêm lô hóa chất vào context
@@ -205,6 +206,38 @@ namespace API_QLHC_DOAN.Controllers
 
             return Ok(chemicals);
         }
+        [HttpGet("GetLotsByPhieuNhap/{maPhieuNhap}")]
+        public async Task<IActionResult> GetLotsByPhieuNhap(int maPhieuNhap)
+        {
+            // Lấy danh sách các lô hóa chất theo mã phiếu nhập
+            var lots = await _context.LoHoaChat
+                .Where(lo => lo.MaPhieuNhap == maPhieuNhap) // Lọc theo mã phiếu nhập
+                .Select(lo => new
+                {
+                    lo.SoLo,
+                    lo.NhaCungCap,
+                    lo.SoLuong,
+                    lo.HanSuDung,
+                    lo.TrangThai,
+                    lo.GhiChu,
+                    lo.SoLuongTon,
+                    PhieuNhap = new
+                    {
+                        lo.MaPhieuNhap
+                    }
+                })
+                .ToListAsync();
+
+            // Kiểm tra nếu không có lô hóa chất nào được tìm thấy
+            if (lots == null || !lots.Any())
+            {
+                return NotFound($"No lots found for Phieu Nhap with ID {maPhieuNhap}.");
+            }
+
+            // Trả về danh sách lô hóa chất
+            return Ok(lots);
+        }
+
 
     }
 }

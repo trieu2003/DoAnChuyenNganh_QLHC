@@ -8,6 +8,7 @@ namespace API_QLHC_DOAN.Models
         public int MaBaiTN { get; set; } // Primary Key
         public string TenBaiTN { get; set; } = string.Empty;
         public int MaMon { get; set; } // Foreign Key
+        public string TrangThai { get; set; }
 
         // Navigation Property
         //public MonHoc? MonHoc { get; set; }

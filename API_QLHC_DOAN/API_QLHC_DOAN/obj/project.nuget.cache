@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Oax8qYdwVj8=",
+  "dgSpecHash": "Q4w9TE5zxvA=",
   "success": true,
-  "projectFilePath": "E:\\Huit24-25\\HK1\\DoANCNganh\\DOAN\\Code\\TRIEU\\DoAnChuyenNganh_QLHC\\API_QLHC_DOAN\\API_QLHC_DOAN\\API_QLHC_DOAN.csproj",
+  "projectFilePath": "E:\\Huit24-25\\HK1\\DoANCNganh\\DOAN\\Code\\ver3.3\\DoAnChuyenNganh_QLHC\\API_QLHC_DOAN\\API_QLHC_DOAN\\API_QLHC_DOAN.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

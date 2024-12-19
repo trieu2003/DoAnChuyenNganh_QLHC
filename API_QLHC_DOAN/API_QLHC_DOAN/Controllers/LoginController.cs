@@ -51,6 +51,7 @@ namespace API_QLHC_DOAN.Controllers
                 Message = "Đăng nhập thành công",
                 UserId = user.MaNguoiDung,
                 UserName = user.TenDangNhap,
+                tenNguoiDung =user.TenNguoiDung,
                 VaiTro = user.VaiTro,
                 RedirectUrl = redirectUrl
             });

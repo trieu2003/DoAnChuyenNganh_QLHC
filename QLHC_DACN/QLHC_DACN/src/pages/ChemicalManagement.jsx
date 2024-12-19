@@ -16,17 +16,31 @@ const ChemicalManagement = () => {
       const response = await axios.get(
         `https://localhost:7240/api/ChemicalManagement/GetHoaChat?page=${page}&limit=15`
       );
-      console.log("Response from API:", response.data);
 
-      if (
-        response.data &&
-        Array.isArray(response.data.data) &&
-        response.data.data.length > 0
-      ) {
-        setChemicals(response.data.data);
-        setTotalPages(response.data.totalPages); // Update total pages
+      if (response.data && Array.isArray(response.data.data)) {
+        const chemicalsWithStock = await Promise.all(
+          response.data.data.map(async (chemical) => {
+            try {
+              const stockResponse = await axios.get(
+                `https://localhost:7240/api/ChemicalManagement/${chemical.maHoaChat}/TotalStock`
+              );
+              return {
+                ...chemical,
+                TongSoLuongTon: stockResponse.data?.tongSoLuongTon, // Lấy tổng số lượng tồn hoặc mặc định là 0
+              };
+            } catch (error) {
+              console.error(
+                `Error fetching total stock for chemical ${chemical.maHoaChat}:`,
+                error
+              );
+              return { ...chemical, TongSoLuongTon: 0 }; // Gán mặc định là 0 nếu có lỗi
+            }
+          })
+        );
+
+        setChemicals(chemicalsWithStock);
+        setTotalPages(response.data.totalPages);
       } else {
-        console.error("No chemicals found:", response.data.data);
         setChemicals([]);
       }
     } catch (error) {
@@ -50,13 +64,34 @@ const ChemicalManagement = () => {
         const response = await axios.get(
           `https://localhost:7240/api/ChemicalManagement/Search?searchTerm=${searchTerm}`
         );
-
+  
         if (response.status === 200) {
           if (response.data.length > 0) {
-            setChemicals(response.data);
-            setTotalPages(1); // Đặt lại tổng số trang nếu tìm kiếm
+            // Thêm bước lấy tổng số lượng tồn
+            const chemicalsWithStock = await Promise.all(
+              response.data.map(async (chemical) => {
+                try {
+                  const stockResponse = await axios.get(
+                    `https://localhost:7240/api/ChemicalManagement/${chemical.maHoaChat}/TotalStock`
+                  );
+                  return {
+                    ...chemical,
+                    TongSoLuongTon: stockResponse.data?.tongSoLuongTon || 0,
+                  };
+                } catch (error) {
+                  console.error(
+                    `Error fetching total stock for chemical ${chemical.maHoaChat}:`,
+                    error
+                  );
+                  return { ...chemical, TongSoLuongTon: 0 };
+                }
+              })
+            );
+  
+            setChemicals(chemicalsWithStock);
+            setTotalPages(1); // Reset total pages for search results
           } else {
-            setChemicals([]); // Không tìm thấy hóa chất
+            setChemicals([]); // No results found
             alert("Không tìm thấy hóa chất với thông tin đã nhập.");
           }
         }
@@ -67,6 +102,7 @@ const ChemicalManagement = () => {
       }
     }
   };
+  
 
   const handleShowAll = () => {
     fetchChemicals();
@@ -159,6 +195,9 @@ const ChemicalManagement = () => {
               {/* <th className="border px-6 py-3 text-center font-semibold text-sm">
                 Hình Ảnh
               </th> */}
+              <th className="border px-6 py-3 text-left font-semibold text-sm">
+                Tổng Số Lượng Tồn
+              </th>
               <th className="border px-6 py-3 text-center font-semibold text-sm">
                 Hành Động
               </th>
@@ -180,16 +219,12 @@ const ChemicalManagement = () => {
                   <td className="border px-6 py-3 text-gray-600 text-sm">
                     {chemical.donVi}
                   </td>
-                  <td className="border px-6 py-3 text-gray-600 text-sm line-clamp-2">
+                  <td className="border px-6 py-3 text-gray-600 text-sm">
                     {chemical.moTa || "N/A"}
                   </td>
-                  {/* <td className="border px-6 py-3 text-center">
-                    <img
-                      src={`src/assets/Images/${chemical.hinhAnh}`}
-                      alt={chemical.tenHoaChat}
-                      className="h-14 w-14 object-cover rounded-lg shadow-md mx-auto"
-                    />
-                  </td> */}
+                  <td className="border px-6 py-3 text-gray-600 text-sm">
+                    {chemical.TongSoLuongTon}
+                  </td>
                   <td className="border px-6 py-3 text-center">
                     <button
                       onClick={() => handleViewLots(chemical.maHoaChat)}

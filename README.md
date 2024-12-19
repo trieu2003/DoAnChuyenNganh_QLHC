@@ -40,3 +40,13 @@
  
  ## Chức năng
 #### WEDSITE
+<ul>
+    <li>Đăng nhập, Đăng xuất, đổi mật khẩu</li>
+    <li>Quản lý danh mục hóa chất theo lô</li>
+    <li>Đề xuất, duyệt hóa chất mua mới</li>
+    <li>Quản lý nhập hóa chất vào kho</li>
+    <li>Dự trù hóa chất cho các môn học, cho từng bài thí nghiệm</li>
+    <li>Quản lý phân bổ hóa chất thực tế sử dụng</li>
+    <li>Quản lý thanh lý hóa chất hết hạn</li>
+    <li>Thống kê, báo cáo</li>
+</ul>

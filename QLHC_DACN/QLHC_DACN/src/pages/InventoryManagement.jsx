@@ -7,6 +7,7 @@ const InventoryManagement = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const maNguoiDung = parseInt(localStorage.getItem("maNguoiDung"), 10); //Thêm hàm cho phép lấy mã người dùng hiện đang đăng nhập
   const [chemicalList, setChemicalList] = useState([]);
+  const [lots1, setLots1] = useState([]);
   const [newPhieuNhap, setNewPhieuNhap] = useState({
     soLuongNhap: 0,
     ngayNhap: new Date().toISOString().split("T")[0],
@@ -26,7 +27,21 @@ const InventoryManagement = () => {
     ghiChu: "",
     maPhieuNhap: "", // Optional if not needed initially
   });
-
+  // Hàm gọi API để lấy danh sách lô hóa chất
+  const showLots = async (maPhieuNhap) => {
+    try {
+      const response = await fetch(
+        `https://localhost:7240/api/InventoryManagement/GetLotsByPhieuNhap/${maPhieuNhap}`
+      );
+      if (!response.ok) {
+        throw new Error(`Error fetching lots: ${response.statusText}`);
+      }
+      const data = await response.json();
+      setLots(data); // Cập nhật danh sách lô hóa chất
+    } catch (error) {
+      console.error("Error fetching lots:", error);
+    }
+  };
   // Fetch all Phieu Nhap on component mount
   useEffect(() => {
     axios
@@ -195,6 +210,7 @@ const InventoryManagement = () => {
                 <th className="px-6 py-3">Ngày Nhập</th>
                 <th className="px-6 py-3">Người Nhập</th>
                 <th className="px-6 py-3">Ghi Chú</th>
+                <th className="px-6 py-3">Thao tác</th>
               </tr>
             </thead>
             <tbody>
@@ -218,6 +234,14 @@ const InventoryManagement = () => {
                     </td>
                     <td className="px-6 py-3 text-sm text-gray-600">
                       {phieu.ghiChu || "N/A"}
+                    </td>
+                    <td className="px-6 py-3 text-sm text-gray-600">
+                      <button
+                        onClick={() => showLots(phieu.maPhieuNhap)}
+                        className="px-4 py-2 bg-red-500 text-white font-semibold rounded-lg shadow-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-75"
+                      >
+                        Xem Chi Tiết
+                      </button>
                     </td>
                   </tr>
                 ))
@@ -523,6 +547,63 @@ const InventoryManagement = () => {
           </div>
         </div>
       )}
+      {/* Danh sách lô hóa chất */}
+      <div className="container mx-auto my-6">
+        <h2 className="text-2xl font-bold mb-4 text-center">
+          Danh Sách Lô Hóa Chất
+        </h2>
+        {lots.length > 0 ? (
+          <div className="overflow-x-auto">
+            <table className="table-auto border-collapse border border-gray-200 w-full">
+              <thead>
+                <tr className="bg-gray-100 text-left">
+                  <th className="border border-gray-300 px-4 py-2">Số Lô</th>
+                  <th className="border border-gray-300 px-4 py-2">
+                    Nhà Cung Cấp
+                  </th>
+                  <th className="border border-gray-300 px-4 py-2">Số Lượng</th>
+                  <th className="border border-gray-300 px-4 py-2">
+                    Hạn Sử Dụng
+                  </th>
+                  <th className="border border-gray-300 px-4 py-2">
+                    Trạng Thái
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {lots.map((lot, index) => (
+                  <tr
+                    key={index}
+                    className={`${
+                      index % 2 === 0 ? "bg-white" : "bg-gray-50"
+                    } hover:bg-gray-100`}
+                  >
+                    <td className="border border-gray-300 px-4 py-2">
+                      {lot.soLo}
+                    </td>
+                    <td className="border border-gray-300 px-4 py-2">
+                      {lot.nhaCungCap}
+                    </td>
+                    <td className="border border-gray-300 px-4 py-2">
+                      {lot.soLuong}
+                    </td>
+                    <td className="border border-gray-300 px-4 py-2">
+                      {lot.hanSuDung}
+                    </td>
+                    <td className="border border-gray-300 px-4 py-2">
+                      {lot.trangThai}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <p className="text-center text-gray-500 mt-4">
+            Không có lô hóa chất nào được tìm thấy.
+          </p>
+        )}
+      </div>
     </div>
   );
 };

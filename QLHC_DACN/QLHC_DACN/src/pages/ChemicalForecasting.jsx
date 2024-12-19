@@ -8,6 +8,7 @@ const ChemicalForecasting = () => {
   const [lopHocPhans, setLopHocPhans] = useState([]);
   const [thongKeDuTru, setThongKeDuTru] = useState([]);
   const [showThongKe, setShowThongKe] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -43,7 +44,7 @@ const ChemicalForecasting = () => {
       setLoading(false);
     }
   };
-
+  
   const fetchThongKeDuTru = async (maMon) => {
     if (!maMon) return;
     setLoading(true);
@@ -55,8 +56,14 @@ const ChemicalForecasting = () => {
       setThongKeDuTru(response.data);
       setShowThongKe(true); // Hiển thị bảng thống kê
     } catch (err) {
-      console.error("Lỗi khi lấy thống kê hóa chất dự trù:", err);
-      setError("Không thể tải thống kê hóa chất.");
+      // console.error("Lỗi khi lấy thống kê hóa chất dự trù:", err);
+      // setError("Không thể tải thống kê hóa chất.");
+      if (error.response && error.response.status === 404) {
+        setErrorMessage("Chưa có bài thí nghiệm nào được xác nhận");
+      } else {
+        setErrorMessage("Có lỗi xảy ra khi tải dữ liệu");
+      }
+      setThongKeDuTru([]);
     } finally {
       setLoading(false);
     }

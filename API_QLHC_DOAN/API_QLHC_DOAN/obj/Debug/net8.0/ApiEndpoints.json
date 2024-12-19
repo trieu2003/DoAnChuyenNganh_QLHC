@@ -142,6 +142,32 @@
   },
   {
     "ContainingType": "API_QLHC_DOAN.Controllers.ChemicalUsageManagement",
+    "Method": "GetChemicalByLot",
+    "RelativePath": "api/ChemicalUsageManagement/GetChemicalByLot/{maLo}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "maLo",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.ChemicalUsageManagement",
+    "Method": "GetChemicalNames",
+    "RelativePath": "api/ChemicalUsageManagement/GetChemicalNames",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.ChemicalUsageManagement",
     "Method": "GetClasses",
     "RelativePath": "api/ChemicalUsageManagement/GetClasses",
     "HttpMethod": "GET",
@@ -152,12 +178,91 @@
   },
   {
     "ContainingType": "API_QLHC_DOAN.Controllers.ChemicalUsageManagement",
+    "Method": "GetClassInfoByPhieuPhanBo",
+    "RelativePath": "api/ChemicalUsageManagement/GetClassInfoByPhieuPhanBo/{maPhieuPB}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "maPhieuPB",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.ChemicalUsageManagement",
+    "Method": "GetMaxQuantityLotByChemicalName",
+    "RelativePath": "api/ChemicalUsageManagement/GetMaxQuantityLotByChemicalName/{tenHoaChat}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tenHoaChat",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.ChemicalUsageManagement",
     "Method": "GetPhieuPhanBo",
     "RelativePath": "api/ChemicalUsageManagement/GetPhieuPhanBo",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.ChemicalUsageManagement",
+    "Method": "UpdateChiTietPhanBo",
+    "RelativePath": "api/ChemicalUsageManagement/UpdateChiTietPhanBo/{maPhieuPB}/{maLo}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "maPhieuPB",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "maLo",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updatedChiTietPhanBo",
+        "Type": "API_QLHC_DOAN.Models.ChiTietPhanBo",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.ChemicalUsageManagement",
+    "Method": "UpdatePhieuPhanBo",
+    "RelativePath": "api/ChemicalUsageManagement/UpdatePhieuPhanBo/{maPhieuPB}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "maPhieuPB",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updatedPhieuPhanBo",
+        "Type": "API_QLHC_DOAN.Models.PhieuPhanBo",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -449,6 +554,26 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "API_QLHC_DOAN.Controllers.DuyetPhieuTLController",
+    "Method": "GetDuyetPhieuThanhLy",
+    "RelativePath": "api/DuyetPhieuTL/duyet-phieu-thanh-ly",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[API_QLHC_DOAN.Models.DuyetPhieuTLDto, API_QLHC_DOAN, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "API_QLHC_DOAN.Controllers.InventoryManagementController",
     "Method": "AddLots",
     "RelativePath": "api/InventoryManagement/AddLots",
@@ -516,7 +641,27 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[API_QLHC_DOAN.Models.PhieuNhap, API_QLHC_DOAN, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.InventoryManagementController",
+    "Method": "GetChemicals",
+    "RelativePath": "api/InventoryManagement/GetChemicals",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[API_QLHC_DOAN.Models.HoaChat, API_QLHC_DOAN, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -832,6 +977,11 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "lyDoTuChoi",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],

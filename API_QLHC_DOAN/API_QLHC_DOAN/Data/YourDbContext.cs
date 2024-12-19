@@ -2,6 +2,7 @@
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Data;
 namespace API_QLHC_DOAN.Data
 {
     public class YourDbContext : DbContext
@@ -39,6 +40,7 @@ namespace API_QLHC_DOAN.Data
         public DbSet<BaiThiNghiem> BaiThiNghiem { get; set; }
         public DbSet<DuTru> DuTru { get; set; }
         public DbSet<MonHoc> MonHoc { get; set; }
+        public DbSet<DuyetDuTru> DuyetDuTru { get; set; }
         public async Task<List<PhieuThanhLyDetails>> GetPhieuThanhLyDetailsAsync()
         {
             return await this.PhieuThanhLyDetails.FromSqlRaw("EXEC GetPhieuThanhLyDetails").ToListAsync();
@@ -53,7 +55,107 @@ namespace API_QLHC_DOAN.Data
                 .FromSqlRaw("EXEC GetPhieuThanhLyDetailsChiTiet @MaPhieuTL", maPhieuTLParam)
                 .ToListAsync();
         }
+        // Thống kê hóa chất sử dụng theo môn học
+        public async Task<List<ThongKeHoaChatSuDungTheoMonHocResult>> ThongKeHoaChatSuDungTheoMonHoc(DateTime startDate, DateTime endDate)
+        {
+            var results = new List<ThongKeHoaChatSuDungTheoMonHocResult>();
 
+            using (var command = this.Database.GetDbConnection().CreateCommand())
+            {
+                command.CommandText = "ThongKeHoaChatSuDungTheoMonHoc";
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.Add(new SqlParameter("@StartDate", startDate));
+                command.Parameters.Add(new SqlParameter("@EndDate", endDate));
+
+                this.Database.OpenConnection();
+
+                using (var reader = await command.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        results.Add(new ThongKeHoaChatSuDungTheoMonHocResult
+                        {
+                            MonHoc = reader["MonHoc"].ToString(),
+                            HoaChat = reader["HoaChat"].ToString(),
+                            TongSoLuongSuDung = Convert.ToInt32(reader["TongSoLuongSuDung"])
+                        });
+                    }
+                }
+
+                this.Database.CloseConnection();
+            }
+
+            return results;
+        }
+
+        // Thống kê hóa chất tồn kho
+        public async Task<List<ThongKeHoaChatTonKhoResult>> ThongKeHoaChatTonKho()
+        {
+            var results = new List<ThongKeHoaChatTonKhoResult>();
+
+            using (var command = this.Database.GetDbConnection().CreateCommand())
+            {
+                command.CommandText = "ThongKeHoaChatTonKho";
+                command.CommandType = CommandType.StoredProcedure;
+
+                this.Database.OpenConnection();
+
+                using (var reader = await command.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        results.Add(new ThongKeHoaChatTonKhoResult
+                        {
+                            HoaChat = reader["HoaChat"].ToString(),
+                            MaCAS = reader["MaCAS"].ToString(),
+                            TongSoLuongTon = Convert.ToInt32(reader["TongSoLuongTon"]),
+                            SoLoHoaChat = Convert.ToInt32(reader["SoLoHoaChat"])
+                        });
+                    }
+                }
+
+                this.Database.CloseConnection();
+            }
+
+            return results;
+        }
+
+        // Thống kê hóa chất sắp hết hạn
+        public async Task<List<ThongKeHoaChatSapHetHanResult>> ThongKeHoaChatSapHetHan(int soNgayCanhBao)
+        {
+            var results = new List<ThongKeHoaChatSapHetHanResult>();
+
+            using (var command = this.Database.GetDbConnection().CreateCommand())
+            {
+                command.CommandText = "ThongKeHoaChatSapHetHan";
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.Add(new SqlParameter("@SoNgayCanhBao", soNgayCanhBao));
+
+                this.Database.OpenConnection();
+
+                using (var reader = await command.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        results.Add(new ThongKeHoaChatSapHetHanResult
+                        {
+                            HoaChat = reader["HoaChat"].ToString(),
+                            MaCAS = reader["MaCAS"].ToString(),
+                            MaLo = reader["MaLo"].ToString(),
+                            HanSuDung = Convert.ToDateTime(reader["HanSuDung"]),
+                            SoNgayConLai = Convert.ToInt32(reader["SoNgayConLai"]),
+                            SoLuongTon = Convert.ToInt32(reader["SoLuongTon"])
+                        });
+                    }
+                }
+
+                this.Database.CloseConnection();
+            }
+
+            return results;
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<MaxQuantityLotDto>().HasNoKey();
@@ -96,7 +198,8 @@ namespace API_QLHC_DOAN.Data
            
             modelBuilder.Entity<DuyetPhieuDX>()
                 .HasKey(dp => new { dp.MaPhieuDX, dp.MaNguoiDung });
-
+            modelBuilder.Entity<DuyetDuTru>()
+                .HasKey(dp => new { dp.MaBaiTN, dp.MaNguoiDung });
             // Định nghĩa khóa chính phức hợp cho bảng ChiTietPhanBo
             modelBuilder.Entity<ChiTietPhanBo>()
                 .HasKey(ctpb => new { ctpb.MaPhieuPB, ctpb.MaLo });

@@ -39,7 +39,7 @@ const Header = ({ onOpenSidebar, isLoggedIn, userName, onLogout, userId }) => {
               onClick={openEmailModal}
               className="text-white text-lg cursor-pointer"
             >
-              Xin chào, {userName}!
+              Xin chào, {localStorage.getItem("tenNguoiDung")}!
             </span>
             <button
               // onClick={onLogout}

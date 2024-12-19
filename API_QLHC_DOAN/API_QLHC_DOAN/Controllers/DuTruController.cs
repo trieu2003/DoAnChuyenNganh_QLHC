@@ -77,7 +77,8 @@ namespace API_QLHC_DOAN.Controllers
             var baiThiNghiem = new BaiThiNghiem
             {
                 TenBaiTN = dto.TenBaiTN,
-                MaMon = dto.MaMon
+                MaMon = dto.MaMon,
+                TrangThai = "Chờ duyệt",
             };
 
             // Lưu vào cơ sở dữ liệu
@@ -99,6 +100,12 @@ namespace API_QLHC_DOAN.Controllers
                     {
                         b.MaBaiTN,
                         b.TenBaiTN,
+                        b.TrangThai,
+                        LyDoTuChoi = _context.DuyetDuTru
+                                    .Where(c => c.MaBaiTN == b.MaBaiTN)
+                                    .OrderByDescending(c => c.NgayDuyet)
+                                    .Select(c => c.LyDoTuChoi)
+                                    .FirstOrDefault(),
                         // Kết hợp với bảng Dự trù
                         DuTru = _context.DuTru
                             .Where(d => d.MaBaiTN == b.MaBaiTN)
@@ -154,7 +161,7 @@ namespace API_QLHC_DOAN.Controllers
             {
                 // Lấy tất cả các bài thí nghiệm thuộc môn học
                 var baiThiNghiems = await _context.BaiThiNghiem
-                    .Where(b => b.MaMon == maMonHoc)
+                    .Where(b => b.MaMon == maMonHoc && b.TrangThai=="Đã duyệt")
                     .Select(b => b.MaBaiTN)
                     .ToListAsync();
 
@@ -376,7 +383,200 @@ namespace API_QLHC_DOAN.Controllers
                 });
             }
         }
+        [HttpGet("baitn/{maBaiTN}")]
+        public async Task<IActionResult> GetDuTruByMaBaiTN(int maBaiTN)
+        {
+            var duTru = await _context.DuTru.Where(dt=>dt.MaBaiTN==maBaiTN)
+                .GroupBy(d => d.MaHoaChat) // Nhóm theo MaHoaChat để tính tổng lượng
+                            .Select(g => new
+                            {
+                                MaHoaChat = g.Key,
+                                SoLuong= g.Sum(d => d.SoLuong),
+                                HoaChat = _context.HoaChat
+                                    .Where(h => h.MaHoaChat == g.Key)
+                                    .Select(h => new
+                                    {
+                                        h.TenHoaChat,
+                                        h.DonVi
+                                    })
+                                    .FirstOrDefault()
+                            })
+                            .ToListAsync();
 
+            if (duTru == null || duTru.Count == 0)
+            {
+                return NotFound(new { message = "No records found for the provided MaBaiTN." });
+            }
+
+            return Ok(duTru);
+        }
+        [HttpPut("update-status/{maBaiTN}")]
+        public async Task<IActionResult> UpdateStatus(int maBaiTN, [FromBody] DuyetDuTru dto)
+        {
+            // Tìm phiếu đề xuất cần cập nhật
+            var phieu = await _context.BaiThiNghiem.FindAsync(maBaiTN);
+            if (phieu == null)
+                return NotFound(new { message = "Phiếu dự trù bài thí nghiệm không tồn tại." });
+
+            // Cập nhật trạng thái phiếu đề xuất
+            phieu.TrangThai = dto.TrangThai;
+            _context.BaiThiNghiem.Update(phieu);
+            var duyetPhieu = new DuyetDuTru
+            {
+                MaBaiTN = maBaiTN,
+                MaNguoiDung = dto.MaNguoiDung,
+                NgayDuyet = DateTime.Now,
+                TrangThai = dto.TrangThai,
+                LyDoTuChoi = dto.TrangThai == "Từ chối" ? dto.LyDoTuChoi : null
+            };
+            await _context.DuyetDuTru.AddAsync(duyetPhieu);
+            //}
+
+            // Lưu thay đổi vào cơ sở dữ liệu
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Cập nhật trạng thái thành công." });
+        }
+        [HttpGet("duyetbaitn/{maMonHoc}")]
+        public async Task<IActionResult> DSDuyetBaiTN(int maMonHoc)
+        {
+            try
+            {
+                // Lấy danh sách các bài thí nghiệm theo MaMonHoc
+                var baiThiNghiems = (from b in _context.BaiThiNghiem
+                                     where b.MaMon == maMonHoc
+                                     select new
+                                     {
+                                         b.MaBaiTN,
+                                         b.TenBaiTN,
+                                         b.TrangThai,
+                                         LyDoTuChoi = (from c in _context.DuyetDuTru
+                                                       where c.MaBaiTN == b.MaBaiTN
+                                                       orderby c.NgayDuyet descending
+                                                       select c.LyDoTuChoi).FirstOrDefault(),
+                                         DuTru = (from d in _context.DuTru
+                                                  where d.MaBaiTN == b.MaBaiTN
+                                                  group d by d.MaHoaChat into g
+                                                  select new
+                                                  {
+                                                      MaHoaChat = g.Key,
+                                                      SoLuong = g.Sum(d => d.SoLuong),
+                                                      HoaChat = (from h in _context.HoaChat
+                                                                 where h.MaHoaChat == g.Key
+                                                                 select new
+                                                                 {
+                                                                     h.TenHoaChat,
+                                                                     h.DonVi
+                                                                 }).FirstOrDefault()
+                                                  }).ToList()
+                                     }).ToList();
+
+                if (baiThiNghiems == null || baiThiNghiems.Count == 0)
+                {
+                    return NotFound(new { Message = "Không tìm thấy bài thí nghiệm cho môn học này." });
+                }
+
+                return Ok(baiThiNghiems);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new
+                {
+                    Message = "Có lỗi xảy ra khi lấy danh sách bài thí nghiệm.",
+                    Error = ex.Message
+                });
+            }
+        }
+        [HttpGet("history/{maBaiTN}")]
+        public async Task<IActionResult> LichSuDuyet(int maBaiTN)
+        {
+            try
+            {
+                var duyetPhieuList = await _context.DuyetDuTru
+                    .Where(p => p.MaBaiTN == maBaiTN) // Lọc theo MaPhieuDX
+                    .OrderByDescending(p => p.NgayDuyet)
+                    .Select(p => new
+                    {
+                        p.MaBaiTN,
+                        p.NgayDuyet,
+                        p.TrangThai,
+                        p.LyDoTuChoi,
+                        p.MaNguoiDung,
+                        NguoiDung = _context.NguoiDung
+                            .Where(c => c.MaNguoiDung == p.MaNguoiDung)
+                            .Select(c => new
+                            {
+                                c.TenNguoiDung,
+                                c.TenDangNhap
+                            })
+                            .FirstOrDefault()
+                    })
+                    .ToListAsync();
+
+                if (duyetPhieuList == null || duyetPhieuList.Count == 0)
+                {
+                    return NotFound(new { Message = "Không có lịch sử duyệt." });
+                }
+
+                return Ok(duyetPhieuList);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new
+                {
+                    Message = "Có lỗi xảy ra khi lấy thông tin lịch sử duyệt.",
+                    Error = ex.Message
+                });
+            }
+        }
+        [HttpPut("update-details/{maBaiTN}/{maHoaChat}")]
+        public async Task<IActionResult> UpdateChiTietDeXuat(int maBaiTN, int maHoaChat, [FromBody] ChiTietDeXuat updatedChiTiet)
+        {
+            // Tìm chi tiết đề xuất
+            var existingChiTiet = await _context.DuTru
+                .Where(x => x.MaBaiTN == maBaiTN && x.MaHoaChat == maHoaChat)
+                .FirstOrDefaultAsync();
+
+            if (existingChiTiet == null)
+            {
+                return NotFound("Không tìm thấy chi tiết đề xuất.");
+            }
+
+            // Cập nhật số lượng và đơn giá
+            existingChiTiet.SoLuong = updatedChiTiet.SoLuong;
+            
+
+            // Tìm phiếu đề xuất liên quan
+            var baitn = await _context.BaiThiNghiem
+                .Where(x => x.MaBaiTN == maBaiTN)
+                .FirstOrDefaultAsync();
+
+            if (baitn == null)
+            {
+                return NotFound("Không tìm thấy phiếu đề xuất.");
+            }
+
+            // Nếu trạng thái là "Từ chối", cập nhật lại thành "Chờ duyệt"
+            if (baitn.TrangThai == "Từ chối")
+            {
+                baitn.TrangThai = "Chờ duyệt";
+
+                //// Tìm và cập nhật trạng thái trong bảng DuyetPhieuDX
+                //var duyetPhieu = await _context.DuyetPhieuDX
+                //    .Where(x => x.MaPhieuDX == maPhieuDX)
+                //    .FirstOrDefaultAsync();
+
+                //if (duyetPhieu != null)
+                //{
+                //    duyetPhieu.TrangThai = "Chờ duyệt";
+                //}
+            }
+
+            // Lưu thay đổi
+            await _context.SaveChangesAsync();
+
+            return NoContent(); // Trả về trạng thái thành công nhưng không có nội dung
+        }
 
     }
 }

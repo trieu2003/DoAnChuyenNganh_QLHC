@@ -52,6 +52,35 @@ namespace API_QLHC_DOAN.Controllers
 
             return CreatedAtAction(nameof(GetNguoiDung), new { id = nguoiDung.MaNguoiDung }, nguoiDung);
         }
+        [HttpPut("resetpassword/{id}")]
+        public async Task<IActionResult> ResetPassword(int id)
+        {
+            try
+            {
+                // Lấy người dùng từ database
+                var user = await _context.NguoiDung.FirstOrDefaultAsync(u => u.MaNguoiDung == id);
+
+                if (user == null)
+                {
+                    return NotFound(new { Message = "Người dùng không tồn tại" });
+                }
+
+                // Tạo mật khẩu mặc định (mã hóa trước khi lưu vào database)
+                
+                string hashedPassword = "00c6ee2e21a7548de6260cf72c4f4b5b";
+
+                // Cập nhật mật khẩu của người dùng
+                user.MatKhauHash = hashedPassword;
+                _context.NguoiDung.Update(user);
+                await _context.SaveChangesAsync();
+
+                return Ok(new { Message = "Mật khẩu đã được reset thành công" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "Có lỗi xảy ra khi reset mật khẩu", Error = ex.Message });
+            }
+        }
 
         // PUT: api/Users/{id}
         //[HttpPut("{id}")]

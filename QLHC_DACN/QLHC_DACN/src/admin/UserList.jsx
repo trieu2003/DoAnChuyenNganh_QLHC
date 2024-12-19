@@ -1,6 +1,6 @@
 // UserList.jsx
 import { useEffect, useState } from 'react';
-import { getUsers,deleteUser,updateUser } from './CRUDUser'; // Đảm bảo đường dẫn đúng
+import { getUsers,deleteUser,updateUser,resetPassword } from './CRUDUser'; // Đảm bảo đường dẫn đúng
 import { useNavigate } from "react-router-dom";
 
 const UserList = () => {
@@ -38,7 +38,16 @@ const UserList = () => {
       );
       setUsers(updatedUsers); 
   };
-
+  const handleResetPassword = async (id) => {
+    if (window.confirm("Bạn có chắc chắn muốn reset mật khẩu của người dùng này?")) {
+      try {
+        await resetPassword(id); // Gọi API reset mật khẩu
+        alert("Reset mật khẩu thành công!");
+      } catch (error) {
+        alert("Đã xảy ra lỗi khi reset mật khẩu: " + error.message);
+      }
+    }
+  };
   // // Hàm xử lý xóa người dùng
   // const handleDelete = async (userId) => {
   //   if (window.confirm("Bạn có chắc chắn muốn xóa người dùng này?")) {
@@ -138,7 +147,9 @@ const UserList = () => {
                 <td className="border px-4 py-2">{user.vaiTro}</td>
                 <td className="border px-4 py-2">
                   <button onClick={() => handleEdit(user)} className="bg-yellow-500 text-white px-4 py-2 rounded mr-2">Sửa</button>
-                  <button onClick={() => handleDelete(user.maNguoiDung)} className="bg-red-500 text-white px-4 py-2 rounded">Xóa</button>
+                  <button onClick={() => handleDelete(user.maNguoiDung)} className="bg-red-500 text-white px-4 py-2 rounded mr-2">Xóa</button>
+                  <button onClick={() => handleResetPassword(user.maNguoiDung)} className="bg-blue-500 text-white px-4 py-2 rounded">Reset mật khẩu</button>
+                  
                 </td>
               </>
             )}

@@ -11,12 +11,12 @@ const DuyetPhieuThanhLyList = () => {
     setLoading(true);
     try {
       const response = await axios.get('https://localhost:7240/api/DuyetPhieuTL/duyet-phieu-thanh-ly');
-      setDuyetPhieuThanhLys(response.data);  // Lưu dữ liệu vào state
-   
+      // Sắp xếp dữ liệu tăng dần theo mã phiếu thanh lý
+      const sortedData = response.data.sort((a, b) => a.maPhieuTL - b.maPhieuTL);
+      setDuyetPhieuThanhLys(sortedData); // Lưu dữ liệu đã sắp xếp vào state
       setError(null);
     } catch (err) {
       setError('Không thể tải dữ liệu');
-      
     } finally {
       setLoading(false);
     }
@@ -25,7 +25,7 @@ const DuyetPhieuThanhLyList = () => {
   // Gọi API khi component mount
   useEffect(() => {
     fetchDuyetPhieuThanhLys();
-  }, []); // []
+  }, []);
 
   if (loading) return <div className="text-center">Đang tải dữ liệu...</div>;
   if (error) return <div className="text-center text-red-500">{error}</div>;
@@ -44,7 +44,6 @@ const DuyetPhieuThanhLyList = () => {
         </thead>
         <tbody>
           {duyetPhieuThanhLys.map((duyet) => (
-            console.log(duyet),
             <tr key={duyet.maLichSu} className="hover:bg-gray-50">
               <td className="px-4 py-2 border">{duyet.maPhieuTL}</td>
               <td className="px-4 py-2 border">{new Date(duyet.ngayDuyet).toLocaleDateString()}</td>

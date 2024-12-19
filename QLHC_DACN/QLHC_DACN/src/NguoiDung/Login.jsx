@@ -43,6 +43,7 @@ const Login = ({ onLogin }) => {
       alert(`Đăng nhập thành công! ${data.message}`);
 
       // Lưu tên đăng nhập và trạng thái đăng nhập vào localStorage
+      localStorage.setItem("tenNguoiDung",data.tenNguoiDung);
       localStorage.setItem("maNguoiDung", data.userId);
       localStorage.setItem("tenDangNhap", tenDangNhap);
       localStorage.setItem("isLoggedIn", "true");

@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const CreatePhieuThanhLyForm = ({ onClose, onRefresh }) => {
-  const [lyDo, setLyDo] = useState('Hủy hóa chất không còn sử dụng');
-  const [phuongThucThanhLy, setPhuongThucThanhLy] = useState('Tiêu hủy');
+  const [lyDo, setLyDo] = useState([]);
+  const [phuongThucThanhLy, setPhuongThucThanhLy] = useState([]);
   const [hoaChats, setHoaChats] = useState([]);
   const [selectedHoaChats, setSelectedHoaChats] = useState([]); // Danh sách các hóa chất đã chọn
   const [loading, setLoading] = useState(false);
@@ -80,29 +80,28 @@ const CreatePhieuThanhLyForm = ({ onClose, onRefresh }) => {
     <div className="space-y-4">
       <h2 className="text-2xl font-bold mb-4">Tạo Phiếu Thanh Lý</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="mb-4">
-          <label htmlFor="lyDo" className="block text-lg font-medium">Lý Do Thanh Lý</label>
-          <input
-            id="lyDo"
-            type="text"
-            value={lyDo}
-            onChange={(e) => setLyDo(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded"
-            disabled
-          />
-        </div>
+      <div className="mb-4">
+  <label htmlFor="lyDo" className="block text-lg font-medium">Lý Do Thanh Lý</label>
+  <input
+    id="lyDo"
+    type="text"
+    value={lyDo}
+    onChange={(e) => setLyDo(e.target.value)} // Cập nhật state
+    className="w-full p-2 border border-gray-300 rounded"
+  />
+</div>
 
-        <div className="mb-4">
-          <label htmlFor="phuongThucThanhLy" className="block text-lg font-medium">Phương Thức Thanh Lý</label>
-          <input
-            id="phuongThucThanhLy"
-            type="text"
-            value={phuongThucThanhLy}
-            onChange={(e) => setPhuongThucThanhLy(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded"
-            disabled
-          />
-        </div>
+<div className="mb-4">
+  <label htmlFor="phuongThucThanhLy" className="block text-lg font-medium">Phương Thức Thanh Lý</label>
+  <input
+    id="phuongThucThanhLy"
+    type="text"
+    value={phuongThucThanhLy}
+    onChange={(e) => setPhuongThucThanhLy(e.target.value)} // Cập nhật state
+    className="w-full p-2 border border-gray-300 rounded"
+  />
+</div>
+
 
         <div className="mb-4">
           <label htmlFor="hoaChat" className="block text-lg font-medium">Chọn Lô Hóa Chất</label>

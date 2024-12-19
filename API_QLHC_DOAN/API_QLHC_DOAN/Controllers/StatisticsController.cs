@@ -163,7 +163,50 @@ namespace API_QLHC_DOAN.Controllers
                 return StatusCode(500, "Internal server error: " + ex.Message);
             }
         }
+        [HttpGet("hoa-chat-su-dung")]
+        public async Task<ActionResult<IEnumerable<ThongKeHoaChatSuDungTheoMonHocResult>>> GetThongKeHoaChatSuDung(
+       [FromQuery] DateTime startDate,
+       [FromQuery] DateTime endDate)
+        {
+            try
+            {
+                var result = await _context.ThongKeHoaChatSuDungTheoMonHoc(startDate, endDate);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
 
+        [HttpGet("hoa-chat-ton-kho")]
+        public async Task<ActionResult<IEnumerable<ThongKeHoaChatTonKhoResult>>> GetThongKeHoaChatTonKho()
+        {
+            try
+            {
+                var result = await _context.ThongKeHoaChatTonKho();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        [HttpGet("hoa-chat-sap-het-han")]
+        public async Task<ActionResult<IEnumerable<ThongKeHoaChatSapHetHanResult>>> GetThongKeHoaChatSapHetHan(
+            [FromQuery] int soNgayCanhBao)
+        {
+            try
+            {
+                var result = await _context.ThongKeHoaChatSapHetHan(soNgayCanhBao);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
 
     }
 }
@@ -192,4 +235,28 @@ public class PhieuThanhLyByDuyetStatistic
     public string TenNguoiDung { get; set; }
     public int TotalCount { get; set; }
     public int TotalQuantity { get; set; }
+}
+public class ThongKeHoaChatSuDungTheoMonHocResult
+{
+    public string MonHoc { get; set; }
+    public string HoaChat { get; set; }
+    public int TongSoLuongSuDung { get; set; }
+}
+
+public class ThongKeHoaChatTonKhoResult
+{
+    public string HoaChat { get; set; }
+    public string MaCAS { get; set; }
+    public int TongSoLuongTon { get; set; }
+    public int SoLoHoaChat { get; set; }
+}
+
+public class ThongKeHoaChatSapHetHanResult
+{
+    public string HoaChat { get; set; }
+    public string MaCAS { get; set; }
+    public string MaLo { get; set; }
+    public DateTime HanSuDung { get; set; }
+    public int SoNgayConLai { get; set; }
+    public int SoLuongTon { get; set; }
 }

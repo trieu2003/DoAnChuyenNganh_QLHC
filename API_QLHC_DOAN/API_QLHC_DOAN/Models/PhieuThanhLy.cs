@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -83,10 +83,6 @@ namespace API_QLHC_DOAN.Models
         public List<HoaChatDetails> HoaChatDetails { get; internal set; }
 
     }
-
-
-
-    // Class representing the details of a chemical (HoaChat)
     public class HoaChatDetails
     {
         public string TenHoaChat { get; set; } // Name of the chemical
@@ -126,6 +122,4 @@ namespace API_QLHC_DOAN.Models
         public string HinhAnh { get; set; }   // Image of the chemical (nullable)
         public DateTime NgayTao { get; set; } // Creation date
     }
-
-    
 }

@@ -22,7 +22,7 @@ const ChemicalUsageManagement = () => {
   const [hoaChatList, setHoaChatList] = useState([]); // Danh sách hóa chất dự trù
   const [error, setError] = useState(""); // Lưu lỗi nếu có
   const [lopHocPhanList, setLopHocPhanList] = useState([]); // Danh sách lớp học phần
-
+  const [errorMessage, setErrorMessage] = useState("");
   // Lấy danh sách môn học từ API
   useEffect(() => {
     const fetchMonHoc = async () => {
@@ -65,10 +65,15 @@ const ChemicalUsageManagement = () => {
       );
       setLopHocPhanList(lopHocPhanResponse.data); // Lưu danh sách lớp học phần
     } catch (err) {
-      setError("Không thể tải dữ liệu.");
-      console.error(err); // Ghi lại lỗi
+      // setError("Không thể tải dữ liệu.");
+      if (error.response && error.response.status === 404) {
+        setErrorMessage("Chưa có bài thí nghiệm nào được xác nhận");
+      } else {
+        setErrorMessage("Có lỗi xảy ra khi tải dữ liệu");
+      } // Ghi lại lỗi
+      console.error(err);
       setHoaChatList([]); // Xóa danh sách hóa chất nếu lỗi
-      setLopHocPhanList([]); // Xóa danh sách lớp học phần nếu lỗi
+      //setLopHocPhanList([]); // Xóa danh sách lớp học phần nếu lỗi
     }
   };
 
@@ -379,7 +384,10 @@ const ChemicalUsageManagement = () => {
               </tbody>
             </table>
           ) : (
-            <p className="text-gray-500">Không có hóa chất nào được dự trù.</p>
+            <p className="text-gray-500">Không có hóa chất nào được dự trù. 
+            <span className="text-red-500"> Kiểm tra xem đã xác nhận dự trù chưa ?</span>
+            </p>
+            
           )}
         </div>
       </div>

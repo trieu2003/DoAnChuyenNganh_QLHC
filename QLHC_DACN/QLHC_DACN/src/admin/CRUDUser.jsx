@@ -56,6 +56,19 @@ export const updateUser = async (id, user) => {
   // Nếu có phản hồi dữ liệu, chuyển phản hồi thành JSON
   return JSON.parse(data);
 };
+export const resetPassword = async (id) => {
+  try {
+    const response = await fetch(`${API_URL}/resetpassword/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  } catch (error) {
+    console.error("Error resetting password:", error);
+    alert("Đã xảy ra lỗi khi reset mật khẩu.");
+  }
+};
 
 
 export const deleteUser = async (id) => {
