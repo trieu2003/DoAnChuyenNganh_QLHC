@@ -10,6 +10,20 @@ const ChemicalManagement = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+  const [totalChemicalCount, setTotalChemicalCount] = useState(0);
+  const [totalLots, setTotalLots] = useState(0);
+  const [selectedChemicalName, setSelectedChemicalName] = useState("");
+
+  const fetchTotalChemicalCount = async () => {
+    try {
+      const response = await axios.get(
+        "https://localhost:7240/api/ChemicalManagement/Count"
+      );
+      setTotalChemicalCount(response.data.totalChemicals);
+    } catch (error) {
+      console.error("Error fetching the total chemical count:", error);
+    }
+  };
 
   const fetchChemicals = async (page = 1) => {
     try {
@@ -50,6 +64,7 @@ const ChemicalManagement = () => {
   };
 
   useEffect(() => {
+    fetchTotalChemicalCount();
     fetchChemicals(currentPage);
   }, [currentPage]);
 
@@ -64,7 +79,7 @@ const ChemicalManagement = () => {
         const response = await axios.get(
           `https://localhost:7240/api/ChemicalManagement/Search?searchTerm=${searchTerm}`
         );
-  
+
         if (response.status === 200) {
           if (response.data.length > 0) {
             // Thêm bước lấy tổng số lượng tồn
@@ -87,7 +102,7 @@ const ChemicalManagement = () => {
                 }
               })
             );
-  
+
             setChemicals(chemicalsWithStock);
             setTotalPages(1); // Reset total pages for search results
           } else {
@@ -102,24 +117,31 @@ const ChemicalManagement = () => {
       }
     }
   };
-  
 
   const handleShowAll = () => {
     fetchChemicals();
     setSearchTerm("");
   };
 
-  const handleViewLots = async (chemicalId) => {
+  const handleViewLots = async (chemicalId, chemicalName) => {
     setSelectedChemicalId(chemicalId);
+    setSelectedChemicalName(chemicalName); // Lưu tên hóa chất được chọn
     setIsModalOpen(true);
     try {
       const response = await axios.get(
         `https://localhost:7240/api/ChemicalManagement/${chemicalId}/Lots`
       );
       setLots(response.data);
+
+      // Gọi API để lấy tổng số lô
+      const totalLotsResponse = await axios.get(
+        `https://localhost:7240/api/ChemicalManagement/${chemicalId}/TotalLots`
+      );
+      setTotalLots(totalLotsResponse.data.totalLots || 0); // Đặt mặc định là 0 nếu không có lô
     } catch (error) {
-      console.error("Error fetching the chemical lots:", error);
+      console.error("Error fetching the chemical lots or total lots:", error);
       setLots([]);
+      setTotalLots(0); // Đặt mặc định là 0 nếu có lỗi
     }
   };
 
@@ -175,6 +197,23 @@ const ChemicalManagement = () => {
           Hiển thị tất cả
         </button>
       </form>
+      <p className="text-gray-700 mt-2 text-sm">
+  Tổng số hóa chất:{" "}
+  <span className="font-bold">{totalChemicalCount}</span>
+</p>
+
+<p className="mt-2 text-sm">
+  Chú thích:{" "}
+  <span className="inline-flex items-center ml-4">
+    <span className="w-4 h-4 border border-black rounded-lg mr-2"></span>
+    Còn hóa chất
+  </span>
+  <span className="ml-2 inline-flex  items-center">
+    <span className="w-4 h-4 border border-black bg-red-400 rounded-lg mr-2"></span>
+    Hết hóa chất
+  </span>
+  
+</p>
 
       <div className="overflow-x-auto bg-gray-50 p-4 rounded-lg shadow-md">
         <table className="min-w-full border-collapse border border-gray-300 bg-white rounded-lg shadow-xl">
@@ -208,7 +247,9 @@ const ChemicalManagement = () => {
               chemicals.map((chemical) => (
                 <tr
                   key={chemical.maHoaChat}
-                  className="hover:bg-blue-100 transition duration-300"
+                  className={`hover:bg-blue-100 transition duration-300 ${
+                    chemical.TongSoLuongTon === 0 ? "bg-red-100" : ""
+                  }`} // Thêm điều kiện để dòng có số lượng tồn bằng 0 sẽ có nền đỏ
                 >
                   <td className="border px-6 py-3 text-gray-800 text-sm">
                     {chemical.tenHoaChat}
@@ -227,7 +268,9 @@ const ChemicalManagement = () => {
                   </td>
                   <td className="border px-6 py-3 text-center">
                     <button
-                      onClick={() => handleViewLots(chemical.maHoaChat)}
+                      onClick={() =>
+                        handleViewLots(chemical.maHoaChat, chemical.tenHoaChat)
+                      }
                       className="bg-gradient-to-r from-blue-400 to-blue-600 text-white py-2 px-4 rounded-lg shadow hover:from-blue-500 hover:to-blue-700 transform transition-transform duration-200 hover:scale-105"
                     >
                       Xem Lô Hóa Chất
@@ -290,9 +333,13 @@ const ChemicalManagement = () => {
           onClick={handleOverlayClick}
         >
           <div className="bg-white rounded-lg shadow-lg p-8 z-60 max-w-6xl w-full">
-            <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
-              Danh Sách Lô Hóa Chất
+            <h2 className="text-2xl font-bold mb-6 text-center text-blue-600">
+              Danh Sách Lô Hóa Chất: {selectedChemicalName}
             </h2>
+            <p className="text-gray-700 text-xl  mb-4 text-right">
+              Tổng số lô: <span className="font-bold">{totalLots}</span>
+            </p>
+            <p className="text-xl font-semibold text-center text-blue-600 mb-4"></p>
             <div className="overflow-x-auto">
               <table className="min-w-full bg-white border border-gray-300 rounded-lg">
                 <thead>

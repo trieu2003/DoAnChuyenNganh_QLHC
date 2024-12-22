@@ -139,7 +139,33 @@ namespace API_QLHC_DOAN.Controllers
             return Ok(totalStock); // Trả về kết quả
         }
 
+        [HttpGet("Count")]
+        public async Task<IActionResult> GetTotalChemicalCount()
+        {
+            var totalChemicals = await _context.HoaChat.CountAsync();
+            return Ok(new { TotalChemicals = totalChemicals });
+        }
+        [HttpGet("{id}/TotalLots")]
+        public async Task<IActionResult> GetTotalLotsByChemical(int id)
+        {
+            // Lấy tất cả các lô hóa chất liên quan đến MaHoaChat
+            var totalLots = await _context.LoHoaChat
+                .Where(l => l.MaHoaChat == id) // Lọc theo MaHoaChat
+                .CountAsync(); // Đếm số lượng lô
 
+            // Kiểm tra nếu không có lô nào được tìm thấy
+            if (totalLots == 0)
+            {
+                return NotFound($"No lots found for chemical ID {id}.");
+            }
+
+            // Trả về tổng số lô
+            return Ok(new
+            {
+                MaHoaChat = id,
+                TotalLots = totalLots
+            });
+        }
     }
 
 

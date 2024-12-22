@@ -22,7 +22,9 @@ const ChemicalUsageManagement = () => {
   const [hoaChatList, setHoaChatList] = useState([]); // Danh sách hóa chất dự trù
   const [error, setError] = useState(""); // Lưu lỗi nếu có
   const [lopHocPhanList, setLopHocPhanList] = useState([]); // Danh sách lớp học phần
-  const [errorMessage, setErrorMessage] = useState("");
+  const [totalStock, setTotalStock] = useState(null); // Lưu trữ tổng số lượng tồn
+
+
   // Lấy danh sách môn học từ API
   useEffect(() => {
     const fetchMonHoc = async () => {
@@ -65,15 +67,10 @@ const ChemicalUsageManagement = () => {
       );
       setLopHocPhanList(lopHocPhanResponse.data); // Lưu danh sách lớp học phần
     } catch (err) {
-      // setError("Không thể tải dữ liệu.");
-      if (error.response && error.response.status === 404) {
-        setErrorMessage("Chưa có bài thí nghiệm nào được xác nhận");
-      } else {
-        setErrorMessage("Có lỗi xảy ra khi tải dữ liệu");
-      } // Ghi lại lỗi
-      console.error(err);
+      setError("Không thể tải dữ liệu.");
+      console.error(err); // Ghi lại lỗi
       setHoaChatList([]); // Xóa danh sách hóa chất nếu lỗi
-      //setLopHocPhanList([]); // Xóa danh sách lớp học phần nếu lỗi
+      setLopHocPhanList([]); // Xóa danh sách lớp học phần nếu lỗi
     }
   };
 
@@ -94,24 +91,52 @@ const ChemicalUsageManagement = () => {
       .catch((error) => console.error("Error fetching chemical names:", error));
   }, []);
   // Fetch mã lô khi chọn tên hóa chất
-  const handleChemicalChange = async (e) => {
+  const handleChemicalChange = async (e) => { 
     const tenHoaChat = e.target.value;
     setNewChiTiet({ ...newChiTiet, tenHoaChat, maLo: "" }); // Xóa mã lô cũ khi đổi hóa chất
-
+  
     if (tenHoaChat) {
       try {
-        const response = await axios.get(
-          `https://localhost:7240/api/ChemicalUsageManagement/GetMaxQuantityLotByChemicalName/${tenHoaChat}`
+        // Tìm mã hóa chất dựa trên tên hóa chất
+        const selectedChemical = chemicals.find(
+          (hc) => hc.tenHoaChat === tenHoaChat
         );
+  
+        if (!selectedChemical) {
+          console.error("Không tìm thấy mã hóa chất tương ứng");
+          setTotalStock(null);
+          return;
+        }
+  
+        const maHoaChat = selectedChemical.maHoaChat;
+        
+        // Gọi API lấy thông tin mã lô (sử dụng tên hóa chất)
+        const lotResponse = await axios.get(
+          `https://localhost:7240/api/ChemicalUsageManagement/GetMaxQuantityLotByChemicalName/${tenHoaChat}` // Sử dụng tenHoaChat để gọi API
+        );
+  
         setNewChiTiet((prevState) => ({
           ...prevState,
-          maLo: response.data.maLo, // Cập nhật mã lô từ API
+          maLo: lotResponse.data.maLo, // Cập nhật mã lô từ API
         }));
+  
+        // Gọi API lấy tổng số lượng tồn của hóa chất
+        const stockResponse = await axios.get(
+          `https://localhost:7240/api/ChemicalManagement/${maHoaChat}/TotalStock` // Dùng maHoaChat để gọi API
+        );
+  
+        // Cập nhật tổng số lượng tồn vào state
+        setTotalStock(stockResponse.data.tongSoLuongTon); // Giả sử API trả về trường `tongSoLuongTon`
+  
       } catch (error) {
-        console.error("Error fetching lot information:", error);
+        console.error("Error fetching chemical information:", error);
+        setTotalStock(null); // Xử lý lỗi: đặt giá trị về null
       }
+    } else {
+      setTotalStock(null); // Khi không chọn hóa chất nào
     }
   };
+  
   // Fetch phiếu phân bổ
   const fetchPhieuPhanBo = () => {
     axios
@@ -384,10 +409,7 @@ const ChemicalUsageManagement = () => {
               </tbody>
             </table>
           ) : (
-            <p className="text-gray-500">Không có hóa chất nào được dự trù. 
-            <span className="text-red-500"> Kiểm tra xem đã xác nhận dự trù chưa ?</span>
-            </p>
-            
+            <p className="text-gray-500">Không có hóa chất nào được dự trù.</p>
           )}
         </div>
       </div>
@@ -439,19 +461,27 @@ const ChemicalUsageManagement = () => {
           </div>
 
           <div className="flex space-x-4 mb-6">
-            <select
-              className="border p-3 flex-1 rounded-lg shadow-sm"
-              name="tenHoaChat"
-              value={newChiTiet.tenHoaChat}
-              onChange={handleChemicalChange}
-            >
-              <option value="">Chọn Hóa Chất</option>
-              {chemicals.map((hc) => (
-                <option key={hc.maHoaChat} value={hc.tenHoaChat}>
-                  {hc.tenHoaChat}
-                </option>
-              ))}
-            </select>
+          <select
+    className="border p-3 flex-1 rounded-lg shadow-sm"
+    name="tenHoaChat"
+    value={newChiTiet.tenHoaChat}
+    onChange={handleChemicalChange}
+  >
+    <option value="">Chọn Hóa Chất</option>
+    {chemicals.map((hc) => (
+      <option key={hc.maHoaChat} value={hc.tenHoaChat}>
+        {hc.tenHoaChat}
+      </option>
+    ))}
+  </select>
+
+  {/* Hiển thị tổng số lượng tồn */}
+  {totalStock !== null && (
+    <div className="text-sm font-medium text-gray-700 mt-2 text-red-500 text-right">
+    Tổng số lượng tồn có: <span className="text-2xl">{totalStock}</span>
+  </div>
+  
+  )}
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Mã Lô hiện có:
             </label>
@@ -464,7 +494,7 @@ const ChemicalUsageManagement = () => {
               placeholder="Mã Lô"
             />
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Số lượng cần nhập:
+              Số lượng nhập:
             </label>
             <input
               type="number"
