@@ -6,25 +6,44 @@ const CreatePhieuThanhLyForm = ({ onClose, onRefresh }) => {
   const [lyDo, setLyDo] = useState([]);
   const [phuongThucThanhLy, setPhuongThucThanhLy] = useState([]);
   const [hoaChats, setHoaChats] = useState([]);
+  const [sapHetHanHoaChats, setSapHetHanHoaChats] = useState([]); // Chemicals nearing expiration
+  const [soNgayCanhBao, setSoNgayCanhBao] = useState(30); // Days for warning
   const [selectedHoaChats, setSelectedHoaChats] = useState([]); // Danh sách các hóa chất đã chọn
   const [loading, setLoading] = useState(false);
 
-  // Lấy danh sách hóa chất từ API
-  useEffect(() => {
+   // Fetch list of chemicals available for disposal
+   useEffect(() => {
     const fetchHoaChats = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('https://localhost:7240/api/PhieuThanhLy/hoa-chat-chua-thanh-ly');
+        const response = await axios.get(
+          'https://localhost:7240/api/PhieuThanhLy/hoa-chat-chua-thanh-ly'
+        );
         setHoaChats(response.data);
         setLoading(false);
-      } catch (error) {
-        console.error("Lỗi khi lấy danh sách hóa chất:", error);
-        alert('Không thể tải danh sách hóa chất');
+      } catch (err) {
+        console.error('Error fetching chemicals:', err);
+        setError('Không thể tải danh sách hóa chất');
         setLoading(false);
       }
     };
+
+    const fetchSapHetHanHoaChats = async () => {
+      try {
+        const response = await axios.get(
+          `https://localhost:7240/api/Statistics/hoa-chat-sap-het-han?soNgayCanhBao=${soNgayCanhBao}`
+        );
+        setSapHetHanHoaChats(response.data);
+        setError(null);
+      } catch (err) {
+        console.error('Error fetching expiring chemicals:', err);
+        setError('Không thể tải danh sách hóa chất sắp hết hạn');
+      }
+    };
+
     fetchHoaChats();
-  }, []);
+    fetchSapHetHanHoaChats();
+  }, [soNgayCanhBao]);
 
   // Hàm xử lý khi chọn hóa chất từ combobox
   const handleHoaChatSelect = (e) => {
@@ -79,6 +98,37 @@ const CreatePhieuThanhLyForm = ({ onClose, onRefresh }) => {
   return (
     <div className="space-y-4">
       <h2 className="text-2xl font-bold mb-4">Tạo Phiếu Thanh Lý</h2>
+         {/* Display expiring chemicals */}
+         <div className="mb-4">
+  <h3 className="text-lg font-medium mb-2">
+    Danh Sách Hóa Chất Sắp Hết Hạn (trong {soNgayCanhBao} ngày)
+  </h3>
+  <table className="min-w-full table-auto mt-4">
+    <thead>
+      <tr className="bg-gray-200">
+        <th className="px-4 py-2">Tên Hóa Chất</th>
+        <th className="px-4 py-2">Mã CAS</th>
+        <th className="px-4 py-2">Mã Lô</th>
+        <th className="px-4 py-2">Hạn Sử Dụng</th>
+        <th className="px-4 py-2">Số Ngày Còn Lại</th>
+        <th className="px-4 py-2">Số Lượng Tồn</th>
+      </tr>
+    </thead>
+    <tbody>
+      {sapHetHanHoaChats.map((hoaChat) => (
+        <tr key={hoaChat.maLo}>
+          <td className="px-4 py-2">{hoaChat.hoaChat}</td>
+          <td className="px-4 py-2">{hoaChat.maCAS}</td>
+          <td className="px-4 py-2">{hoaChat.maLo}</td>
+          <td className="px-4 py-2">{new Date(hoaChat.hanSuDung).toLocaleDateString()}</td>
+          <td className="px-4 py-2">{hoaChat.soNgayConLai}</td>
+          <td className="px-4 py-2">{hoaChat.soLuongTon}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
       <form onSubmit={handleSubmit} className="space-y-4">
       <div className="mb-4">
   <label htmlFor="lyDo" className="block text-lg font-medium">Lý Do Thanh Lý</label>

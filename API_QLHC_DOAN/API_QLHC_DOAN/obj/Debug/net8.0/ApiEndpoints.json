@@ -27,6 +27,48 @@
   },
   {
     "ContainingType": "API_QLHC_DOAN.Controllers.ChemicalManagementController",
+    "Method": "GetTotalLotsByChemical",
+    "RelativePath": "api/ChemicalManagement/{id}/TotalLots",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.ChemicalManagementController",
+    "Method": "GetTotalStockByChemical",
+    "RelativePath": "api/ChemicalManagement/{id}/TotalStock",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.ChemicalManagementController",
+    "Method": "GetTotalChemicalCount",
+    "RelativePath": "api/ChemicalManagement/Count",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.ChemicalManagementController",
     "Method": "GetChemicals",
     "RelativePath": "api/ChemicalManagement/GetHoaChat",
     "HttpMethod": "GET",
@@ -355,6 +397,22 @@
   },
   {
     "ContainingType": "API_QLHC_DOAN.Controllers.DeXuatController",
+    "Method": "LichSuDuyet",
+    "RelativePath": "api/DeXuat/history/{maPhieuDX}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "maPhieuDX",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.DeXuatController",
     "Method": "UpdateAndApproveAsync",
     "RelativePath": "api/DeXuat/update-and-approve/{maPhieuDX}",
     "HttpMethod": "PUT",
@@ -377,7 +435,7 @@
   {
     "ContainingType": "API_QLHC_DOAN.Controllers.DeXuatController",
     "Method": "UpdateChiTietDeXuat",
-    "RelativePath": "api/DeXuat/updateChiTietDeXuat/{maPhieuDX}/{maHoaChat}",
+    "RelativePath": "api/DeXuat/update-details/{maPhieuDX}/{maHoaChat}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -395,6 +453,27 @@
       {
         "Name": "updatedChiTiet",
         "Type": "API_QLHC_DOAN.Models.ChiTietDeXuat",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.DeXuatController",
+    "Method": "UpdateStatus",
+    "RelativePath": "api/DeXuat/update-status/{maPhieuDX}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "maPhieuDX",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "DuyetPhieuDX",
         "IsRequired": true
       }
     ],
@@ -422,17 +501,17 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "API_QLHC_DOAN.Controllers.DeXuatController",
-    "Method": "GetDeXuatByUser",
-    "RelativePath": "api/DeXuat/user-details",
+    "ContainingType": "API_QLHC_DOAN.Controllers.DuTruController",
+    "Method": "GetDuTruByMaBaiTN",
+    "RelativePath": "api/DuTru/baitn/{maBaiTN}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "createdBy",
+        "Name": "maBaiTN",
         "Type": "System.Int32",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -455,6 +534,22 @@
   },
   {
     "ContainingType": "API_QLHC_DOAN.Controllers.DuTruController",
+    "Method": "DSDuyetBaiTN",
+    "RelativePath": "api/DuTru/duyetbaitn/{maMonHoc}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "maMonHoc",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.DuTruController",
     "Method": "GetBaiThiNghiemById",
     "RelativePath": "api/DuTru/getBaiTN/{MaBaiTN}",
     "HttpMethod": "GET",
@@ -463,6 +558,22 @@
     "Parameters": [
       {
         "Name": "MaBaiTN",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.DuTruController",
+    "Method": "LichSuDuyet",
+    "RelativePath": "api/DuTru/history/{maBaiTN}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "maBaiTN",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -548,6 +659,53 @@
       {
         "Name": "maMonHoc",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.DuTruController",
+    "Method": "UpdateChiTietDeXuat",
+    "RelativePath": "api/DuTru/update-details/{maBaiTN}/{maHoaChat}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "maBaiTN",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "maHoaChat",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updatedChiTiet",
+        "Type": "API_QLHC_DOAN.Models.ChiTietDeXuat",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.DuTruController",
+    "Method": "UpdateStatus",
+    "RelativePath": "api/DuTru/update-status/{maBaiTN}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "maBaiTN",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "API_QLHC_DOAN.Models.DuyetDuTru",
         "IsRequired": true
       }
     ],
@@ -670,6 +828,22 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.InventoryManagementController",
+    "Method": "GetLotsByPhieuNhap",
+    "RelativePath": "api/InventoryManagement/GetLotsByPhieuNhap/{maPhieuNhap}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "maPhieuNhap",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "API_QLHC_DOAN.Controllers.InventoryManagementController",
@@ -834,6 +1008,22 @@
   },
   {
     "ContainingType": "API_QLHC_DOAN.Controllers.PhieuThanhLyController",
+    "Method": "AutoDispose",
+    "RelativePath": "api/PhieuThanhLy/auto-dispose",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "maNguoiDung",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.PhieuThanhLyController",
     "Method": "CreatePhieuThanhLy",
     "RelativePath": "api/PhieuThanhLy/create-phieu-thanh-ly",
     "HttpMethod": "POST",
@@ -989,6 +1179,32 @@
   },
   {
     "ContainingType": "API_QLHC_DOAN.Controllers.StatisticsController",
+    "Method": "GetThongKeHoaChatSapHetHan",
+    "RelativePath": "api/Statistics/hoa-chat-sap-het-han",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "soNgayCanhBao",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ThongKeHoaChatSapHetHanResult, API_QLHC_DOAN, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.StatisticsController",
     "Method": "GetHoaChatStatistics",
     "RelativePath": "api/Statistics/hoa-chat-statistics",
     "HttpMethod": "GET",
@@ -998,6 +1214,57 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[HoaChatStatistic, API_QLHC_DOAN, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.StatisticsController",
+    "Method": "GetThongKeHoaChatSuDung",
+    "RelativePath": "api/Statistics/hoa-chat-su-dung",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "startDate",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "endDate",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ThongKeHoaChatSuDungTheoMonHocResult, API_QLHC_DOAN, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.StatisticsController",
+    "Method": "GetThongKeHoaChatTonKho",
+    "RelativePath": "api/Statistics/hoa-chat-ton-kho",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ThongKeHoaChatTonKhoResult, API_QLHC_DOAN, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1203,6 +1470,22 @@
         "Name": "vaiTro",
         "Type": "System.String",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_QLHC_DOAN.Controllers.UsersController",
+    "Method": "ResetPassword",
+    "RelativePath": "api/Users/resetpassword/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []

@@ -496,9 +496,37 @@ namespace API_QLHC_DOAN.Controllers
             }
         }
 
+        [HttpPost("auto-dispose")]
+        public async Task<IActionResult> AutoDispose([FromBody] int maNguoiDung)
+        {
+            if (maNguoiDung <= 0)
+            {
+                return BadRequest("Mã người dùng không hợp lệ.");
+            }
 
+            try
+            {
+                // Thực hiện Stored Procedure và lấy kết quả
+                var result = await _context.Database
+                    .SqlQueryRaw<MessageResult>($"EXEC AutoDisposeExpiredChemicals @MaNguoiDung = {maNguoiDung}")
+                    .ToListAsync();
+
+                // Lấy danh sách thông báo từ kết quả
+                var messages = result.Select(r => r.Message).ToList();
+
+                return Ok(new { messages });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Đã xảy ra lỗi khi thực hiện thanh lý.", error = ex.Message });
+            }
+        }
     }
 
+}
+public class MessageResult
+{
+    public string Message { get; set; }
 }
 
 

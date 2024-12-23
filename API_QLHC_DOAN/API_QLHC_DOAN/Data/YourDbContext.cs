@@ -78,6 +78,7 @@ namespace API_QLHC_DOAN.Data
                         {
                             MonHoc = reader["MonHoc"].ToString(),
                             HoaChat = reader["HoaChat"].ToString(),
+                          
                             TongSoLuongSuDung = Convert.ToInt32(reader["TongSoLuongSuDung"])
                         });
                     }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { FaChartBar, FaFileInvoice, FaBoxes, FaCogs } from 'react-icons/fa';
@@ -71,6 +72,84 @@ const DashboardThongKe = () => {
     }
   };
 
+   // Chuẩn bị dữ liệu biểu đồ
+   const preparePhieuThanhLyChartData = () => ({
+    labels: phieuThanhLys.map((item) => item.trangThai),
+    datasets: [
+      {
+        label: 'Tổng Số Lượng',
+        data: phieuThanhLys.map((item) => item.totalQuantity),
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 1,
+      },
+    ],
+  });
+
+  const prepareLoHoaChatChartData = () => ({
+    labels: loHoaChats.map((item) => item.trangThai),
+    datasets: [
+      {
+        label: 'Tổng Số Lô',
+        data: loHoaChats.map((item) => item.totalCount),
+        backgroundColor: 'rgba(255, 159, 64, 0.2)',
+        borderColor: 'rgba(255, 159, 64, 1)',
+        borderWidth: 1,
+      },
+    ],
+  });
+
+  const prepareHoaChatChartData = () => ({
+    labels: hoaChatStats.map((item) => item.tenHoaChat),
+    datasets: [
+      {
+        label: 'Tổng Số Lượng',
+        data: hoaChatStats.map((item) => item.totalQuantity),
+        backgroundColor: 'rgba(153, 102, 255, 0.2)',
+        borderColor: 'rgba(153, 102, 255, 1)',
+        borderWidth: 1,
+      },
+    ],
+  });
+
+  const prepareHoaChatSuDungChartData = () => ({
+    labels: hoaChatSuDung.map((item) => item.hoaChat),
+    datasets: [
+      {
+        label: 'Tổng Số Lượng Sử Dụng',
+        data: hoaChatSuDung.map((item) => item.tongSoLuongSuDung),
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgba(255, 99, 132, 1)',
+        borderWidth: 1,
+      },
+    ],
+  });
+
+  const prepareHoaChatTonKhoChartData = () => ({
+    labels: hoaChatTonKho.map((item) => item.hoaChat),
+    datasets: [
+      {
+        label: 'Tổng Số Lượng Tồn',
+        data: hoaChatTonKho.map((item) => item.tongSoLuongTon),
+        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 1,
+      },
+    ],
+  });
+
+  const prepareHoaChatSapHetHanChartData = () => ({
+    labels: hoaChatSapHetHan.map((item) => item.hoaChat),
+    datasets: [
+      {
+        label: 'Số Ngày Còn Lại',
+        data: hoaChatSapHetHan.map((item) => item.soNgayConLai),
+        backgroundColor: 'rgba(255, 206, 86, 0.2)',
+        borderColor: 'rgba(255, 206, 86, 1)',
+        borderWidth: 1,
+      },
+    ],
+  });
   if (loading) return <div>Đang tải dữ liệu...</div>;
   if (error) return <div>{error}</div>;
 
@@ -348,6 +427,12 @@ const DashboardThongKe = () => {
       {selectedStat === 'hoa-chat' && renderHoaChatStats()}
       {selectedStat === 'lo-hoa-chat' && renderLoHoaChatStats()}
       {selectedStat === 'total-phieu' && renderTotalPhieuThanhLy()}
+      {selectedStat === 'phieu-thanh-ly' && <Bar data={preparePhieuThanhLyChartData()} />}
+      {selectedStat === 'hoa-chat-su-dung' && <Bar data={prepareHoaChatSuDungChartData()} />}
+      {selectedStat === 'hoa-chat-ton-kho' && <Bar data={prepareHoaChatTonKhoChartData()} />}
+      {selectedStat === 'hoa-chat-sap-het-han' && <Bar data={prepareHoaChatSapHetHanChartData()} />}
+      {selectedStat === 'hoa-chat' && <Bar data={prepareHoaChatChartData()} />}
+      {selectedStat === 'lo-hoa-chat' && <Bar data={prepareLoHoaChatChartData()} />}
     </div>
   );
 };

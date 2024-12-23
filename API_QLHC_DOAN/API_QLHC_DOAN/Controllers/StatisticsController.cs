@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API_QLHC_DOAN.Data;
+using Microsoft.Data.SqlClient;
+using System.Data;
 
 namespace API_QLHC_DOAN.Controllers
 {
@@ -170,14 +172,18 @@ namespace API_QLHC_DOAN.Controllers
         {
             try
             {
-                var result = await _context.ThongKeHoaChatSuDungTheoMonHoc(startDate, endDate);
-                return Ok(result);
+                var results = await _context.ThongKeHoaChatSuDungTheoMonHoc(startDate, endDate);
+                return Ok(results);
             }
             catch (Exception ex)
             {
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
+
+
+
+
 
         [HttpGet("hoa-chat-ton-kho")]
         public async Task<ActionResult<IEnumerable<ThongKeHoaChatTonKhoResult>>> GetThongKeHoaChatTonKho()
@@ -239,8 +245,13 @@ public class PhieuThanhLyByDuyetStatistic
 public class ThongKeHoaChatSuDungTheoMonHocResult
 {
     public string MonHoc { get; set; }
+    public string LopHocPhan { get; set; }
+    public int SiSo { get; set; }
+    public string GVDay { get; set; }
+    public string BaiThiNghiem { get; set; }
     public string HoaChat { get; set; }
     public int TongSoLuongSuDung { get; set; }
+    public DateTime NgayLap { get; set; }
 }
 
 public class ThongKeHoaChatTonKhoResult
